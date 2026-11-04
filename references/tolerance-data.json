@@ -1,0 +1,879 @@
+{
+  "_description": "Data transcribed from the user-provided PDF 'Recommended fits and permissible deviations for general mechanical engineering and bearings'. Standard editions in the PDF: DIN 7157 (1966-01), DIN ISO 2768-1 (1991-06), DIN ISO 2768-2 (1991-04), DIN 5425-1 (1984-11). These are old editions; verify which editions are currently applicable in your organization. Intervals are lower-exclusive and upper-inclusive (the lower bound of the first interval is inclusive). A null value means the table does not specify a value.",
+  "fit_series": {
+    "series_1_priority": [
+      "C11/h9",
+      "D10/h9",
+      "E9/h9",
+      "F8/h9",
+      "H8/f7",
+      "F8/h6",
+      "H7/f7",
+      "H8/h9",
+      "H7/h6",
+      "H7/n6",
+      "H7/r6",
+      "H8/u8",
+      "H8/x8"
+    ],
+    "series_2": [
+      "C11/h11",
+      "D10/h11",
+      "H8/d9",
+      "H8/e8",
+      "H7/g6",
+      "G7/h6",
+      "H11/h9",
+      "H7/j6",
+      "H7/k6",
+      "H7/s6"
+    ]
+  },
+  "fits": [
+    {
+      "type": "clearance",
+      "hole_basis": "H8/d9",
+      "shaft_basis": "D10/h9",
+      "name": "Large clearance between mating parts",
+      "application": "Shafts, vehicle axles, propeller plain bearings, agricultural machinery bearings, non-precision locating assemblies, and textile-machine ropes."
+    },
+    {
+      "type": "clearance",
+      "hole_basis": "H8/e8",
+      "shaft_basis": "E9/h9",
+      "name": "Clearance for easy assembly",
+      "application": "Heavy-vehicle plain bearings and transmission shaft bearings."
+    },
+    {
+      "type": "clearance",
+      "hole_basis": "H8/f7",
+      "shaft_basis": "F8/h9",
+      "name": "Clearance for easy manual assembly",
+      "application": "Crankshafts, pumps, coupling sleeves, fan bearings, and heavy-vehicle plain bearings."
+    },
+    {
+      "type": "clearance",
+      "hole_basis": "H7/f7",
+      "shaft_basis": "F8/h6",
+      "name": "Clearance for free rotational movement",
+      "application": "Metal-cutting machine drives, crankshaft plain bearings, and camshaft plain bearings."
+    },
+    {
+      "type": "clearance",
+      "hole_basis": "H7/g6",
+      "shaft_basis": "G7/h6",
+      "name": "Small clearance for improved location with free rotation",
+      "application": "Precision moving joints and lightly loaded plain bearings."
+    },
+    {
+      "type": "clearance",
+      "hole_basis": "H8/h9",
+      "shaft_basis": "H8/h9",
+      "name": "Minimum clearance for precise location",
+      "application": "Allows parts to be assembled with minimal sliding clearance, e.g. spacer sleeves (couplings)."
+    },
+    {
+      "type": "clearance",
+      "hole_basis": "H7/h6",
+      "shaft_basis": "H7/h6",
+      "name": "Zero clearance for precise location in stationary joints",
+      "application": "Frequently disassembled joints: replaceable gears on shafts, friction clutches, and moving joints that can rotate."
+    },
+    {
+      "type": "transition",
+      "hole_basis": "H7/j6",
+      "shaft_basis": null,
+      "name": "Assembly by hand or with a wooden mallet",
+      "application": "Locating features for couplings and centring of electric-motor end covers."
+    },
+    {
+      "type": "transition",
+      "hole_basis": "H7/n6",
+      "shaft_basis": null,
+      "name": "Assembly with a wooden mallet; not intended for disassembly",
+      "application": "Pulleys, small flywheels, couplings, levers, and gears or worm wheels running under steady loads on shafts."
+    },
+    {
+      "type": "interference",
+      "hole_basis": "H7/r6",
+      "shaft_basis": null,
+      "interference_level": "light",
+      "name": "Firm, accurate location without special grooves",
+      "application": "Securing a bushing in its housing"
+    },
+    {
+      "type": "interference",
+      "hole_basis": "H7/s6",
+      "shaft_basis": null,
+      "interference_level": "medium",
+      "name": "Medium interference",
+      "application": "Locating pins and supports in fixture bodies, fans, gearboxes, worm wheels on reducer shafts, worm-wheel rims on cast-iron discs, and plain-bearing bushings in housings."
+    },
+    {
+      "type": "interference",
+      "hole_basis": "H8/u8",
+      "shaft_basis": null,
+      "interference_level": "heavy",
+      "name": "Joints designed to withstand high contact forces",
+      "application": "Wheels on axles"
+    },
+    {
+      "type": "interference",
+      "hole_basis": "H8/x8",
+      "shaft_basis": null,
+      "interference_level": "very heavy",
+      "name": "Very heavy interference",
+      "application": "Bronze gear rims on steel discs; parts subject to reversing impact loads and vibration."
+    }
+  ],
+  "general_linear": {
+    "unit": "mm",
+    "note": "ISO 2768-1, linear dimensions (nominal dimension)",
+    "ranges": [
+      [
+        0.5,
+        3
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        6,
+        30
+      ],
+      [
+        30,
+        120
+      ],
+      [
+        120,
+        400
+      ],
+      [
+        400,
+        1000
+      ],
+      [
+        1000,
+        2000
+      ],
+      [
+        2000,
+        4000
+      ]
+    ],
+    "classes": {
+      "f": [
+        0.05,
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.3,
+        0.5,
+        null
+      ],
+      "m": [
+        0.1,
+        0.1,
+        0.2,
+        0.3,
+        0.5,
+        0.8,
+        1.2,
+        2
+      ],
+      "c": [
+        0.2,
+        0.3,
+        0.5,
+        0.8,
+        1.2,
+        2,
+        3,
+        4
+      ],
+      "v": [
+        null,
+        0.5,
+        1,
+        1.5,
+        2.5,
+        4,
+        6,
+        8
+      ]
+    }
+  },
+  "general_radius_chamfer": {
+    "unit": "mm",
+    "note": "ISO 2768-1, radii of external corners and chamfer heights",
+    "ranges": [
+      [
+        0.5,
+        3
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        6,
+        null
+      ]
+    ],
+    "classes": {
+      "f": [
+        0.2,
+        0.5,
+        1
+      ],
+      "m": [
+        0.2,
+        0.5,
+        1
+      ],
+      "c": [
+        0.4,
+        1,
+        2
+      ],
+      "v": [
+        0.4,
+        1,
+        2
+      ]
+    }
+  },
+  "general_angular": {
+    "unit": "angular minutes (±)",
+    "note": "ISO 2768-1, angular dimensions based on the length of the shorter angle leg (mm)",
+    "ranges": [
+      [
+        0,
+        10
+      ],
+      [
+        10,
+        50
+      ],
+      [
+        50,
+        120
+      ],
+      [
+        120,
+        400
+      ],
+      [
+        400,
+        null
+      ]
+    ],
+    "classes": {
+      "f": [
+        60,
+        30,
+        20,
+        10,
+        5
+      ],
+      "m": [
+        60,
+        30,
+        20,
+        10,
+        5
+      ],
+      "c": [
+        90,
+        60,
+        30,
+        15,
+        10
+      ],
+      "v": [
+        180,
+        120,
+        60,
+        30,
+        20
+      ]
+    }
+  },
+  "geometric": {
+    "unit": "mm",
+    "note": "ISO 2768-2, general tolerances for form and position (classes H, K, L)",
+    "straightness_flatness": {
+      "ranges": [
+        [
+          0,
+          10
+        ],
+        [
+          10,
+          30
+        ],
+        [
+          30,
+          100
+        ],
+        [
+          100,
+          300
+        ],
+        [
+          300,
+          1000
+        ],
+        [
+          1000,
+          3000
+        ]
+      ],
+      "classes": {
+        "H": [
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.3,
+          0.4
+        ],
+        "K": [
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.6,
+          0.8
+        ],
+        "L": [
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.2,
+          1.6
+        ]
+      }
+    },
+    "perpendicularity": {
+      "note": "based on the shorter angle leg",
+      "ranges": [
+        [
+          0,
+          100
+        ],
+        [
+          100,
+          300
+        ],
+        [
+          300,
+          1000
+        ],
+        [
+          1000,
+          3000
+        ]
+      ],
+      "classes": {
+        "H": [
+          0.2,
+          0.3,
+          0.4,
+          0.5
+        ],
+        "K": [
+          0.4,
+          0.6,
+          0.8,
+          1
+        ],
+        "L": [
+          0.6,
+          1,
+          1.5,
+          2
+        ]
+      }
+    },
+    "symmetry": {
+      "note": "based on the shorter part; the PDF merged the first two interval cells for class K (0.6), which are separated here.",
+      "ranges": [
+        [
+          0,
+          100
+        ],
+        [
+          100,
+          300
+        ],
+        [
+          300,
+          1000
+        ],
+        [
+          1000,
+          3000
+        ]
+      ],
+      "classes": {
+        "H": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "K": [
+          0.6,
+          0.6,
+          0.8,
+          1
+        ],
+        "L": [
+          0.6,
+          1,
+          1.5,
+          2
+        ]
+      }
+    },
+    "runout": {
+      "note": "circular runout (labelled “runout” in the PDF); one value applies to all dimensions.",
+      "classes": {
+        "H": 0.1,
+        "K": 0.2,
+        "L": 0.5
+      }
+    }
+  },
+  "bearings": {
+    "_description": "DIN 5425-1 (1984-11). Lowercase letters refer to the shaft; uppercase letters refer to the housing bore. Typical tolerance grades are IT6 for shafts and IT7 for housings (bushings); choose a lower (more precise) grade when greater rotational smoothness and accuracy are required. The PDF column heading says “shaft deviations” for both rings, but uppercase letters (bores) are specified for the outer ring.",
+    "radial": {
+      "inner_ring_shaft": [
+        {
+          "load": "circumferential",
+          "level": "light",
+          "ball": "h, k",
+          "roller": "k, m",
+          "fit": "transition / interference fit"
+        },
+        {
+          "load": "circumferential",
+          "level": "medium",
+          "ball": "j, k, m",
+          "roller": "k, m, n, p",
+          "fit": "transition / interference fit"
+        },
+        {
+          "load": "circumferential",
+          "level": "heavy",
+          "ball": "m, n",
+          "roller": "n, p, r",
+          "fit": "transition / interference fit"
+        },
+        {
+          "load": "point",
+          "level": "temporarily_high",
+          "ball": "j, h, g, f",
+          "roller": "j, h, g, f",
+          "fit": "clearance fit"
+        }
+      ],
+      "outer_ring_housing": [
+        {
+          "load": "circumferential",
+          "level": "light",
+          "ball": "J",
+          "roller": "K",
+          "fit": "transition / interference fit"
+        },
+        {
+          "load": "circumferential",
+          "level": "medium",
+          "ball": "K, M",
+          "roller": "M, N",
+          "fit": "transition / interference fit"
+        },
+        {
+          "load": "circumferential",
+          "level": "heavy",
+          "ball": null,
+          "roller": "N, P",
+          "fit": "transition / interference fit"
+        },
+        {
+          "load": "point",
+          "level": "temporarily_high",
+          "ball": "J, H, G, F",
+          "roller": "J, H, G, F",
+          "fit": "clearance fit"
+        }
+      ]
+    },
+    "thrust": {
+      "combined_radial_axial": {
+        "bearing_types": "radial-thrust, spherical roller, and tapered roller bearings",
+        "shaft_washer": {
+          "circumferential": "j, k, m",
+          "point": "j"
+        },
+        "housing_washer": {
+          "circumferential": "K, M",
+          "point": "H, J"
+        }
+      },
+      "axial_only": {
+        "bearing_types": "ball and roller bearings",
+        "shaft_washer": "h, j, k",
+        "housing_washer": "H, G, E"
+      }
+    }
+  },
+  "iso20457": {
+    "_description": "Plastic molding tolerance groups TG1–TG9 (±, mm). VALUES ARE FROM DIN 16742:2013 (size range 1–315 mm), transcribed from an RpProto summary; that source has not been reconciled against the full text of ISO 20457:2026. ISO 20457:2026 is the current edition (2nd edition, 2026-08, 34 pages), so verify critical dimensions and contractual requirements against the full standard. TG1 is defined only up to 120 mm (null = not available). TG9 has one value for W and NW.",
+    "sizes": [
+      [
+        1,
+        3
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        6,
+        10
+      ],
+      [
+        10,
+        18
+      ],
+      [
+        18,
+        30
+      ],
+      [
+        30,
+        50
+      ],
+      [
+        50,
+        80
+      ],
+      [
+        80,
+        120
+      ],
+      [
+        120,
+        180
+      ],
+      [
+        180,
+        250
+      ],
+      [
+        250,
+        315
+      ]
+    ],
+    "groups": [
+      "TG1",
+      "TG2",
+      "TG3",
+      "TG4",
+      "TG5",
+      "TG6",
+      "TG7",
+      "TG8",
+      "TG9"
+    ],
+    "W": {
+      "TG1": [
+        0.007,
+        0.012,
+        0.018,
+        0.022,
+        0.026,
+        0.031,
+        0.037,
+        0.044,
+        null,
+        null,
+        null
+      ],
+      "TG2": [
+        0.013,
+        0.02,
+        0.029,
+        0.035,
+        0.042,
+        0.05,
+        0.06,
+        0.09,
+        0.13,
+        0.15,
+        0.16
+      ],
+      "TG3": [
+        0.02,
+        0.031,
+        0.05,
+        0.06,
+        0.07,
+        0.08,
+        0.1,
+        0.15,
+        0.2,
+        0.23,
+        0.26
+      ],
+      "TG4": [
+        0.03,
+        0.05,
+        0.08,
+        0.09,
+        0.11,
+        0.13,
+        0.15,
+        0.23,
+        0.32,
+        0.35,
+        0.41
+      ],
+      "TG5": [
+        0.05,
+        0.08,
+        0.11,
+        0.14,
+        0.17,
+        0.2,
+        0.23,
+        0.36,
+        0.5,
+        0.58,
+        0.65
+      ],
+      "TG6": [
+        0.07,
+        0.12,
+        0.18,
+        0.22,
+        0.26,
+        0.31,
+        0.37,
+        0.57,
+        0.8,
+        0.93,
+        1.05
+      ],
+      "TG7": [
+        0.13,
+        0.2,
+        0.29,
+        0.35,
+        0.42,
+        0.5,
+        0.6,
+        0.9,
+        1.25,
+        1.45,
+        1.6
+      ],
+      "TG8": [
+        0.2,
+        0.31,
+        0.45,
+        0.55,
+        0.65,
+        0.8,
+        0.95,
+        1.4,
+        2.0,
+        2.3,
+        2.6
+      ],
+      "TG9": [
+        0.3,
+        0.49,
+        0.75,
+        0.9,
+        1.05,
+        1.25,
+        1.5,
+        2.25,
+        3.15,
+        3.6,
+        4.05
+      ]
+    },
+    "NW": {
+      "TG1": [
+        0.012,
+        0.018,
+        0.022,
+        0.026,
+        0.031,
+        0.037,
+        0.044,
+        0.05,
+        null,
+        null,
+        null
+      ],
+      "TG2": [
+        0.02,
+        0.029,
+        0.035,
+        0.042,
+        0.05,
+        0.06,
+        0.09,
+        0.13,
+        0.15,
+        0.16,
+        0.18
+      ],
+      "TG3": [
+        0.031,
+        0.05,
+        0.06,
+        0.07,
+        0.08,
+        0.1,
+        0.15,
+        0.2,
+        0.23,
+        0.26,
+        0.29
+      ],
+      "TG4": [
+        0.05,
+        0.08,
+        0.09,
+        0.11,
+        0.13,
+        0.15,
+        0.23,
+        0.32,
+        0.35,
+        0.41,
+        0.45
+      ],
+      "TG5": [
+        0.08,
+        0.11,
+        0.14,
+        0.17,
+        0.2,
+        0.23,
+        0.36,
+        0.5,
+        0.58,
+        0.65,
+        0.7
+      ],
+      "TG6": [
+        0.12,
+        0.18,
+        0.22,
+        0.26,
+        0.31,
+        0.37,
+        0.57,
+        0.8,
+        0.93,
+        1.05,
+        1.15
+      ],
+      "TG7": [
+        0.2,
+        0.29,
+        0.35,
+        0.42,
+        0.5,
+        0.6,
+        0.9,
+        1.25,
+        1.45,
+        1.6,
+        1.8
+      ],
+      "TG8": [
+        0.31,
+        0.45,
+        0.55,
+        0.65,
+        0.8,
+        0.95,
+        1.4,
+        2.0,
+        2.3,
+        2.6,
+        2.85
+      ],
+      "TG9": [
+        0.3,
+        0.49,
+        0.75,
+        0.9,
+        1.05,
+        1.25,
+        1.5,
+        2.25,
+        3.15,
+        3.6,
+        4.05
+      ]
+    },
+    "production_series": {
+      "columns": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "series": {
+        "1": [
+          "TG4",
+          "TG5",
+          "TG6",
+          "TG7",
+          "TG8",
+          "TG9"
+        ],
+        "2": [
+          "TG3",
+          "TG4",
+          "TG5",
+          "TG6",
+          "TG7",
+          "TG8"
+        ],
+        "3": [
+          "TG2",
+          "TG3",
+          "TG4",
+          "TG5",
+          "TG6",
+          "TG7"
+        ],
+        "4": [
+          "TG1",
+          "TG2",
+          "TG3",
+          "TG4",
+          "TG5",
+          "TG6"
+        ]
+      },
+      "note": "Columns A–F represent material and process groups from the standard annexes (these are not included in the source). Only series 1 is used for general tolerances. Series 3 and 4 require a separate agreement."
+    }
+  }
+}

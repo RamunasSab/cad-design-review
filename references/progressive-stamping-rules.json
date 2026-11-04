@@ -1,0 +1,71 @@
+{
+  "_description": "Preliminary progressive-stamping DFM heuristics. These are not universal ISO limits. The stamper must confirm all limits for the material, thickness, press, tooling, and operation sequence. Unknown data -> NEEDS_CLARIFICATION.",
+  "_sources": {
+    "engineering_review": "General design guidance; company/stamper approval required"
+  },
+  "rules": [
+    {
+      "id": "PS-WEB-01",
+      "applies_to": [
+        "carrier_bridge",
+        "narrow_web"
+      ],
+      "field": "web_width",
+      "op": ">=",
+      "limit": "1.5*t",
+      "severity": "RISK",
+      "message": "Carrier/bridge width is below the preliminary 1.5×t guideline; check strip stiffness, material, and station loads.",
+      "source": "engineering_review"
+    },
+    {
+      "id": "PS-PILOT-01",
+      "applies_to": "pilot_hole",
+      "field": "diameter",
+      "op": ">=",
+      "limit": "1.0*t",
+      "severity": "RISK",
+      "message": "Pilot-hole diameter is very small relative to thickness; check pilot strength, positioning accuracy, and wear.",
+      "source": "engineering_review"
+    },
+    {
+      "id": "PS-FORM-01",
+      "applies_to": "forming_feature",
+      "field": "minimum_radius",
+      "op": ">=",
+      "limit": "1.0*t",
+      "severity": "RISK",
+      "message": "Forming radius is below 1×t; assess material grade, hardness, rolling direction, and cracking risk.",
+      "source": "engineering_review"
+    },
+    {
+      "id": "PS-BURR-01",
+      "applies_to": "cut_edge",
+      "field": "burr_height",
+      "op": "<=",
+      "limit": "max_burr_height",
+      "severity": "RISK",
+      "message": "Burr height exceeds the specified company/supplier limit.",
+      "source": "company_or_supplier_spec"
+    },
+    {
+      "id": "PS-STRIP-01",
+      "applies_to": "strip_layout",
+      "field": "carrier_present_until_cutoff",
+      "op": ">=",
+      "limit": "1",
+      "severity": "NEEDS_CLARIFICATION",
+      "message": "Confirm that the part remains attached to the carrier until the intended cut-off operation.",
+      "source": "process_review"
+    },
+    {
+      "id": "PS-SLUG-01",
+      "applies_to": "piercing_feature",
+      "field": "slug_ejection_verified",
+      "op": ">=",
+      "limit": "1",
+      "severity": "NEEDS_CLARIFICATION",
+      "message": "Scrap slug ejection has not been verified; assess the risks of slug pulling and slug stacking.",
+      "source": "tooling_review"
+    }
+  ]
+}

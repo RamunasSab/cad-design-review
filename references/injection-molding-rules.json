@@ -1,0 +1,256 @@
+{
+  "_description": "Injection-molding DFM rules. w (or t) = nominal wall thickness (mm). Other variables refer to feature or part fields. EDIT these values to match your material, toolmaker, and company standards. The file must remain valid JSON (limit values are expressions).",
+  "_sources": {
+    "DFMPro": "https://dfmpro.com/manufacturing-processes/dfmpro-for-injection-molding/ (+ /2/ ir /3/)",
+    "DFM-skill": "atviras a5c-ai/babysitter dfm-review skill'as"
+  },
+  "rules": [
+    {
+      "id": "IM-RIB-01",
+      "applies_to": "rib",
+      "field": "thickness",
+      "op": "between",
+      "limit": "0.5*w",
+      "max": "0.75*w",
+      "severity": "RISK",
+      "message": "Rib thickness is outside 50–75% of the wall thickness (source: DFM-skill; DFMPro values are shown only in an illustration).",
+      "source": "DFM-skill"
+    },
+    {
+      "id": "IM-RIB-02",
+      "applies_to": "rib",
+      "field": "height",
+      "op": "<=",
+      "limit": "3.0*w",
+      "severity": "RISK",
+      "message": "Rib height exceeds 3×w (potential filling, cooling, and ejection issues).",
+      "source": "DFM-skill"
+    },
+    {
+      "id": "IM-RIB-03",
+      "applies_to": "rib",
+      "field": "base_radius",
+      "op": "between",
+      "limit": "0.25*w",
+      "max": "0.4*w",
+      "severity": "RISK",
+      "message": "Rib root radius is outside 0.25–0.4×w.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-RIB-04",
+      "applies_to": "rib",
+      "field": "draft",
+      "op": ">=",
+      "limit": "0.5",
+      "severity": "NONCONFORMANCE",
+      "message": "Rib draft angle is less than 0.5° per side.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-RIB-05",
+      "applies_to": "rib",
+      "field": "draft",
+      "op": ">=",
+      "limit": "1.0",
+      "severity": "RISK",
+      "message": "Rib draft angle is less than 1° (approximately 1–1.5° is recommended).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-RIB-06",
+      "applies_to": "rib",
+      "field": "spacing_to_nearest_rib",
+      "op": ">=",
+      "limit": "2.0*w",
+      "severity": "NONCONFORMANCE",
+      "message": "Spacing between ribs is less than 2×w (thin mold steel and cooling concerns).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-BOSS-01",
+      "applies_to": "boss",
+      "field": "base_radius",
+      "op": "between",
+      "limit": "0.25*w",
+      "max": "0.5*w",
+      "severity": "RISK",
+      "message": "Boss root radius is outside 0.25–0.5×w.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-BOSS-02",
+      "applies_to": "boss",
+      "field": "height",
+      "op": "<=",
+      "limit": "3.0*outer_diameter",
+      "severity": "NONCONFORMANCE",
+      "message": "Boss height exceeds 3× its outer diameter.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-BOSS-03",
+      "applies_to": "boss",
+      "field": "height",
+      "op": "<=",
+      "limit": "2.0*outer_diameter",
+      "severity": "RISK",
+      "message": "Boss height exceeds 2× its outer diameter (a more conservative limit; consider adding gussets).",
+      "source": "DFM-skill"
+    },
+    {
+      "id": "IM-BOSS-04",
+      "applies_to": "boss",
+      "field": "tip_radius",
+      "op": ">=",
+      "limit": "0.01",
+      "severity": "RISK",
+      "message": "No radius is defined at the top of the boss (DFMPro requires one but does not specify a value; enter your own limit).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-BOSS-05",
+      "applies_to": "boss",
+      "field": "wall_thickness",
+      "op": "<=",
+      "limit": "0.6*w",
+      "severity": "RISK",
+      "message": "Boss wall thickness exceeds approximately 0.6×w (sink risk; greater thickness may be acceptable near a non-cosmetic area).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-BOSS-06",
+      "applies_to": "boss",
+      "field": "hole_base_radius",
+      "op": "between",
+      "limit": "0.25*w",
+      "max": "0.5*w",
+      "severity": "RISK",
+      "message": "Boss hole-bottom radius is outside 0.25–0.5×w.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-BOSS-07",
+      "applies_to": "boss",
+      "field": "draft_od",
+      "op": ">=",
+      "limit": "0.5",
+      "severity": "NONCONFORMANCE",
+      "message": "Boss outer-wall draft angle is less than 0.5°.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-BOSS-08",
+      "applies_to": "boss",
+      "field": "draft_id",
+      "op": ">=",
+      "limit": "0.25",
+      "severity": "NONCONFORMANCE",
+      "message": "Boss inner-wall draft angle is less than 0.25°.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-BOSS-09",
+      "applies_to": "boss",
+      "field": "spacing_to_nearest_boss",
+      "op": ">=",
+      "limit": "2.0*w",
+      "severity": "NONCONFORMANCE",
+      "message": "Spacing between bosses is less than 2×w.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-BOSS-10",
+      "applies_to": "boss",
+      "field": "connected_to_wall",
+      "op": ">=",
+      "limit": "1",
+      "severity": "RISK",
+      "message": "Atrama nesujungta su artimiausia sienele (standalone); geriau sujungti",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-WALL-01",
+      "applies_to": "wall_transition",
+      "field": "change_percent",
+      "op": "<=",
+      "limit": "25",
+      "when": "polymer_class == 'amorphous'",
+      "severity": "RISK",
+      "message": "Wall-thickness variation exceeds 25% (amorphous polymers such as PC and ABS).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-WALL-02",
+      "applies_to": "wall_transition",
+      "field": "change_percent",
+      "op": "<=",
+      "limit": "15",
+      "when": "polymer_class == 'semi_crystalline'",
+      "severity": "RISK",
+      "message": "Wall-thickness variation exceeds 15% (semi-crystalline polymers such as PA and PE).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-DRAFT-01",
+      "applies_to": "sidewall",
+      "field": "draft_angle",
+      "op": ">=",
+      "limit": "0.5",
+      "severity": "NONCONFORMANCE",
+      "message": "Sidewall draft angle is less than 0.5° (DFMPro indicates 0.5–2°; a larger angle improves ejection).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-DRAFT-02",
+      "applies_to": "textured_sidewall",
+      "field": "draft_angle",
+      "op": ">=",
+      "limit": "0.5 + texture_depth/0.025",
+      "severity": "NONCONFORMANCE",
+      "message": "Draft angle on the textured surface is too small (add 1° for each 0.025 mm of texture depth).",
+      "source": "DFM-skill"
+    },
+    {
+      "id": "IM-UC-01",
+      "applies_to": "undercut",
+      "field": "count",
+      "op": "<=",
+      "limit": "0",
+      "severity": "RISK",
+      "message": "An undercut is present: a slide or other mechanism is required, increasing tooling cost; avoid where possible.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-CORNER-01",
+      "applies_to": "corner",
+      "field": "inner_radius",
+      "op": ">=",
+      "limit": "0.5*w",
+      "severity": "RISK",
+      "message": "Corner radius is less than 0.5×w (sharp corners increase stress and make filling more difficult).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-CORNER-02",
+      "applies_to": "corner",
+      "field": "outer_radius",
+      "op": "~=",
+      "limit": "inner_radius + w",
+      "tol": "0.1*w",
+      "severity": "RISK",
+      "message": "Inner and outer radii are not concentric (outer radius should equal inner radius + w).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "IM-HOLE-01",
+      "applies_to": "blind_hole",
+      "field": "depth_to_diameter",
+      "op": "<=",
+      "limit": "2.0",
+      "severity": "RISK",
+      "message": "Blind-hole depth exceeds 2× the diameter (a long core pin may deflect).",
+      "source": "DFMPro"
+    }
+  ]
+}

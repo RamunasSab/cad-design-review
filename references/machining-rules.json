@@ -1,0 +1,239 @@
+{
+  "_description": "Machining DFM rules (drilling, milling, turning). Boolean fields use 1 = true and 0 = false. Part-level variables (e.g. min_tool_diameter) belong at the top level of the part JSON. EDIT these values to match your supplier and company standards. The file must remain valid JSON (limit values are expressions).",
+  "_sources": {
+    "DFMPro": "https://dfmpro.com/manufacturing-processes/dfmpro-for-machining/",
+    "DFM-skill": "atviras a5c-ai/babysitter dfm-review skill'as"
+  },
+  "rules": [
+    {
+      "id": "MC-DRILL-01",
+      "applies_to": "drilled_hole",
+      "field": "depth_to_diameter",
+      "op": "<=",
+      "limit": "5.0",
+      "severity": "RISK",
+      "message": "Drilled-hole depth exceeds 5× diameter: deep-hole drilling may be required, increasing cost.",
+      "source": "DFM-skill"
+    },
+    {
+      "id": "MC-DRILL-02",
+      "applies_to": "drilled_hole",
+      "field": "depth_to_diameter",
+      "op": "<=",
+      "limit": "3.0",
+      "severity": "RISK",
+      "message": "Drilled-hole depth exceeds 3× diameter: the drill may wander or break, and chip evacuation becomes difficult (DFMPro wording “diameter-to-depth ratio < 3” is interpreted here as depth/diameter).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-DRILL-03",
+      "applies_to": "drilled_hole",
+      "field": "entry_perpendicular",
+      "op": ">=",
+      "limit": "1",
+      "severity": "RISK",
+      "message": "The drill enters a surface that is not perpendicular to the hole axis (risk of drill wandering).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-DRILL-04",
+      "applies_to": "drilled_hole",
+      "field": "exit_perpendicular",
+      "op": ">=",
+      "limit": "1",
+      "when": "blind == 0",
+      "severity": "RISK",
+      "message": "The drill exits through a surface that is not perpendicular to the hole axis (uneven breakout/burrs may result).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-DRILL-05",
+      "applies_to": "drilled_hole",
+      "field": "flat_bottom",
+      "op": "<=",
+      "limit": "0",
+      "when": "blind == 1",
+      "severity": "RISK",
+      "message": "The blind-hole bottom is specified as flat: a standard drill leaves a conical bottom, which can cause problems for subsequent boring.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-DRILL-06",
+      "applies_to": "drilled_hole",
+      "field": "intersects_cavity",
+      "op": "<=",
+      "limit": "0",
+      "severity": "RISK",
+      "message": "The hole intersects a cavity: the drill may wander when it re-enters the material.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-DRILL-07",
+      "applies_to": "drilled_hole",
+      "field": "axis_in_cavity",
+      "op": "<=",
+      "limit": "0",
+      "when": "intersects_cavity == 1",
+      "severity": "NONCONFORMANCE",
+      "message": "Where the hole intersects a cavity, its axis lies inside the cavity (at minimum, the axis should remain outside the cavity).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-DRILL-08",
+      "applies_to": "drilled_hole",
+      "field": "area_in_material_percent",
+      "op": ">=",
+      "limit": "75",
+      "optional": true,
+      "severity": "NONCONFORMANCE",
+      "message": "Partial hole: less than 75% of the hole area is supported by material (risk of drill wandering).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-DRILL-09",
+      "applies_to": "drilled_hole",
+      "field": "is_standard_size",
+      "op": ">=",
+      "limit": "1",
+      "severity": "RISK",
+      "message": "Non-standard hole size: a special tool may be required, increasing manufacturing and inventory costs.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-MILL-01",
+      "applies_to": "pocket",
+      "field": "depth",
+      "op": "<=",
+      "limit": "8.0*corner_radius",
+      "when": "corner_radius > 0",
+      "severity": "RISK",
+      "message": "Deep pocket: depth exceeds 4× tool diameter (tool diameter ≈ 2× corner radius); long tools may deflect, break, or vibrate.",
+      "source": "DFM-skill (depth) + DFMPro (qualitative guidance)"
+    },
+    {
+      "id": "MC-MILL-02",
+      "applies_to": "pocket",
+      "field": "corner_radius",
+      "op": ">=",
+      "limit": "0.01",
+      "severity": "NONCONFORMANCE",
+      "message": "Sharp internal corner: cannot be produced by conventional milling; use EDM or revise the geometry.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-MILL-03",
+      "applies_to": "narrow_region",
+      "field": "width",
+      "op": ">=",
+      "limit": "min_tool_diameter",
+      "severity": "RISK",
+      "message": "The narrow region between features is smaller than the minimum permitted cutter diameter (min_tool_diameter).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-MILL-04",
+      "applies_to": [
+        "pocket",
+        "slot"
+      ],
+      "field": "standard_radii",
+      "op": ">=",
+      "limit": "1",
+      "severity": "RISK",
+      "message": "Non-standard side or bottom radius (use one standard side radius and one standard bottom radius).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-MILL-05",
+      "applies_to": [
+        "pocket",
+        "slot"
+      ],
+      "field": "side_to_bottom_angle",
+      "op": "~=",
+      "limit": "90",
+      "tol": "0.01",
+      "severity": "RISK",
+      "message": "Side and bottom surfaces are not perpendicular: multi-axis machining may be required, increasing cost.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-MILL-06",
+      "applies_to": [
+        "pocket",
+        "slot",
+        "milled_feature"
+      ],
+      "field": "accessible",
+      "op": ">=",
+      "limit": "1",
+      "severity": "NONCONFORMANCE",
+      "message": "The feature is not accessible to the tool in the intended machining orientation.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-TURN-01",
+      "applies_to": "blind_bore",
+      "field": "relief",
+      "op": ">=",
+      "limit": "0.03*diameter",
+      "severity": "RISK",
+      "message": "Tool relief in the blind-turned bore is less than 3% of the bore diameter.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-TURN-02",
+      "applies_to": "keyway",
+      "field": "end_radius",
+      "op": "~=",
+      "limit": "width/2",
+      "tol": "0.01",
+      "severity": "RISK",
+      "message": "The end of the keyway is not rounded to match the cutter (radius = half the width because cutter diameter = keyway width; inferred from the DFMPro description).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-TURN-03",
+      "applies_to": "turned_body",
+      "field": "length_to_min_diameter",
+      "op": "<=",
+      "limit": "8.0",
+      "severity": "RISK",
+      "message": "Length / minimum diameter exceeds 8: a tailstock or steady rest may be required to prevent part deflection.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-TURN-04",
+      "applies_to": "internal_corner",
+      "field": "radius",
+      "op": ">=",
+      "limit": "0.01",
+      "severity": "RISK",
+      "message": "Sharp internal corner in turning: a larger radius is needed to accommodate the tool nose radius.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-TURN-05",
+      "applies_to": "od_profile",
+      "field": "contour_angle_from_axis",
+      "op": "<=",
+      "limit": "58",
+      "severity": "RISK",
+      "message": "Contour angle exceeds 58° from the axis: it cannot be machined in a single turning operation (steep or wall-parallel grooves).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "MC-TURN-06",
+      "applies_to": [
+        "axial_slot",
+        "keyway"
+      ],
+      "field": "axis_offset",
+      "op": "<=",
+      "limit": "0.01",
+      "severity": "RISK",
+      "message": "Axial slot is not symmetric about the rotation axis: likely a modelling error that may cause assembly problems.",
+      "source": "DFMPro"
+    }
+  ]
+}

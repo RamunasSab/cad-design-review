@@ -1,0 +1,200 @@
+{
+  "_description": "Sheet-metal bending DFM rules. The script evaluates the 'limit' expression: t = sheet thickness (mm); other variables are feature fields. EDIT these values to match company and supplier standards. The file must remain valid JSON (limit values are expressions).",
+  "_sources": {
+    "DFMPro": "https://dfmpro.com/manufacturing-processes/dfmpro-for-sheet-metal/ (bendros rekomendacijos)",
+    "DFM-skill": "atviras a5c-ai/babysitter dfm-review skill'as (bendros rekomendacijos)"
+  },
+  "rules": [
+    {
+      "id": "SM-BEND-01",
+      "applies_to": "bend",
+      "field": "inner_radius",
+      "op": ">=",
+      "limit": "0.5*t",
+      "severity": "NONCONFORMANCE",
+      "message": "Inside bend radius is less than 0.5×t (too small even for soft materials).",
+      "source": "DFM-skill"
+    },
+    {
+      "id": "SM-BEND-02",
+      "applies_to": "bend",
+      "field": "inner_radius",
+      "op": ">=",
+      "limit": "1.0*t",
+      "severity": "RISK",
+      "message": "Inside bend radius is less than 1×t: may be acceptable only for soft materials; verify the material and grain direction.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-BEND-03",
+      "applies_to": "bend",
+      "field": "flange_length",
+      "op": ">=",
+      "limit": "max(4*t, 3)",
+      "severity": "NONCONFORMANCE",
+      "message": "Bend flange is too short (should be > 4×t and practically at least 3 mm).",
+      "source": "DFM-skill"
+    },
+    {
+      "id": "SM-HOLE-01",
+      "applies_to": "hole",
+      "field": "diameter",
+      "op": ">=",
+      "limit": "1.0*t",
+      "severity": "NONCONFORMANCE",
+      "message": "Hole diameter is smaller than the sheet thickness (the small punch may break).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-HOLE-02",
+      "applies_to": "hole",
+      "field": "dist_to_edge",
+      "op": ">=",
+      "limit": "2.0*t",
+      "severity": "RISK",
+      "message": "Hole is too close to the edge (< 2×t): the edge may deform.",
+      "source": "DFM-skill"
+    },
+    {
+      "id": "SM-HOLE-03",
+      "applies_to": "hole",
+      "field": "dist_to_bend",
+      "op": ">=",
+      "limit": "2.0*t + bend_radius",
+      "severity": "NONCONFORMANCE",
+      "message": "Hole is too close to the bend (should be > 2×t + bend radius); the hole may distort.",
+      "source": "DFM-skill"
+    },
+    {
+      "id": "SM-HOLE-04",
+      "applies_to": "hole",
+      "field": "dist_to_nearest_hole",
+      "op": ">=",
+      "limit": "2.0*t",
+      "severity": "RISK",
+      "message": "Hole-to-hole spacing is less than 2×t.",
+      "source": "DFM-skill"
+    },
+    {
+      "id": "SM-EXT-01",
+      "applies_to": "extruded_hole",
+      "field": "dist_to_edge",
+      "op": ">=",
+      "limit": "3.0*t",
+      "severity": "NONCONFORMANCE",
+      "message": "Extruded-hole distance to the edge is less than 3×t: deformation or tearing may occur.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-EXT-02",
+      "applies_to": "extruded_hole",
+      "field": "dist_to_nearest_extruded",
+      "op": ">=",
+      "limit": "6.0*t",
+      "severity": "NONCONFORMANCE",
+      "message": "Spacing between extruded holes is less than 6×t.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-EMB-01",
+      "applies_to": "emboss",
+      "field": "depth",
+      "op": "<=",
+      "limit": "3.0*t",
+      "severity": "NONCONFORMANCE",
+      "message": "Emboss depth exceeds 3×t: the material may thin or tear.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-CURL-01",
+      "applies_to": "curl",
+      "field": "outer_radius",
+      "op": ">=",
+      "limit": "2.0*t",
+      "severity": "NONCONFORMANCE",
+      "message": "Curl outside radius is less than 2×t.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-CURL-02",
+      "applies_to": "curl",
+      "field": "dist_to_hole",
+      "op": ">=",
+      "limit": "outer_radius + t",
+      "severity": "NONCONFORMANCE",
+      "message": "Hole is too close to the curl (distance should be at least curl radius + t).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-CURL-03",
+      "applies_to": "curl",
+      "field": "dist_to_bend",
+      "op": ">=",
+      "limit": "outer_radius + 6.0*t",
+      "severity": "NONCONFORMANCE",
+      "message": "Bend is too close to the curl (should be at least curl radius + 6×t).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-HEM-01",
+      "applies_to": "hem_teardrop",
+      "field": "inside_diameter",
+      "op": "~=",
+      "limit": "1.0*t",
+      "tol": "0.1*t",
+      "severity": "RISK",
+      "message": "The inside diameter of a teardrop hem should equal the sheet thickness.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-HEM-02",
+      "applies_to": "hem_open",
+      "field": "inside_diameter",
+      "op": "<=",
+      "limit": "1.0*t",
+      "severity": "RISK",
+      "message": "Open-hem inside diameter exceeds t: the bend may lose its round shape.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-HEM-03",
+      "applies_to": "hem",
+      "field": "dist_to_bend",
+      "op": ">=",
+      "limit": "5.0*t + bend_radius + hem_radius",
+      "severity": "NONCONFORMANCE",
+      "message": "Bend is too close to the hem (should be at least 5×t + bend radius + hem radius).",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-NOTCH-01",
+      "applies_to": "notch",
+      "field": "width",
+      "op": ">=",
+      "limit": "1.5*t",
+      "severity": "NONCONFORMANCE",
+      "message": "Notch width is less than 1.5×t.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-NOTCH-02",
+      "applies_to": "notch",
+      "field": "length",
+      "op": "<=",
+      "limit": "5.0*t",
+      "severity": "RISK",
+      "message": "Notch length exceeds 5×t.",
+      "source": "DFMPro"
+    },
+    {
+      "id": "SM-NOTCH-03",
+      "applies_to": "notch",
+      "field": "corner_radius",
+      "op": ">=",
+      "limit": "0.5*t",
+      "severity": "RISK",
+      "message": "Notch corner radius is less than 0.5×t.",
+      "source": "DFMPro"
+    }
+  ]
+}
