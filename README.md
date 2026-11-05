@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="assets/cad-design-review-icon.png"
+       alt="CAD Design Review"
+       width="160">
+</p>
 # CAD Design Review
 
 **A portable AI skill for mechanical engineering design reviews and manufacturing risk assessment.**
