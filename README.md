@@ -85,7 +85,7 @@ The repository contains:
 - `SKILL.md` — main instructions and engineering review workflow.
 - `references/` — technical guidance, checklists, schemas, and reference datasets.
 - `scripts/` — Python utilities for supported DFM, tolerance, stack-up, and drawing-data checks.
-- `tests/` — lightweight smoke and validation tests.
+- `tests/` — lightweight smoke and validation tests. ## In this catalogue, you will find STEP, DXF and PNG files for the test component – the gearbox shaft – for quick verification.
 
 ### Running the Python utilities
 
