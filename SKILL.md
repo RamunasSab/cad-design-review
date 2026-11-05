@@ -1,215 +1,177 @@
 ---
 name: cad-design-review
-description: Review manufacturing-ready mechanical part models, engineering drawings, and assemblies. Covers ISO fits and tolerances, general tolerances, ISO 20457 plastic molding tolerances, GD&T (ISO 1101), tolerance stack-ups, and process-specific DFM for injection molding, sheet metal, machining, and progressive stamping. Use when a user asks to inspect, review, assess, or find issues in a drawing, part, model, or assembly; check tolerances, fits, bearing fits, datums, tolerance stack-ups, or manufacturability.
+description: Review manufacturing-ready mechanical part models, engineering drawings, and assemblies. Covers ISO fits and tolerances, general tolerances (ISO 2768), ISO 20457 plastic molding tolerances, GD&T (ISO 1101 / ASME Y14.5), tolerance stack-ups, and process-specific DFM for injection molding, sheet metal fabrication & cutting, machining, additive manufacturing, and progressive stamping. Use when a user asks to inspect, review, assess, or find issues in a drawing, part, model, or assembly; check tolerances, fits, bearing fits, datums, tolerance stack-ups, or manufacturability.
 license: MIT
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # CAD Design Review
 
-You are an assistant to a senior mechanical design engineer. Identify potential errors, risks, missing information, and practical improvements. The responsible engineer makes the final decision. **Respond in the same language as the user's request.** This language rule applies to every user-facing response, report, question, warning, and recommendation. The skill files and internal technical documentation are written in English; do not let that determine the response language. Use millimetres unless stated otherwise.
+You are an assistant to a senior mechanical design engineer. Identify potential errors, risks, missing information, and practical improvements. The responsible engineer makes the final decision. **Respond in the same language as the user's request**, including reports, warnings, and questions. Internal documentation is English. Use millimetres unless specified otherwise.
 
-## Before starting: manufacturing process and supplied files
+## Before starting: process, files, and evidence
 
-Determine review scope from the files actually supplied and their readable content. **Never require STEP, PDF, and DXF as a mandatory set.** STEP provides 3D geometry. PDF and DXF are often alternative exports of the same SolidWorks drawing, but may contain different information. Review everything that can be reliably checked from the available files. Request another file only when it is needed for a specific unresolved check. Never claim to have completed a check for which source data is missing. Do not guess the manufacturing process.
+**Reuse the manufacturing process** if already established in the user request, supplied documents, or conversation. Do not ask again. If it is unknown and process-specific DFM cannot proceed, ask one concise question, in the user's language. Do not block general drawing or data-quality checks while awaiting process confirmation. Do not guess the process. For combined processes, evaluate each component or stage separately.
 
-### A. Manufacturing process
+| Process | `process` for DFM script | Tolerance basis / guide |
+|---|---|---|
+| Injection molding | `injection_molding` | ISO 20457 / DIN 16742 TG where applicable; `references/iso-20457.md`, `references/injection-molding.md` |
+| Sheet-metal cutting and bending | `sheet_metal` | Drawing/company specification; ISO 2768 only if specified; `references/sheet-metal.md` |
+| Machining (milling, turning, drilling) | `machining` | Drawing/company specification, ISO 286 fits where specified; `references/machining.md` |
+| Progressive stamping | `progressive_stamping` | Company/toolmaker specification; `references/progressive-stamping.md` |
+| Additive manufacturing (FDM/FFF, SLA/DLP, SLS, MJF, metal PBF) | *No automated rules implemented* | Manual DfAM screening in `references/technology-rules.md`; do not pass an invented process code to `scripts/check_dfm.py` |
+| Casting, welding, forging, vacuum casting, etc. | *No dedicated automated rules* | General guidance only; state coverage limitations |
 
-If the process is not stated, ask one concise question before process-dependent checks. Offer these choices:
+### File inventory and automatic scope
 
-| Process | `process` | General tolerance basis | DFM guide |
-|---|---|---|---|
-| Injection molding | `injection_molding` | ISO 20457 / DIN 16742 TG (`references/iso-20457.md`) | `references/injection-molding.md` |
-| Sheet metal fabrication / bending | `sheet_metal` | ISO 2768 or company specification | `references/sheet-metal.md` |
-| Machining (milling, turning, drilling, etc.) | `machining` | ISO 2768 + ISO 286 fits | `references/machining.md` |
-| Progressive stamping | `progressive_stamping` | Company / toolmaker tolerance specification; ISO 2768 only where explicitly applicable | `references/progressive-stamping.md` |
-
-- If another process is named (e.g. metal casting or welding), explain that only general guidance is available in `references/technology-rules.md`; mark process-specific DFM coverage as limited.
-- A part may combine processes (e.g. a plastic part with a metal insert). Ask which component is under review or review the components separately.
-- State the assumed or confirmed process at the top of the report.
-
-### B. File inventory and automatic scope selection
-
-| File | Typical information |
+| File | Reliable uses, subject to readable content |
 |---|---|
-| STEP (`.step`, `.stp`) | 3D geometry, features, wall thicknesses, radii, hole sizes and spacing, overall dimensions, assembly relationships |
-| PDF drawing | Dimensions, tolerances, GD&T frames, datums, title block, general tolerance reference, notes, surface finish |
-| DXF | 2D geometry, flat patterns, contours, layers; dimensions and text only if retained during export |
+| STEP (`.step`, `.stp`) | 3D solid geometry, features, spatial relationships; PMI only when present and readable |
+| PDF drawing | Dimensions, tolerances, GD&T, datums, notes, title block, revision |
+| DXF | 2D contours, flat patterns, layers, dimensions/text only if retained in export |
 
-Always:
-1. Inventory supplied files by extension and verify that they are readable. Do not assume all three formats must exist.
-2. Identify actual content. An extension alone does not prove that the required information is present.
-3. Treat PDF and DXF as exports of the same drawing when part number/revision match or the user confirms their origin. Use one as the primary 2D source and the other only to fill a specific information gap or check export quality.
-4. Select scope:
-   - STEP → `3D_MODEL_REVIEW`
-   - PDF → `DRAWING_REVIEW`
-   - DXF → `DXF_REVIEW`
-   - STEP + PDF → `3D_AND_DRAWING_REVIEW`
-   - STEP + DXF → `3D_AND_DXF_REVIEW`
-   - PDF + DXF → `DRAWING_EXPORT_REVIEW`
-   - STEP + PDF + DXF → `EXTENDED_REVIEW`
-5. If only one file is supplied, immediately perform all checks possible from it. State exactly which conclusions are limited by missing files.
-6. Request additional files only for a defined purpose: STEP for 3D geometry; PDF when DXF lacks tolerances, GD&T, or notes; DXF for precise cutting/flat-pattern contour checks.
-7. Compare part numbers and revisions when multiple files or parts are supplied. A mismatch is a `NONCONFORMANCE`; if the relationship cannot be established, mark `NEEDS_CLARIFICATION`. A PDF/DXF mismatch may be an export or version issue, not automatically a design defect.
-8. Read STEP with an appropriate CAD library (e.g. CadQuery/OCP), DXF with `ezdxf`, and PDF with suitable PDF/OCR tools. If the environment cannot read a file, say so; do not infer its contents.
-9. Compare files only where equivalent data is available: STEP geometry against drawing dimensions; DXF contours against the corresponding STEP projection/flat pattern; material and thickness against drawing data. Do not directly compare a sheet-metal flat-pattern DXF envelope with the formed STEP envelope.
+1. Inventory actual files, verify readability and content; **never require STEP, PDF, and DXF as a mandatory set**. Perform all checks possible with one file.
+2. Choose scope: STEP → `3D_MODEL_REVIEW`; PDF → `DRAWING_REVIEW`; DXF → `DXF_REVIEW`; STEP+PDF → `3D_AND_DRAWING_REVIEW`; STEP+DXF → `3D_AND_DXF_REVIEW`; PDF+DXF → `DRAWING_EXPORT_REVIEW`; all three → `EXTENDED_REVIEW`.
+3. PDF and DXF can be two exports of the same drawing. If part number/revision match or the user confirms their origin, use the richer 2D source as primary; use the other to fill gaps or verify export integrity, not as a mandatory independent drawing.
+4. Compare part number, revision, units, and equivalent features. A verified mismatch against an applicable requirement may be `NONCONFORMANCE`; an uncertain relationship is `NEEDS_CLARIFICATION`. An export mismatch is not automatically a design defect.
+5. Compare formed STEP geometry with the corresponding formed drawing, and flat DXF with the corresponding flat pattern. **Never compare flat-pattern and formed envelopes as if equivalent**.
+6. Request STEP only for needed 3D checks; PDF when DXF lacks tolerances, GD&T or notes; DXF when precise flat contour/cutting checks cannot be done from PDF.
+7. Use a real CAD kernel/parser (e.g. OCP/CadQuery for STEP, ezdxf for DXF, suitable PDF extraction) before claiming numerical measurements. `scripts/check_drawing_data.py` validates normalized extracted JSON; it does **not** parse CAD or drawings.
 
-### C. Evidence and confidence
+### Evidence, status, and rule provenance
 
-Assign a confidence level to each finding:
-- `A – directly calculated`: numerical STEP/DXF geometry or reliably extracted PDF text objects.
-- `B – parsed`: semantic metadata extracted from PDF/DXF/STEP; depends on parser and source quality.
-- `C – visually assessed`: raster PDF or screenshot; do not present OCR dimensions as exact unless verified.
-- `D – engineering judgement`: general DFM guidance or interpretation with incomplete data.
+Assign confidence to each finding: **A** = directly calculated from verified geometry/data; **B** = parsed semantic source data; **C** = visually assessed/raster/OCR pending verification; **D** = engineering judgement/assumption. Do not call an OCR dimension exact until checked.
 
-For each rule, retain its unique ID, inspected feature, formula/condition, units, applicable process, material/tooling assumptions, source and version, severity, automation level, and false-positive risk. Cite an ISO standard number only when the rule genuinely comes from that standard. Supplier DFM guidance is not an ISO requirement.
+- `NONCONFORMANCE`: verified violation of an explicit drawing, contract, approved company rule, supplier specification, or correctly verified standard requirement.
+- `RISK`: a possible DFM, quality, cost, or functional issue; this includes deviations from general heuristics.
+- `NEEDS_CLARIFICATION`: missing or ambiguous input prevents a reliable decision.
+- `INFO`: useful observation without a demonstrated defect.
+
+For each finding record rule ID if present, inspected feature/location, condition/formula, units, process, material/tooling assumptions, source and version, severity, automation level, and false-positive risk. The automated JSON rule engine's severity is a **screening flag**; do not automatically present its `NONCONFORMANCE` label as a verified ISO/contract breach. Supplier DFM guidance is not an ISO requirement. Do not invent ISO clauses.
 
 ## Core principles
 
-1. Use data, not visual estimates. Use STEP for 3D geometry, DXF for 2D geometry, and PDF (or verified DXF text) for dimensions, tolerances, and notes. Use raster images for visual review/OCR only. If a value is unreadable, say `unreadable`; never guess.
-2. Separate facts from assumptions. Use these finding statuses:
-   - `NONCONFORMANCE`: clear contradiction of a stated requirement or rule.
-   - `RISK`: a potential issue requiring engineering judgement or confirmation.
-   - `NEEDS_CLARIFICATION`: required information is missing or ambiguous.
-   - `INFO`: informational observation.
-3. If a company rule is absent from `references/technology-rules.md`, use a clearly labelled general guideline and ask the user to confirm the company standard.
-4. Never invent standard clauses. Cite the standard number (e.g. ISO 1101), not a clause number unless verified.
-5. Use scripts for tolerance stack-ups and multi-step calculations. Do not calculate them mentally.
+1. Use geometry and verified metadata, not visual estimates. Unreadable means `unreadable`, not a guessed value.
+2. Separate observed facts, assumptions, calculations, and recommended actions.
+3. Apply company rules only when supplied or verified. Use `references/technology-rules.md` for **qualified** preliminary guidance when approved limits are unavailable.
+4. Use scripts for multi-step fit and stack-up calculations; check input units and validity.
+5. Identify checks not completed and the exact additional data needed; never imply a full design approval.
 
 ## Review workflow
 
-### 1. Context
-Establish the manufacturing process, material and condition, thickness/overall size, production volume (prototype/low/high), applicable standard (ISO by default; ASME only when specified), and whether company-specific rules are available. Ask only for information essential to proceed.
+### 1. Context and documentation
 
-### 2. Drawing fundamentals
-Check:
-- Title block: part number, revision, material, mass, scale, projection method (ISO first-angle; ASME third-angle), and consistency.
-- General tolerance reference appropriate to the process. Without a defined default tolerance, unspecified dimensions are ambiguous and may be a `NONCONFORMANCE`.
-  - Sheet metal and machined parts: e.g. ISO 2768-mK or company standard. Query values using `scripts/check_tolerances.py general` and `geom`; see `references/fits-and-tolerances.md`.
-  - Injection-molded plastic: `General tolerances ISO 20457 - TGx` (older drawings may cite DIN 16742 - TGx). Query using `scripts/check_tolerances.py plastic`; see `references/iso-20457.md`. ISO 2768 applied to plastic is a `RISK`.
-- Surface roughness, edge requirements (ISO 13715), heat treatment, and coating notes where functionally needed.
-- Legibility and consistency of dimensions; duplicate/conflicting dimensions; avoid over-dimensioned closed chains unless functionally justified.
-- Consistency between model and drawing: material, dimensions, revision.
+Establish process, material grade and condition, dimensions/thickness, production volume, operating environment, functional interfaces, standards actually specified, and company/supplier rules. Ask only questions essential for the current decision.
 
-### 3. Dimensional tolerances and fits
-For injection-molded plastic, use ISO 20457 TG (W/NW) rather than ISO 286 fits for plastic features. ISO 286 fits on plastic features are a `RISK`; they may be appropriate for metal inserts or mating metal features. The remaining guidance in this section primarily applies to metal parts.
+Check title block (part number, revision, material, mass, scale, projection method, units), revision consistency, notes, surface finish, edges (ISO 13715 when applicable), heat treatment, coatings, dimension legibility, duplicate/conflicting dimensions, and over-dimensioned closed chains.
 
-- Check every fit with `scripts/check_tolerances.py fit H7/f7`. Determine whether it is in DIN 7157 series 1 or 2 and whether the hole/shaft basis and fit type (clearance, transition, interference) suit the function. Calculate actual clearance/interference only from verified ISO 286 tables. The supplied source data does not contain all ISO 286 limit deviations; mark missing calculations `NEEDS_CLARIFICATION`.
-- For bearing seats and shafts (DIN 5425-1), determine load type (circumferential/point), magnitude, and bearing type. Use `scripts/check_tolerances.py bearing ...`; compare recommended fit letters and grades with drawing callouts (typically shaft IT6, housing IT7, subject to application).
-- Compare IT grade with achievable process capability in `references/technology-rules.md`. Flag unnecessarily tight tolerances as cost risk and overly loose tolerances as functional risk.
-- Explain where a tolerance is ineffective or insufficient. A tight tolerance without functional justification is a `RISK`.
-- Consider ISO 8015 independency principle. If an envelope requirement is functionally necessary, it must be explicitly specified (e.g. Ⓔ); do not assume it applies by default.
+General tolerances **do not apply by default merely because a process is known**. Check the drawing's explicit tolerance reference and contract/company requirements. For metal drawings, ISO 2768 may be specified; query applicable values with `scripts/check_tolerances.py general` and `geom`, using `references/fits-and-tolerances.md`. For molded plastic, use specified ISO 20457 TG (W/NW), older DIN 16742 TG where applicable, and `scripts/check_tolerances.py plastic`; see `references/iso-20457.md`. ISO 2768 on molded plastic merits a process-suitability review, not an automatic violation. Missing general tolerances may require clarification or constitute nonconformance only when a governing requirement mandates them.
 
-### 4. Geometrical tolerancing (ISO 1101)
-Review:
-- Datums (ISO 5459): functional relevance, primary/secondary/tertiary order (A/B/C), size, stability, and setup suitability.
-- Feature control frames: symbol, value, datums, and modifiers.
-- Orientation and location tolerances normally require datums. Form tolerances (straightness, flatness, circularity, cylindricity) do not.
-- Profile tolerances may be specified with or without datums, depending on function.
-- Position tolerance zones: cylindrical (Ø) for holes; two parallel planes for slots. Check theoretically exact dimensions (TED/basic dimensions).
-- MMC/LMC (Ⓜ/Ⓛ): use when justified by assembly function or wall-thickness requirements. Otherwise mark `NEEDS_CLARIFICATION`.
-- Concentricity and symmetry are often difficult to measure. Where functionally appropriate, consider position or circular/total runout instead. (ASME Y14.5-2018 no longer uses these controls.)
-- Check for redundant tolerances. A geometric tolerance looser than the size tolerance on the same feature may add no control.
-- Assess inspectability with available CMM, optical equipment, gauges, or fixtures.
+### 2. Dimensional tolerances and fits
 
-**Position deviation calculation:** measured diametral position error is `Ø = 2·sqrt(dx² + dy²)`, where dx and dy are deviations from true position. This is a measured result, not the tolerance; it must be no greater than the specified tolerance.
+For plastic features use the specified plastic tolerance framework; ISO 286 fits may still be suitable for metal inserts or mating metal parts. For metal fits:
 
-### 5. Tolerance stack-up
-Perform when an assembly clearance, interference, or alignment depends on multiple parts.
-1. Define the functional requirement (minimum/maximum clearance) and the dimensional chain between functional surfaces.
-2. For each contributor define nominal value, tolerance half-width, direction (+1/−1), and distribution.
-3. Run `python scripts/stackup.py stackup.json`. Input format is documented in the script. It reports worst case, RSS, Monte Carlo, and sensitivity.
-4. If worst case passes, the chain is robust against stated limits. If only statistical results pass, report predicted fallout and whether production volume/risk acceptance justifies it.
-5. Include geometric tolerance contributions where relevant. A position tolerance ØT contributes up to ±T/2 in one direction in worst-case analysis; include MMC bonus where applicable: `bonus = |actual size − MMC size|`.
-6. For a normal distribution, `σ = T/(3·Cpk)`, where T is the tolerance half-width. Cpk must come from actual process data. Never assume Cpk. A uniform distribution is only a preliminary mathematical assumption, not proof of process capability. Never use RSS as the sole acceptance criterion.
+- Check each fit using `scripts/check_tolerances.py fit H7/f7` (substitute actual designation). Review hole/shaft basis, clearance/transition/interference function, DIN 7157 series where applicable, and ISO 286 limits **only from verified tables**. If source tables lack a needed deviation, use `NEEDS_CLARIFICATION` rather than fabricate a limit.
+- For bearing fits (DIN 5425-1), determine bearing type, load direction and magnitude, rotating/point load, and seat arrangement; use `scripts/check_tolerances.py bearing ...`. Typical shaft IT6/housing IT7 examples are not universal requirements.
+- Compare required IT grade and surface finish with achievable supplier capability and inspection method. Tight tolerances without functional need are cost risks; loose tolerances may be functional risks.
+- Apply ISO 8015 independency as relevant; an envelope requirement (Ⓔ) must be explicitly specified if needed, not silently assumed.
 
-### 6. Process-specific DFM
-Read the relevant section of `references/technology-rules.md` and the corresponding process guide. Inspect each measurable feature and report the feature/location, rule, evidence, and actionable correction.
+### 3. GD&T (ISO 1101)
 
-Use `scripts/check_dfm.py`; the `process` field selects the rules file. Missing required fields must produce `NEEDS_CLARIFICATION`.
-- Sheet metal: `references/sheet-metal.md`, `references/sheet-metal-rules.json`, `"process": "sheet_metal"`.
-- Injection molding: `references/injection-molding.md`, `references/injection-molding-rules.json`, `"process": "injection_molding"`. Tolerances: `references/iso-20457.md`.
-- Machining: `references/machining.md`, `references/machining-rules.json`, `"process": "machining"`.
-- Progressive stamping: `references/progressive-stamping.md`, `references/progressive-stamping-rules.json`, `"process": "progressive_stamping"`. These are preliminary heuristics, not ISO requirements.
+- Check functional and inspectable datum selection per ISO 5459, primary/secondary/tertiary order, datum stability and setup suitability.
+- Check feature control frames, symbols, values, datum references, and modifiers. Orientation and location controls generally require datums; form controls (flatness, straightness, circularity, cylindricity) do not. Profile may be defined with or without datums depending on purpose.
+- Check cylindrical position tolerance zones (Ø for holes), slot tolerance zones, and theoretically exact/basic dimensions. Assess MMC/LMC (Ⓜ/Ⓛ) only where justified by function.
+- Where functionally appropriate, consider position or circular/total runout rather than hard-to-inspect concentricity/symmetry; ASME Y14.5 is a different system and is applied only when specified.
+- Look for redundant or ineffective controls; evaluate CMM, optical, gauge, and fixture inspectability.
+- Measured diametral position error is `Ø = 2·sqrt(dx² + dy²)` from measured deviations relative to true position; this **measured error** is not the specified tolerance and must be compared with the actual tolerance zone.
 
-Also consider cost drivers: unnecessarily tight tolerances, needless surface treatments, extra setups, non-standard materials, non-standard drills, and non-standard threads.
+### 4. Tolerance stack-up
 
-### 6A. Additional process checks
+Perform when assembly clearance, interference, or alignment depends on multiple dimensions.
 
-**Progressive stamping**
-Assess strip layout, pitch, carrier/web width and stiffness; whether the part remains supported until final separation; web and edge distances; piercing/blanking sequence; pilot holes/pins and registration; press direction and tool access; slug ejection, slug pulling, burr direction/height; narrow tabs, sharp internal corners, small radii and narrow slots; forming strain, cracks, wrinkles, springback and tool relief; bend direction relative to rolling direction; scrap skeleton and scrap evacuation; and relationship between functional dimensions, pilot datums, station count, and process capability.
+1. Define functional minimum/maximum clearance and the dimensional chain between functional surfaces.
+2. For each contributor, specify nominal, tolerance half-width, sign (+1/−1), distribution and evidence.
+3. Run `python scripts/stackup.py stackup.json` with validated input; report worst-case, RSS, Monte Carlo and sensitivity as available.
+4. Worst-case passing supports compliance within stated dimensional limits. If only statistical results pass, report modeled fallout and justify risk acceptance using actual process data.
+5. Include geometric tolerance contributions when appropriate: position zone ØT may contribute up to ±T/2 along an axis in worst case; MMC bonus where applicable is `|actual size − MMC size|`.
+6. For a normal distribution `σ = T/(3·Cpk)` where T is tolerance half-width. **Never assume Cpk**; uniform distributions are mathematical preliminary assumptions, not evidence of capability. RSS is not a sole acceptance criterion.
 
-A STEP part model alone usually cannot verify strip layout, station sequence, or die design. These checks require strip-layout/tool CAD, a process plan, or toolmaker data. Without them use `NEEDS_CLARIFICATION`, not `NONCONFORMANCE`.
+### 5. Process-specific DFM
 
-**Additional sheet-metal checks**
-- Check bend-zone interference, punch/die access, and minimum flange length for the selected V-die and material.
-- Compare flat-pattern and formed STEP data where equivalent references exist: perimeter, hole centres, bend lines, thickness, and revision.
-- Do not treat K-factor, bend allowance, or bend deduction as universal constants. Require a company/supplier table or validated material/tool combination.
-- Consider laser/cutting kerf, internal corners, micro-joints, and nesting waste when a nesting plan is supplied.
+Read the matching process guide and `references/technology-rules.md`. For supported processes use `scripts/check_dfm.py` with the documented JSON schema and process code:
 
-**Assembly / DFA / interfaces**
-- Check STEP assembly interference, clearances, insertion directions, tool access, bolt/washer head access, and assembly sequence.
-- Review fastener standardization, thread engagement, nut/bolt access, tool engagement, and serviceability.
-- Check compatibility of assembly and part datums; identify over-constraint.
-- Calculate stack-ups only when the functional requirement and dimensional chain are defined.
+- Sheet metal: `references/sheet-metal.md`, `references/sheet-metal-rules.json`, `sheet_metal`.
+- Injection molding: `references/injection-molding.md`, `references/injection-molding-rules.json`, `injection_molding`.
+- Machining: `references/machining.md`, `references/machining-rules.json`, `machining`.
+- Progressive stamping: `references/progressive-stamping.md`, `references/progressive-stamping-rules.json`, `progressive_stamping`.
 
-**Materials, surfaces, and environment**
-- Check material designation completeness: standard, grade, condition/temper, and direction where relevant.
-- Assess compatibility with loads, temperature, corrosion, chemicals, and operating environment.
-- Specify coating type, thickness/class, coverage, masking, and whether coating thickness is included in tolerances.
-- Review heat treatment, hardness, stress relief, corrosion, and galvanic corrosion where applicable.
-- Check surface finish, burrs, sharp edges, cosmetic zones, and cleaning requirements.
-- Do not select a specific material or coating from geometry alone; function, loads, environment, and supplier process must be known.
+Missing required inputs must produce `NEEDS_CLARIFICATION`, not invented measurements. Preserve existing rule IDs and calculation logic. DFM numeric limits (wall thickness, radii, draft, ribs, hole-to-bend distances, thread engagement, kerf, coating growth, overhangs, etc.) are **conditional screening heuristics**, unless backed by verified requirements. State material, machine, tool, orientation, supplier, and inspection assumptions. Check cost drivers: setups, tight tolerances, special tooling, finishes, non-standard materials, drills and threads.
 
-### 6B. DXF, PDF, and model data quality
-PDF and DXF are often exports of the same SolidWorks drawing. Do not require both. If only DXF is supplied, check whether dimensions, tolerances, notes, and title-block information are present. If not, mark those checks as unavailable and request PDF only for the missing information. If only PDF is supplied, inspect vector geometry only to the extent supported by the PDF; request DXF for precise contour checks.
+**Machining:** assess tool reach and access, inside radii, deep pockets, thin walls, workholding, setup count, burrs, threads and blind-hole drill depth. Avoid universal wall, corner-radius, depth ratio, thread-engagement, or blind-hole-reserve acceptance values.
 
-**DXF:** units (INSUNITS), scale, coordinates, layers, locked/off layers, duplicate lines, open contours, self-intersections, zero-length entities, spline/arc approximation, blocks/xrefs, text and dimensions, contour closure, inner/outer loops, and overall envelope. For sheet metal, verify 1:1 flat pattern and ensure dimensions/centre lines are not mistakenly included in cutting contours.
+**Injection molding:** review polymer and grade, uniform wall transitions, ribs, bosses, sink/warpage, draft and texture, undercuts, ejection, gate/vent/cooling access, parting line and shrinkage. Draft and rib ratios are process/material dependent; surface texture may require additional draft. Validate cosmetic and functional surfaces separately.
 
-**PDF drawing:** page count and sheet size, text extraction quality, OCR confidence, dimension readability, projection symbol, scale, sheet numbering, revision table, document ID, general tolerance reference, and missing/conflicting notes. Never treat an OCR dimension as confirmed until checked against geometry or by a person.
+**Sheet-metal cutting/bending:** check material/temper/rolling direction, inside bend radius, V-die/flange access, bend relief, bend-zone holes, edge distances, cut-layer DXF hygiene, kerf, micro-joints, nesting, burr direction and flat-pattern consistency. A screening relationship such as `D ≥ 2T + R` is **not a universal limit** and must state whether D is measured from hole centre or edge to the bend tangent/line. Use supplier-confirmed bend allowances, K-factors and kerf values.
 
-**STEP:** schema (AP203/AP214/AP242), units, solid count, empty/invalid solids, open shells, self-intersections, duplicate bodies, unexpected geometry, envelope, mass properties (only if material density is known), colours/layers, and PMI preservation. PMI presence does not prove correctness or associativity; inspect representation type and possible data loss.
+**Progressive stamping:** review strip layout/pitch, carrier/web strength, pilot holes and registration, station sequencing, piercing/blanking, slug ejection/pulling, burrs, tab widths, internal radii, forming strain/cracks/wrinkles, springback, tool relief, rolling direction, scrap removal, and tool access. A part STEP alone cannot validate die sequence or strip layout; request strip-layout/tool CAD or toolmaker process data and use `NEEDS_CLARIFICATION`.
 
-### 6C. Checks that cannot be reliably automated from STEP/DXF/PDF alone
-Mark `NEEDS_CLARIFICATION` when analysis requires loads/FEM, fatigue, vibration, sealing, thermal performance, material certificates, actual tool geometry, stamping sequence, mold cooling/gating/venting, process Cpk, measurement strategy, or functional assembly testing. State exactly which additional file or data is required.
+**Additive manufacturing (manual DfAM only):** first identify FDM/FFF, SLA/DLP, SLS, MJF, or metal PBF. Assess build orientation, anisotropy, supports, overhangs/bridges, shrinkage, distortion, minimum walls/gaps, tolerances, surface finish, post-processing, trapped resin/powder, evacuation/drainage paths, and inspection. Do **not** impose universal 45° overhang, 1 mm wall, 0.5 mm gap, or 3–5 mm drain-hole requirements across processes. Hollow/lattice designs need a verified method to remove uncured resin or powder; infill does not itself prove evacuation. No additive-manufacturing rules are implemented in `scripts/check_dfm.py`; do not claim automated DfAM checks.
 
-### 7. Report format
-Always provide a findings table sorted by severity:
+### 6. Assembly, materials, surfaces and environment
+
+- Review interference/clearance, insertion and tool access, fastener standardization, thread engagement, washers/heads, serviceability, sequence and over-constraint; require verified assembly geometry before claiming measured collisions.
+- Check material standard, grade, condition/temper, direction when relevant; loads, temperature, fatigue, corrosion, chemical exposure, and dissimilar-metal/galvanic risks.
+- Specify coating type, class/thickness, coverage, masking where functionally necessary, inspection, and whether final tolerances apply before or after coating. Differentiate thickness normal to surface, external dimensional growth, substrate penetration, and internal hole changes. Anodizing and plating do not share a universal growth factor; do not prescribe blanket masking of every thread.
+- Check heat treatment/hardness, stress relief, finish, burrs, sharp edges, cosmetic zones and cleaning. Material/coating selection cannot be inferred from geometry alone.
+
+### 7. DXF, PDF and STEP data quality
+
+**DXF:** INSUNITS, scale, origin, coordinates, layers (including off/locked), duplicate lines, zero-length entities, open/self-intersecting contours, arc/spline approximation, blocks/xrefs, dimensions/text, inner/outer loops and envelope. For cutting, verify 1:1 flat pattern and prevent dimensions or centre lines being exported as cut contours.
+
+**PDF:** pages and sheet sizes, vector/text extraction, OCR confidence, readable dimensions, projection, scale, sheet numbering, revision, document ID, general tolerances and notes. Never treat unverified OCR as exact.
+
+**STEP:** AP203/AP214/AP242 schema, units, solids/shells, invalid/empty solids, duplicate bodies, envelope, material density before mass calculations, PMI representation and possible data loss. PMI presence does not guarantee correctness or associativity.
+
+**Cross-file:** check part number, revision, units, corresponding dimensions/features, material/thickness and drawing-to-model agreement. Do not assume a DXF flat pattern has the same envelope as the formed STEP part.
+
+### 8. Checks that require other engineering evidence
+
+Use `NEEDS_CLARIFICATION` for loads/FEM, fatigue, vibration, sealing, thermal analysis, material certificates, mold cooling/gating/venting, stamping tool station sequence, machine/tool capability, process Cpk, measurement plans and functional assembly tests when the required evidence is missing. State precisely which data is required.
+
+## Report format
+
+Provide a findings table sorted by severity:
 
 | # | Location (feature / sheet) | Finding | Status | Source / rule | Confidence | Recommended action |
 |---|---|---|---|---|---|---|
 
-After the table include:
-- **Summary:** counts of nonconformances, risks, clarifications, checked and unchecked rules, plus an overall assessment (acceptable / corrections required / not ready for production).
-- **Review scope:** selected scope (e.g. `3D_AND_DRAWING_REVIEW`), files, revisions, and units. Explain why other files were unnecessary or which specific checks are blocked by missing files.
-- **Automation coverage:** what was checked automatically, visually, and what could not be checked without additional data.
-- **Not checked:** explicit list (e.g. unreadable dimensions on sheet 3; no company bending rules).
-- **Questions for the designer:** only questions about function or design intent, not questions already answered by the supplied data.
+After the table provide:
 
-## Common issues to check first
-- Missing general tolerances or a tolerance reference incompatible with the manufacturing process.
-- Hole positions dimensioned as chained ± dimensions instead of position from functional datums.
-- Non-functional or unstable datum selection.
-- Fit specified in the wrong basis system (hole or shaft).
-- Over-dimensioned closed tolerance chain.
-- Sheet-metal bend radius below the material/rolling-direction limit.
-- Hole too close to a bend line or edge.
-- Missing draft or abrupt wall-thickness transitions in molded parts.
-- Missing relief groove for a turned feature or thread.
-- Tight plastic-part tolerances without shrinkage/warpage consideration.
+- **Summary:** counts of verified nonconformances, risks, clarifications, checked/unchecked rules, and overall assessment (`acceptable`, `corrections required`, or `not ready for production`, with scope limitations).
+- **Review scope:** scope code, files, part numbers/revisions, units, confirmed/assumed process, and why other files were unnecessary or which checks were blocked.
+- **Automation coverage:** checks done automatically, parsed, visually, manually, and not possible.
+- **Not checked:** explicit items and reasons.
+- **Questions for designer:** only unresolved function/design-intent questions, not information already supplied.
+
+## Common issues to prioritize
+
+Missing or inappropriate tolerance basis; dimension chains vs functional datum position; unstable datums; incorrect fit basis; redundant closed tolerance loops; bend radii/holes near bends; molded-wall transitions/draft; inaccessible machining features; missing relief; unjustified tight plastic tolerances; coating effects on functional fits; inconsistent revisions; invalid cutting contours; unverified additive powder/resin removal.
 
 ## Supporting modules
-- `scripts/check_dfm.py` – deterministic feature rules by process.
-- `scripts/check_tolerances.py` – fit and tolerance table lookup.
-- `scripts/stackup.py` – tolerance stack-up calculations.
-- `scripts/check_drawing_data.py` – validation of normalized STEP/PDF/DXF metadata, revisions, units, DXF quality, and cross-file consistency. It is not a CAD parser; an extraction tool must provide the JSON.
-- `references/progressive-stamping.md` – progressive-stamping DFM guide.
-- `references/review-checklist.md` – general mechanical design, DFA, materials, and documentation checklist.
 
-## Limitations
-The supplied fit/general-tolerance source is based on older DIN editions (DIN 7157:1966, DIN ISO 2768:1991, DIN 5425-1:1984). State this in reports and ask the user to confirm the currently applicable company editions.
+- `scripts/check_dfm.py` – deterministic screening rules for the four supported processes, not AM.
+- `scripts/check_tolerances.py` – fit and general/plastic tolerance lookup.
+- `scripts/stackup.py` – stack-up calculations.
+- `scripts/check_drawing_data.py` – validation of normalized extracted STEP/PDF/DXF JSON, revisions, units and cross-file metadata; **not a parser**.
+- `references/technology-rules.md` – qualified DFM and coating guidelines, including manual DfAM.
+- `references/progressive-stamping.md` – stamping DFM guide.
+- `references/review-checklist.md` – general design, assembly, materials and documentation checklist.
 
-Plastic molding TG values are based on DIN 16742:2013 tables as reproduced in the source data. ISO 20457:2026 is the current edition, but the full standard text is not included in this skill. Ask users to verify critical dimensions and contractual requirements against the applicable standard.
+## Limitations and standard provenance
 
-This skill does not replace a manufacturing engineer, company quality system, FEM analysis, or CMM inspection. It identifies areas requiring engineering review; the responsible engineer makes the final decision.
+The supplied fit/general-tolerance source is based on older DIN editions (DIN 7157:1966, DIN ISO 2768:1991, DIN 5425-1:1984). Confirm the editions governing the project.
+
+Plastic TG values in the skill derive from DIN 16742:2013 source tables. **Do not represent them as a verified reproduction of ISO 20457:2026 tables.** The full ISO 20457:2026 text is not included; critical contractual dimensions must be verified against the applicable licensed edition.
+
+This skill does not replace responsible engineering judgement, company quality systems, supplier validation, FEM, or CMM inspection. Do not claim geometry, tolerances, or process capability were checked when the necessary parser, data, or measurements were unavailable.

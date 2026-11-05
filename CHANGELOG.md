@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.5.0 – Expanded process coverage and review controls
+
+- Expanded manufacturing-process identification and review guidance, including additive manufacturing (FDM/FFF, SLA/DLP, SLS, MJF, and metal powder-bed fusion).
+- Added a process-coverage distinction: additive-manufacturing guidance is currently manual and is not evaluated by `scripts/check_dfm.py`.
+- Refined the process-selection workflow so the skill reuses process information already present in the user's message, supplied files, or conversation context instead of asking redundant questions.
+- Clarified automatic file-scope selection and cross-checking of STEP, PDF, and DXF data, including part/revision correlation and the limits of comparing flat-pattern and formed geometry.
+- Added A–D evidence/confidence levels and stronger requirements to distinguish calculated, parsed, visually assessed, and engineering-judgement findings.
+- Expanded guidance for CNC machining, injection molding, sheet-metal cutting/bending, additive manufacturing, coatings, materials, and process-dependent manufacturing risks.
+- Reclassified generic numeric DFM values as screening heuristics unless supported by a verified standard, approved company requirement, or supplier capability specification.
+- Clarified hole-to-bend distance measurement convention and removed the unverified electroless-nickel thickness value from the generic coating table.
+- Preserved existing automated JSON rule IDs, formulas, schemas, and calculation logic; no new additive-manufacturing automation is claimed.
+- Clarified that geometry checks must not be reported as measured unless an appropriate parser/CAD measurement tool was actually used.
+
 ## 1.4.0 – Public GitHub release preparation
 
 - Added MIT license, security policy, Git ignore rules, and automated GitHub Actions checks.
