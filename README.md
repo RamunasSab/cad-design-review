@@ -65,18 +65,99 @@ Coverage and available checks vary by process and by the information supplied.
 
 ## Installation
 
-Download the latest release:
+CAD Design Review can be installed with the [Skills CLI](https://skills.sh/docs/cli), which downloads the skill from this GitHub repository and makes it available to compatible AI agents.
 
-[**CAD Design Review – GitHub Releases**](https://github.com/RamunasSab/cad-design-review/releases/latest)
+### Requirements
 
-1. Download and extract the source archive.
-2. Copy the `cad-design-review` folder into the skills directory supported by your AI agent.
-3. Follow your AI agent's instructions for enabling or invoking skills.
-4. If you intend to use the included Python utilities, make sure Python 3 is available.
+- **Node.js 22.20 or later**
+- npm (included with Node.js)
+- At least one AI agent supported by the Skills CLI
 
-This project follows the portable [Agent Skills](https://agentskills.io/) folder convention: a `SKILL.md` file with YAML frontmatter and optional scripts and reference resources.
+Check your installed versions:
 
-**Compatibility note:** support depends on the host AI agent. The agent must be able to read the skill instructions and bundled resources. Running the Python utilities also requires an environment that permits Python execution.
+```bash
+node -v
+npm -v
+```
+
+If Node.js is not installed or is outdated, download the current LTS release from [nodejs.org](https://nodejs.org/).
+
+### Recommended: Global installation for all supported agents
+
+Open a terminal (Windows PowerShell, Command Prompt, macOS Terminal, or a Linux shell) and run:
+
+```bash
+npx skills add RamunasSab/cad-design-review --global --all
+```
+
+This command:
+
+- Downloads CAD Design Review from this public GitHub repository.
+- Installs the skill for all agents supported and detected by the Skills CLI.
+- Uses **global scope**, making the skill available across your projects for your operating-system user account.
+- Skips the interactive agent and skill selection prompts.
+
+The repository currently provides one skill: `cad-design-review`.
+
+**Important:** `--all` means all agents supported by the Skills CLI; it does not mean every AI application on your computer. An agent must support the Agent Skills format and be recognized by the CLI. Availability and activation behavior may vary between agents.
+
+### Optional: Preview before installing
+
+To list the skill or skills available in the repository without installing them, run:
+
+```bash
+npx skills add RamunasSab/cad-design-review --list
+```
+
+To use the interactive installation flow instead, run:
+
+```bash
+npx skills add RamunasSab/cad-design-review
+```
+
+The CLI will guide you through selecting the skill, compatible agent(s), and installation scope.
+
+### Verify the installation
+
+List globally installed skills:
+
+```bash
+npx skills ls --global
+```
+
+Look for `cad-design-review` in the output. If your AI agent was already open during installation, restart it so it can discover the newly installed skill.
+
+### Updating
+
+To update globally installed skills, run:
+
+```bash
+npx skills update --global
+```
+
+To check whether installed skills have updates available:
+
+```bash
+npx skills check
+```
+
+### Uninstalling
+
+To remove CAD Design Review from the global installation:
+
+```bash
+npx skills remove --global cad-design-review
+```
+
+### Installation scope and method
+
+- **Global installation** makes the skill available across projects for the current operating-system user. It does not install the skill separately for every user account on the computer.
+- The Skills CLI recommends **symlink installation** when supported. This keeps a canonical copy of the skill and links it to the agent's skill directory.
+- If symbolic links are not supported or suitable in your environment, use the CLI's copy option when available.
+- Installing this skill adds its instructions and supporting resources to the agent's skill directory. It does not install or modify a CAD application.
+- The included Python utilities are separate from the skill installation. To run them, install Python 3 and use the commands in the [Included tools](#included-tools) section below.
+
+For further details, supported-agent information, and additional CLI options, see the [Skills CLI documentation](https://skills.sh/docs/cli).
 
 ## Included tools
 
@@ -85,7 +166,7 @@ The repository contains:
 - `SKILL.md` — main instructions and engineering review workflow.
 - `references/` — technical guidance, checklists, schemas, and reference datasets.
 - `scripts/` — Python utilities for supported DFM, tolerance, stack-up, and drawing-data checks.
-- `tests/` — lightweight smoke and validation tests. ## In this catalogue, you will find STEP, DXF and PNG files for the test component – the gearbox shaft – for quick verification.
+- `tests/` — lightweight smoke and validation tests.\n\nThe `tests/` directory also includes STEP, DXF, and PNG files for the gearbox shaft test component, allowing quick manual verification.
 
 ### Running the Python utilities
 
