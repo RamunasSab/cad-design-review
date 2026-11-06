@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- Added five ready-to-copy English review prompts in `prompt-templates/`: progressive stamping, sheet-metal cutting and bending, machining, plastic injection molding, and additive manufacturing / 3D printing.
+- Included editable input fields, documentation and dimension-chain checks, worst-case tolerance stack-ups with minimum/maximum values, process-specific DFM checks, and explicit evidence and coverage limitations.
+
+### Documentation
+- Added README links to all five templates and instructions for selecting, completing, and using them with available CAD/drawing files.
+- Clarified that the templates request English reports by default and can be adapted to another response language.
+- Clarified that the additive-manufacturing template provides manual DfAM guidance without adding automated DfAM rules.
+
 ## 1.5.0 – Expanded process coverage and review controls
 
 - Expanded manufacturing-process identification and review guidance, including additive manufacturing (FDM/FFF, SLA/DLP, SLS, MJF, and metal powder-bed fusion).
