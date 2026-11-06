@@ -16,4 +16,4 @@ Check:
 6. Flat-pattern allowances against the supplied bend data. Do not invent a K-factor or bend table if none is provided.
 7. Burrs, cut quality, coating effects on final dimensions, and inspectability.
 
-Present findings in English, ordered by priority, with specific corrective actions. Distinguish geometric measurements from visual assessments. Evaluate process limits against the actual material and supplier equipment, and identify checks that remain incomplete.
+Present findings in the language of my request, ordered by priority, with specific corrective actions. Distinguish geometric measurements from visual assessments. Evaluate process limits against the actual material and supplier equipment, and identify checks that remain incomplete.

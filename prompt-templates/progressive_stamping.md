@@ -16,4 +16,4 @@ Check:
 6. Burr direction and height, coating damage, scrap removal, and slug evacuation.
 7. If strip-layout and die-design files are supplied, check carriers, pilots, pitch, station sequence, and tool access.
 
-Present findings in English, ordered by priority: location, issue, evidence, status, and specific corrective action. Separate verified nonconformances from risks and missing information. Do not treat general DFM guidance as mandatory standards. State which checks could not be completed.
+Present findings in the language of my request, ordered by priority: location, issue, evidence, status, and specific corrective action. Separate verified nonconformances from risks and missing information. Do not treat general DFM guidance as mandatory standards. State which checks could not be completed.

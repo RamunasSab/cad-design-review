@@ -17,4 +17,4 @@ Check:
 7. Thread designations, full thread depth, drilled depth, runouts, chamfers, and deburring.
 8. Coating and heat-treatment effects on dimensions and distortion. Identify unnecessarily costly precision requirements.
 
-Provide a prioritized findings table in English, including evidence and proposed corrections. Do not apply universal limits for wall thickness, thread engagement, or tool reach without the relevant conditions. State review coverage and missing information.
+Provide a prioritized findings table in the language of my request, including evidence and proposed corrections. Do not apply universal limits for wall thickness, thread engagement, or tool reach without the relevant conditions. State review coverage and missing information.

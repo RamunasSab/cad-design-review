@@ -6,9 +6,16 @@
 - Added five ready-to-copy English review prompts in `prompt-templates/`: progressive stamping, sheet-metal cutting and bending, machining, plastic injection molding, and additive manufacturing / 3D printing.
 - Included editable input fields, documentation and dimension-chain checks, worst-case tolerance stack-ups with minimum/maximum values, process-specific DFM checks, and explicit evidence and coverage limitations.
 
+### Improved
+- Integrated closed-chain and duplicate-dimension screening into the core drawing-review workflow, including actual dimension references, view scales, tolerance overrides, and reference-only dimensions.
+- Added `references/dimension-chains-and-symmetry.md` with worst-case minimum/maximum rules for functional open chains, asymmetric intervals, shared-variable cancellation, rounding, and redundant-constraint limitations.
+- Added guidance on functional datums, median planes, centring versus size, full-width/half-width redundancy, and free-state versus restrained inspection.
+- Updated all five templates to request reports in the language of the user's request.
+- Preserved existing Python utilities and numeric reference datasets; these changes strengthen review instructions and do not add automatic CAD parsing.
+
 ### Documentation
 - Added README links to all five templates and instructions for selecting, completing, and using them with available CAD/drawing files.
-- Clarified that the templates request English reports by default and can be adapted to another response language.
+- Clarified that template reports follow the language of the user's request unless another output language is explicitly chosen.
 - Clarified that the additive-manufacturing template provides manual DfAM guidance without adding automated DfAM rules.
 
 ## 1.5.0 – Expanded process coverage and review controls

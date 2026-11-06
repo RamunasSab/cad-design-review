@@ -17,4 +17,4 @@ Check:
 6. Effects of shrinkage, fiber orientation, moisture, and conditioning on critical dimensions.
 7. If mold data is supplied, assess gate locations, weld-line risks, venting, and cooling. Do not claim these are validated from the part model alone.
 
-Present prioritized findings and specific changes in English. Assess ISO 20457 requirements against the specified edition and verified information; do not present older DIN tables as verified ISO 20457:2026 tables. Do not invent missing process data. Label general DFM ratios as conditional guidance.
+Present prioritized findings and specific changes in the language of my request. Assess ISO 20457 requirements against the specified edition and verified information; do not present older DIN tables as verified ISO 20457:2026 tables. Do not invent missing process data. Label general DFM ratios as conditional guidance.

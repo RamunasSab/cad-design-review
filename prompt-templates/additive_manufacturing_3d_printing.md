@@ -18,4 +18,4 @@ Check:
 7. Shrinkage, distortion, heat treatment, and machining allowances.
 8. Threads, inserts, and functional surfaces that may require post-machining.
 
-Provide a prioritized findings table in English with specific corrective actions. Do not apply universal 45° overhang, minimum wall, or clearance limits across all processes. Treat this as a manual DfAM review and identify conclusions that require build-preparation data or test specimens for validation.
+Provide a prioritized findings table in the language of my request with specific corrective actions. Do not apply universal 45° overhang, minimum wall, or clearance limits across all processes. Treat this as a manual DfAM review and identify conclusions that require build-preparation data or test specimens for validation.

@@ -19,6 +19,7 @@ CAD Design Review helps AI agents review mechanical parts, engineering drawings,
 - **Fits and dimensional tolerances** — review ISO fits, general tolerances, bearing fits, and tolerance selection.
 - **Geometrical tolerancing** — assess GD&T concepts, datum selection, feature control frames, and inspectability.
 - **Tolerance stack-ups** — perform worst-case, RSS, Monte Carlo, and sensitivity analysis.
+- **Dimension chains and symmetry** — check closed chains and duplicate dimensions, calculate functional open-chain minimum/maximum limits, and assess functional datums and centring. See the [dimension-chain and symmetry guidance](references/dimension-chains-and-symmetry.md).
 - **Design for Manufacturability (DFM)** — identify potential manufacturing risks for machining, sheet-metal fabrication, injection molding, and progressive stamping.
 - **Structured engineering findings** — distinguish nonconformances, risks, clarification requests, and informational observations.
 - **Multilingual interaction** — internal instructions and documentation are in English, while user-facing responses follow the language of the user's request.
@@ -84,7 +85,7 @@ Ready-to-copy English review prompts are available in [`prompt-templates/`](prom
 
 The templates cover documentation, dimensions, datums, closed dimension chains, worst-case tolerance stack-ups with minimum/maximum results, and process-specific manufacturing risks. Actual checks depend on the supplied data and the host environment's tools.
 
-The templates request English reports by default. Change that instruction to your preferred response language when needed. Additive-manufacturing review is manual DfAM guidance; it is not automated by `scripts/check_dfm.py`.
+The templates request reports in the language of your request unless you explicitly choose another output language. Their English source text does not require English output. Additive-manufacturing review is manual DfAM guidance; it is not automated by `scripts/check_dfm.py`.
 
 ## Installation
 
