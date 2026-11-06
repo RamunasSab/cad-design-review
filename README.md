@@ -63,6 +63,29 @@ Findings are separated into:
 
 Coverage and available checks vary by process and by the information supplied.
 
+## Prompt templates
+
+Ready-to-copy English review prompts are available in [`prompt-templates/`](prompt-templates/):
+
+| Manufacturing process | Template |
+|---|---|
+| Progressive stamping | [progressive_stamping.md](prompt-templates/progressive_stamping.md) |
+| Sheet-metal cutting and bending | [sheet_metal_cutting_and_bending.md](prompt-templates/sheet_metal_cutting_and_bending.md) |
+| Machining | [machining.md](prompt-templates/machining.md) |
+| Plastic injection molding | [plastic_injection_molding.md](prompt-templates/plastic_injection_molding.md) |
+| Additive manufacturing / 3D printing | [additive_manufacturing_3d_printing.md](prompt-templates/additive_manufacturing_3d_printing.md) |
+
+### Using a template
+
+1. Open the template for your manufacturing process and copy its contents.
+2. Replace the bracketed fields with known material, process, and functional requirements. Leave unknown inputs marked as “unknown.”
+3. Paste the prompt into your AI agent with CAD Design Review available, and attach the files you have. STEP, PDF, and DXF are not all required.
+4. Review the findings, assumptions, and checks that could not be completed.
+
+The templates cover documentation, dimensions, datums, closed dimension chains, worst-case tolerance stack-ups with minimum/maximum results, and process-specific manufacturing risks. Actual checks depend on the supplied data and the host environment's tools.
+
+The templates request English reports by default. Change that instruction to your preferred response language when needed. Additive-manufacturing review is manual DfAM guidance; it is not automated by `scripts/check_dfm.py`.
+
 ## Installation
 
 CAD Design Review can be installed with the [Skills CLI](https://skills.sh/docs/cli), which downloads the skill from this GitHub repository and makes it available to compatible AI agents.
@@ -166,6 +189,7 @@ The repository contains:
 - `SKILL.md` — main instructions and engineering review workflow.
 - `references/` — technical guidance, checklists, schemas, and reference datasets.
 - `scripts/` — Python utilities for supported DFM, tolerance, stack-up, and drawing-data checks.
+- `prompt-templates/` — ready-to-copy review prompts for five manufacturing-process categories.
 - `tests/` — lightweight smoke and validation tests. The `tests/` directory also includes STEP, DXF, and PNG files for the gearbox shaft test component, allowing quick manual verification.
 
 ### Running the Python utilities
