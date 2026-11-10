@@ -1,0 +1,25 @@
+{
+  "name": "Demonstration: shaft-to-hole clearance",
+  "requirement": {
+    "min": 0.02,
+    "max": 0.2
+  },
+  "contributors": [
+    {
+      "name": "Hole diameter",
+      "nominal": 20.065,
+      "tolerance": 0.065,
+      "direction": 1,
+      "distribution": "uniform"
+    },
+    {
+      "name": "Shaft diameter",
+      "nominal": 19.985,
+      "tolerance": 0.015,
+      "direction": -1,
+      "distribution": "uniform"
+    }
+  ],
+  "samples": 100000,
+  "seed": 12345
+}
