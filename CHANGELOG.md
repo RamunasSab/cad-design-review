@@ -18,6 +18,16 @@
 - Clarified that template reports follow the language of the user's request unless another output language is explicitly chosen.
 - Clarified that the additive-manufacturing template provides manual DfAM guidance without adding automated DfAM rules.
 
+### Project presentation and contributor support
+- Added a README quick start, tag-pinned stable installation, and explicit stable/main channel guidance.
+- Added a reproducible clearance-review example with original and revised JSON inputs.
+- Added test, release, and MIT badges, CONTRIBUTING.md, and issue forms for installation problems, engineering findings, and feature requests.
+- Recorded scoped hosted-Codex checks and a user-reported Claude AI example; kept Claude Code and clean CLI installation claims unverified.
+- Added an agent-compatibility overview, documented a correction to the Claude AI recommendation, and clarified FAQ and manual additive-manufacturing coverage.
+
+### Maintenance
+- Upgraded actions/checkout and actions/setup-python to v6, using Node.js 24; the updated workflow completed successfully.
+
 ## 1.5.0 – Expanded process coverage and review controls
 
 - Expanded manufacturing-process identification and review guidance, including additive manufacturing (FDM/FFF, SLA/DLP, SLS, MJF, and metal powder-bed fusion).
