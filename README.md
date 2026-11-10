@@ -3,15 +3,61 @@
        alt="CAD Design Review"
        width="160">
 </p>
+
 # CAD Design Review
 
-**A portable AI skill for mechanical engineering design reviews and manufacturing risk assessment.**
+**A portable AI agent skill for reviewing mechanical drawings, tolerances, GD&T, and manufacturability.**
 
-CAD Design Review helps AI agents review mechanical parts, engineering drawings, assemblies, tolerances, and manufacturability. It combines an engineering-focused review workflow with Python utilities for repeatable checks and calculations.
+Use a structured engineering workflow and included Python tools to identify dimensional conflicts, manufacturing risks, and missing requirements.
 
-**The goal:** help engineers identify potential design issues earlier, reduce manufacturing risks, and make design reviews more structured and consistent.
+## Quick start
 
-[**Get the latest release**](https://github.com/RamunasSab/cad-design-review/releases/latest) · [Report an issue](https://github.com/RamunasSab/cad-design-review/issues) · [Agent Skills standard](https://agentskills.io/)
+Requires **Node.js 22.20+**, npm, and a compatible AI agent. Install the **stable v1.5.0 release** globally for all agents supported by the Skills CLI:
+
+```bash
+npx skills add RamunasSab/cad-design-review@v1.5.0 --global --all
+npx skills ls --global
+```
+
+Look for `cad-design-review`, then restart your agent if it was already open. In the agent, ask it to use `cad-design-review` and paste this first check:
+
+> Review this shaft-to-hole interface. Hole: 20.065 ± 0.065 mm; shaft: 19.985 ± 0.015 mm. Required diametral clearance: 0.020–0.200 mm. Calculate the worst-case clearance, report any verified nonconformance, and state what remains unchecked.
+
+**Expected result:** clearance is **0.000–0.160 mm**, so the minimum-clearance requirement fails. No CAD parser is needed for this explicit dimensional input. See the [verified example and candidate correction](#example-review).
+
+`--all` targets CLI-supported agents, not every AI application. File-reading and Python execution capabilities depend on the host. This skill does not install a CAD application or a STEP/PDF/DXF parser. Python 3 is only needed to run the bundled utilities.
+
+[Detailed installation](#installation) · [Stable release](https://github.com/RamunasSab/cad-design-review/releases/tag/v1.5.0) · [Report an issue](https://github.com/RamunasSab/cad-design-review/issues)
+
+## Stable release and development version
+
+| Channel | Contents | Documentation |
+|---|---|---|
+| **Stable: v1.5.0** | Published release, including expanded process guidance and evidence controls | [Release README](https://github.com/RamunasSab/cad-design-review/blob/v1.5.0/README.md) · [Release changelog](https://github.com/RamunasSab/cad-design-review/blob/v1.5.0/CHANGELOG.md) |
+| **Development: main** | Stable functionality plus unreleased review guidance, five process prompt templates, and the demonstration linked below | This README · [Unreleased changes](CHANGELOG.md#unreleased) |
+
+This README describes **main** unless a section says otherwise. An unpinned repository installation follows the default branch; it does not select the latest GitHub release. To try the current development version instead:
+
+```bash
+npx skills add RamunasSab/cad-design-review --global --all
+```
+
+Choose one channel. To reproduce v1.5.0, use the pinned command above and its tag-specific documentation. The five prompt templates and dimension-chain/symmetry additions are currently **main-only**, not part of v1.5.0. The example files below are also added on main; the stack-up utility they use already exists unchanged in v1.5.0.
+
+## Example review
+
+A nominal clearance of **0.080 mm** looks acceptable, but checking the permitted limits reveals a zero-clearance condition.
+
+| Check | Original dimensions | Candidate correction |
+|---|---|---|
+| Hole diameter | 20.065 ± 0.065 mm | 20.085 ± 0.045 mm |
+| Shaft diameter | 19.985 ± 0.015 mm | Unchanged |
+| Worst-case diametral clearance | **0.000–0.160 mm** | **0.040–0.160 mm** |
+| Requirement: 0.020–0.200 mm | **FAIL** | **PASS** for this dimensional check |
+
+This is a constructed, reproducible example, not an assessment of the bundled CAD part. Both results were checked with the included Python utility and independent endpoint arithmetic. The candidate correction still needs manufacturing and functional validation.
+
+[**Read the findings, evidence, limitations, and reproduction steps →**](examples/clearance-review.md)
 
 ## Key capabilities
 
@@ -19,7 +65,7 @@ CAD Design Review helps AI agents review mechanical parts, engineering drawings,
 - **Fits and dimensional tolerances** — review ISO fits, general tolerances, bearing fits, and tolerance selection.
 - **Geometrical tolerancing** — assess GD&T concepts, datum selection, feature control frames, and inspectability.
 - **Tolerance stack-ups** — perform worst-case, RSS, Monte Carlo, and sensitivity analysis.
-- **Dimension chains and symmetry** — check closed chains and duplicate dimensions, calculate functional open-chain minimum/maximum limits, and assess functional datums and centring. See the [dimension-chain and symmetry guidance](references/dimension-chains-and-symmetry.md).
+- **Dimension chains and symmetry (main-only additions)** — check closed chains and duplicate dimensions, calculate functional open-chain minimum/maximum limits, and assess functional datums and centring. See the [dimension-chain and symmetry guidance](references/dimension-chains-and-symmetry.md).
 - **Design for Manufacturability (DFM)** — identify potential manufacturing risks for machining, sheet-metal fabrication, injection molding, and progressive stamping.
 - **Structured engineering findings** — distinguish nonconformances, risks, clarification requests, and informational observations.
 - **Multilingual interaction** — internal instructions and documentation are in English, while user-facing responses follow the language of the user's request.
@@ -66,6 +112,8 @@ Coverage and available checks vary by process and by the information supplied.
 
 ## Prompt templates
 
+**Development / main only:** these five templates are not included in v1.5.0.
+
 Ready-to-copy English review prompts are available in [`prompt-templates/`](prompt-templates/):
 
 | Manufacturing process | Template |
@@ -106,18 +154,20 @@ npm -v
 
 If Node.js is not installed or is outdated, download the current LTS release from [nodejs.org](https://nodejs.org/).
 
-### Recommended: Global installation for all supported agents
+### Recommended: Stable release, global installation for all supported agents
 
 Open a terminal (Windows PowerShell, Command Prompt, macOS Terminal, or a Linux shell) and run:
 
 ```bash
-npx skills add RamunasSab/cad-design-review --global --all
+npx skills add RamunasSab/cad-design-review@v1.5.0 --global --all
 ```
+
+For development additions described in this README, use the unpinned command in [Stable release and development version](#stable-release-and-development-version).
 
 This command:
 
-- Downloads CAD Design Review from this public GitHub repository.
-- Installs the skill for all agents supported and detected by the Skills CLI.
+- Downloads CAD Design Review from the v1.5.0 tag in this public GitHub repository.
+- Installs the skill for all agents supported by the Skills CLI.
 - Uses **global scope**, making the skill available across your projects for your operating-system user account.
 - Skips the interactive agent and skill selection prompts.
 
@@ -127,16 +177,16 @@ The repository currently provides one skill: `cad-design-review`.
 
 ### Optional: Preview before installing
 
-To list the skill or skills available in the repository without installing them, run:
+To list the skill or skills in the stable release without installing them, run:
 
 ```bash
-npx skills add RamunasSab/cad-design-review --list
+npx skills add RamunasSab/cad-design-review@v1.5.0 --list
 ```
 
-To use the interactive installation flow instead, run:
+To use the interactive installation flow for the stable release instead, run:
 
 ```bash
-npx skills add RamunasSab/cad-design-review
+npx skills add RamunasSab/cad-design-review@v1.5.0
 ```
 
 The CLI will guide you through selecting the skill, compatible agent(s), and installation scope.
@@ -152,6 +202,8 @@ npx skills ls --global
 Look for `cad-design-review` in the output. If your AI agent was already open during installation, restart it so it can discover the newly installed skill.
 
 ### Updating
+
+A tag-pinned installation selects a specific version. To move to a newer stable release, explicitly install its published tag. An installation from the unpinned repository follows the development channel. After updating, check the source/ref before assuming you are running a stable release.
 
 To update globally installed skills, run:
 
@@ -190,6 +242,7 @@ The repository contains:
 - `SKILL.md` — main instructions and engineering review workflow.
 - `references/` — technical guidance, checklists, schemas, and reference datasets.
 - `scripts/` — Python utilities for supported DFM, tolerance, stack-up, and drawing-data checks.
+- `examples/` — reproducible clearance review, original input, and revised input (main only).
 - `prompt-templates/` — ready-to-copy review prompts for five manufacturing-process categories.
 - `tests/` — lightweight smoke and validation tests. The `tests/` directory also includes STEP, DXF, and PNG files for the gearbox shaft test component, allowing quick manual verification.
 
