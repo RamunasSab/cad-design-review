@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest a workflow, documentation, rule, or calculation improvement.
+title: '[Feature]: '
+body:
+- type: markdown
+  attributes:
+    value: 'Please search existing issues first. Issues are public: use an anonymized minimal example
+      and remove credentials, customer data, and proprietary CAD information. For vulnerabilities, follow
+      [SECURITY.md](https://github.com/RamunasSab/cad-design-review/blob/main/SECURITY.md).'
+- type: textarea
+  id: problem
+  attributes:
+    label: Problem and use case
+    description: Who is affected and what engineering task is difficult today?
+  validations:
+    required: true
+- type: textarea
+  id: proposal
+  attributes:
+    label: Proposed improvement
+    description: Describe the desired behavior and, when useful, an example input/output.
+  validations:
+    required: true
+- type: textarea
+  id: scope
+  attributes:
+    label: Scope and evidence
+    description: Which process, agent, file format, or calculation is affected? For numeric rules, identify
+      units, applicability and source if available.
+  validations:
+    required: false
+- type: textarea
+  id: alternatives
+  attributes:
+    label: Alternatives and acceptance criteria
+    description: What workaround exists and how would you verify the improvement works?
+  validations:
+    required: false

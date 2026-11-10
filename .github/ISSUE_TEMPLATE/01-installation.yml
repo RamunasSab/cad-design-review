@@ -1,0 +1,47 @@
+name: Installation problem
+description: Report a failure installing, discovering, updating, or running the skill.
+title: '[Installation]: '
+body:
+- type: markdown
+  attributes:
+    value: 'Please search existing issues first. Issues are public: use an anonymized minimal example
+      and remove credentials, customer data, and proprietary CAD information. For vulnerabilities, follow
+      [SECURITY.md](https://github.com/RamunasSab/cad-design-review/blob/main/SECURITY.md).'
+- type: textarea
+  id: environment
+  attributes:
+    label: Environment and version
+    description: Include skill tag/commit (or unknown), AI agent and model/version, OS, and relevant tools.
+      For CLI installation include Node.js, npm, Skills CLI version if known, shell, and global/project
+      scope.
+  validations:
+    required: true
+- type: textarea
+  id: steps
+  attributes:
+    label: Steps to reproduce
+    description: Paste the exact command or actions and explain where the failure occurs.
+  validations:
+    required: true
+- type: textarea
+  id: expected
+  attributes:
+    label: Expected behavior
+    description: What should have happened?
+  validations:
+    required: true
+- type: textarea
+  id: actual
+  attributes:
+    label: Actual behavior and error output
+    description: Include the error and relevant sanitized logs as text. State whether installation completed
+      but the agent cannot discover the skill.
+  validations:
+    required: true
+- type: textarea
+  id: attempts
+  attributes:
+    label: Troubleshooting already attempted
+    description: 'For example: restart, installed-skill listing, or a different installation scope.'
+  validations:
+    required: false

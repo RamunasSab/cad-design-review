@@ -1,0 +1,58 @@
+name: Incorrect engineering finding
+description: Report an incorrect calculation, unsupported claim, missed issue, or false positive.
+title: '[Engineering]: '
+body:
+- type: markdown
+  attributes:
+    value: 'Please search existing issues first. Issues are public: use an anonymized minimal example
+      and remove credentials, customer data, and proprietary CAD information. For vulnerabilities, follow
+      [SECURITY.md](https://github.com/RamunasSab/cad-design-review/blob/main/SECURITY.md).'
+- type: textarea
+  id: environment
+  attributes:
+    label: Environment and version
+    description: Include skill tag/commit (or unknown), AI agent and model/version, OS, and relevant tools.
+      For CLI installation include Node.js, npm, Skills CLI version if known, shell, and global/project
+      scope.
+  validations:
+    required: true
+- type: textarea
+  id: context
+  attributes:
+    label: Engineering context and source inputs
+    description: State process, material, units, relevant dimensions/tolerances and requirement. Identify
+      drawing feature/sheet or script/rule ID. Mark unknown inputs explicitly.
+  validations:
+    required: true
+- type: textarea
+  id: reproduce
+  attributes:
+    label: Minimal reproduction
+    description: Provide the prompt, smallest relevant JSON/data, command, and any extraction/parser tools
+      used. State whether the issue repeats.
+  validations:
+    required: true
+- type: textarea
+  id: actual
+  attributes:
+    label: Reported finding or calculation
+    description: Quote the relevant output, status and evidence level if available. Describe why it appears
+      incorrect.
+  validations:
+    required: true
+- type: textarea
+  id: expected
+  attributes:
+    label: Expected result and supporting evidence
+    description: Show your calculation with units or cite the governing specification, edition and clause
+      if known. If uncertain, say so. Do not upload restricted standard text.
+  validations:
+    required: true
+- type: textarea
+  id: impact
+  attributes:
+    label: Impact and unchecked assumptions
+    description: Describe the functional/manufacturing consequence and whether the problem is geometric,
+      numeric, visual, or judgement-based.
+  validations:
+    required: false

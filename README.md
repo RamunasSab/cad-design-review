@@ -6,6 +6,10 @@
 
 # CAD Design Review
 
+[![Tests](https://github.com/RamunasSab/cad-design-review/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/RamunasSab/cad-design-review/actions/workflows/tests.yml)
+[![Latest release](https://img.shields.io/github/v/release/RamunasSab/cad-design-review)](https://github.com/RamunasSab/cad-design-review/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 **A portable AI agent skill for reviewing mechanical drawings, tolerances, GD&T, and manufacturability.**
 
 Use a structured engineering workflow and included Python tools to identify dimensional conflicts, manufacturing risks, and missing requirements.
@@ -288,4 +292,8 @@ The repository includes an MIT license. Before reusing or redistributing bundled
 
 ---
 
-**Contributions, suggestions, and issue reports are welcome.** If you find a bug, an unclear engineering rule, or an opportunity to improve the review workflow, please open an issue.
+## Contributing and feedback
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for reporting guidance, contribution steps, and validation commands. Use the [issue forms](https://github.com/RamunasSab/cad-design-review/issues/new/choose) for installation problems, incorrect engineering findings, or feature requests.
+
+The Tests badge reports the Python compilation, smoke tests, and reference-JSON validation in the workflow; it is not certification of engineering correctness or agent compatibility.
