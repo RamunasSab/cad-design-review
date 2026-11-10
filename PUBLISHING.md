@@ -33,7 +33,9 @@ Reference: [GitHub social preview documentation](https://docs.github.com/en/repo
 
 The [project listing](https://skills.sh/ramunassab/cad-design-review/cad-design-review) was publicly reachable on **2026-11-10** and reported **1 install**. Counts are a point-in-time observation and may change.
 
-The listing also displayed **“No SKILL.md available for this skill.”** The repository's [root SKILL.md](https://github.com/RamunasSab/cad-design-review/blob/main/SKILL.md) is publicly readable. The reason for the directory's missing rendered content has not been established. Do not claim a fix or rearrange the skill solely on this evidence.
+The listing also displayed **“No SKILL.md available for this skill.”** The repository's [root SKILL.md](https://github.com/RamunasSab/cad-design-review/blob/main/SKILL.md) is publicly readable. Follow-up diagnostics on 2026-11-10: anonymous raw access returned HTTP 200, the GitHub tree identifies root SKILL.md as a regular file (mode 100644), and the official CLI supports root-level skills. The project's `/api/download/ramunassab/cad-design-review/cad-design-review` returned HTTP 404 with `not_found`; the same API for `vercel-labs/skills/find-skills` returned HTTP 200 with SKILL.md content. This establishes that the project's content snapshot is unavailable through the public API, while its listing exists. The internal ingestion/cache failure cause is not established. Do not rearrange or duplicate the repository skill solely on this evidence.
+
+The maintainers' replies on [issue #1073](https://github.com/vercel-labs/skills/issues/1073) and [issue #2367](https://github.com/vercel-labs/skills/issues/2367) state that a normal installation with telemetry enabled triggers indexing; they do not promise a specific refresh time or guarantee it fixes every missing snapshot. The CLI install event includes a skill-to-repository-file-path map.
 
 Follow-up:
 
