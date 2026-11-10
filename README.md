@@ -111,6 +111,7 @@ Findings are separated into:
 | Sheet-metal fabrication | Thickness, bends, holes, cut-outs, and fabrication DFM |
 | Injection molding | Plastic part design, molding constraints, and ISO 20457 tolerance considerations |
 | Progressive stamping | Strip and part design considerations, tooling-related risks, and process DFM |
+| Additive manufacturing / 3D printing | Manual DfAM guidance; no automated rules in `check_dfm.py` |
 
 Coverage and available checks vary by process and by the information supplied.
 
@@ -138,6 +139,16 @@ Ready-to-copy English review prompts are available in [`prompt-templates/`](prom
 The templates cover documentation, dimensions, datums, closed dimension chains, worst-case tolerance stack-ups with minimum/maximum results, and process-specific manufacturing risks. Actual checks depend on the supplied data and the host environment's tools.
 
 The templates request reports in the language of your request unless you explicitly choose another output language. Their English source text does not require English output. Additive-manufacturing review is manual DfAM guidance; it is not automated by `scripts/check_dfm.py`.
+
+## Agent compatibility
+
+| Environment | Current evidence |
+|---|---|
+| Hosted Codex workspace | Partial utility, parser, and directed-review checks; see below |
+| Claude AI | User-reported example: correct clearance calculation, one incorrect recommendation; tool logs unavailable |
+| Claude Code | Not tested |
+
+[Compatibility details and the corrected recommendation](docs/agent-compatibility.md). Claude AI results do not establish Claude Code compatibility. Clean CLI installation checks are deferred.
 
 ## Codex environment checks
 
@@ -283,6 +294,24 @@ python scripts/check_dfm.py part.json
 python scripts/stackup.py --example > stackup.json
 python scripts/stackup.py stackup.json
 ```
+
+## Frequently asked questions
+
+### Is this a SolidWorks add-in?
+
+No. It is an AI agent skill with supporting Python utilities. It does not install into SolidWorks or modify a CAD application.
+
+### Do I need Python?
+
+Python 3 is needed to execute the bundled calculation utilities. The review instructions can also guide an agent without Python, provided it clearly states which calculations and checks were actually performed.
+
+### Can it automatically measure STEP, PDF, and DXF files?
+
+The repository does not include automatic CAD/drawing parsers. Numerical geometry inspection requires suitable tools in the host environment. Being able to attach a file does not establish that its geometry, dimensions, or tolerances were read.
+
+### Which version should I use?
+
+Use the pinned stable installation for v1.5.0. Use the unpinned repository for current main additions. Check the [channel table](#stable-release-and-development-version) before choosing; documentation and examples on main may not exist in the stable snapshot.
 
 ## Important limitations
 
