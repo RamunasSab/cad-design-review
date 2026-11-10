@@ -1,0 +1,90 @@
+name: Publish v1.6.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - docs/releases/v1.6.0.md
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-v1.6.0
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: startsWith(github.event.head_commit.message, 'Release v1.6.0')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+      - name: Compile Python
+        run: python -m compileall -q scripts tests
+      - name: Run regression checks
+        run: python tests/test_smoke.py
+      - name: Validate JSON and clearance examples
+        run: |
+          python - <<'PY'
+          import json, pathlib, runpy
+          for folder in ("references", "examples"):
+              for path in pathlib.Path(folder).glob("*.json"):
+                  json.loads(path.read_text(encoding="utf-8"))
+          analyse = runpy.run_path("scripts/stackup.py")["analyse"]
+          for filename, expected in (
+              ("clearance-input.json", (0.0, 0.16, False)),
+              ("clearance-revised.json", (0.04, 0.16, True)),
+          ):
+              data = json.loads(pathlib.Path("examples", filename).read_text(encoding="utf-8"))
+              result = analyse(data)["worst_case"]
+              assert (result["min"], result["max"], result["pass"]) == expected
+          PY
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Publish the exact validated commit
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const tag = 'v1.6.0';
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const sha = context.sha;
+            const skill = fs.readFileSync('SKILL.md', 'utf8');
+            if (!skill.includes('version: "1.6.0"')) throw new Error('Skill version mismatch');
+            const body = fs.readFileSync('docs/releases/v1.6.0.md', 'utf8');
+            if (!body.startsWith('# CAD Design Review v1.6.0')) throw new Error('Release notes mismatch');
+            try {
+              const ref = await github.rest.git.getRef({owner, repo, ref: 'tags/' + tag});
+              if (ref.data.object.type !== 'commit' || ref.data.object.sha !== sha) {
+                throw new Error('Existing tag does not point to this commit; refusing to change it');
+              }
+            } catch (error) {
+              if (error.status !== 404) throw error;
+            }
+            try {
+              const existing = await github.rest.repos.getReleaseByTag({owner, repo, tag});
+              if (existing.data.draft || existing.data.prerelease) throw new Error('Existing release is not stable');
+              core.notice('Release already exists: ' + existing.data.html_url);
+              return;
+            } catch (error) {
+              if (error.status !== 404) throw error;
+            }
+            const release = await github.rest.repos.createRelease({
+              owner, repo, tag_name: tag, target_commitish: sha,
+              name: 'CAD Design Review v1.6.0 — Review templates and dimension-chain checks',
+              body, draft: false, prerelease: false, make_latest: 'true'
+            });
+            core.notice('Published: ' + release.data.html_url);

@@ -15,16 +15,12 @@
 
 Use a structured engineering workflow and included Python tools to identify dimensional conflicts, manufacturing risks, and missing requirements.
 
-## Release preparation: v1.6.0
-
-**v1.6.0 is prepared but not yet published.** The stable installation below remains pinned to v1.5.0. See the [prepared release notes](docs/releases/v1.6.0.md) for the candidate's contents and publication checklist in [PUBLISHING.md](PUBLISHING.md#publish-the-prepared-v160-release).
-
 ## Quick start
 
-Requires **Node.js 22.20+**, npm, and a compatible AI agent. Install the **stable v1.5.0 release** globally for all agents supported by the Skills CLI:
+Requires **Node.js 22.20+**, npm, and a compatible AI agent. Install the **stable v1.6.0 release** globally for all agents supported by the Skills CLI:
 
 ```bash
-npx skills add RamunasSab/cad-design-review@v1.5.0 --global --all
+npx skills add RamunasSab/cad-design-review@v1.6.0 --global --all
 npx skills ls --global
 ```
 
@@ -36,23 +32,22 @@ Look for `cad-design-review`, then restart your agent if it was already open. In
 
 `--all` targets CLI-supported agents, not every AI application. File-reading and Python execution capabilities depend on the host. This skill does not install a CAD application or a STEP/PDF/DXF parser. Python 3 is only needed to run the bundled utilities.
 
-[Find on skills.sh](https://skills.sh/ramunassab/cad-design-review/cad-design-review) · [Detailed installation](#installation) · [Stable release](https://github.com/RamunasSab/cad-design-review/releases/tag/v1.5.0) · [Report an issue](https://github.com/RamunasSab/cad-design-review/issues)
+[Find on skills.sh](https://skills.sh/ramunassab/cad-design-review/cad-design-review) · [Detailed installation](#installation) · [Stable release](https://github.com/RamunasSab/cad-design-review/releases/tag/v1.6.0) · [Report an issue](https://github.com/RamunasSab/cad-design-review/issues)
 
 ## Stable release and development version
 
 | Channel | Contents | Documentation |
 |---|---|---|
-| **Stable: v1.5.0** | Published release, including expanded process guidance and evidence controls | [Release README](https://github.com/RamunasSab/cad-design-review/blob/v1.5.0/README.md) · [Release changelog](https://github.com/RamunasSab/cad-design-review/blob/v1.5.0/CHANGELOG.md) |
-| **Prepared: v1.6.0** | Five process prompts, dimension-chain/symmetry guidance, worked example, and presentation updates; not published | [Release notes](docs/releases/v1.6.0.md) · [Changelog](CHANGELOG.md#160--review-templates-and-dimension-chain-checks-prepared) |
+| **Stable: v1.6.0** | Five process prompts, dimension-chain/symmetry guidance, worked example, and presentation updates | [Release README](https://github.com/RamunasSab/cad-design-review/blob/v1.6.0/README.md) · [Release changelog](https://github.com/RamunasSab/cad-design-review/blob/v1.6.0/CHANGELOG.md) · [Release notes](docs/releases/v1.6.0.md) |
 | **Development: main** | Ongoing development; unpinned installs follow the default branch | [Unreleased changes](CHANGELOG.md#unreleased) |
 
-This README describes the **v1.6.0 preparation branch**; its additions remain unreleased. The stable v1.5.0 documentation is linked above. An unpinned repository installation follows the default branch; it does not select the latest GitHub release. To try the current development version instead:
+This README describes the current repository state. For a reproducible v1.6.0 snapshot, use the tag-specific documentation linked above. An unpinned repository installation follows the default branch; it does not select the latest GitHub release. To try the current development version instead:
 
 ```bash
 npx skills add RamunasSab/cad-design-review --global --all
 ```
 
-Choose one channel. To reproduce v1.5.0, use the pinned command above and its tag-specific documentation. The five prompt templates and dimension-chain/symmetry additions are prepared for **v1.6.0**, not part of v1.5.0. The example files below are also added on main; the stack-up utility they use already exists unchanged in v1.5.0.
+Choose one channel. To reproduce v1.6.0, use the pinned command above and its tag-specific documentation. Version 1.6.0 includes the five prompt templates, dimension-chain/symmetry guidance, and example files. The previous [v1.5.0 snapshot](https://github.com/RamunasSab/cad-design-review/tree/v1.5.0) remains available.
 
 ## Example review
 
@@ -75,7 +70,7 @@ This is a constructed, reproducible example, not an assessment of the bundled CA
 - **Fits and dimensional tolerances** — review ISO fits, general tolerances, bearing fits, and tolerance selection.
 - **Geometrical tolerancing** — assess GD&T concepts, datum selection, feature control frames, and inspectability.
 - **Tolerance stack-ups** — perform worst-case, RSS, Monte Carlo, and sensitivity analysis.
-- **Dimension chains and symmetry (v1.6.0 additions, unreleased)** — check closed chains and duplicate dimensions, calculate functional open-chain minimum/maximum limits, and assess functional datums and centring. See the [dimension-chain and symmetry guidance](references/dimension-chains-and-symmetry.md).
+- **Dimension chains and symmetry (added in v1.6.0)** — check closed chains and duplicate dimensions, calculate functional open-chain minimum/maximum limits, and assess functional datums and centring. See the [dimension-chain and symmetry guidance](references/dimension-chains-and-symmetry.md).
 - **Design for Manufacturability (DFM)** — identify potential manufacturing risks for machining, sheet-metal fabrication, injection molding, and progressive stamping.
 - **Structured engineering findings** — distinguish nonconformances, risks, clarification requests, and informational observations.
 - **Multilingual interaction** — internal instructions and documentation are in English, while user-facing responses follow the language of the user's request.
@@ -123,7 +118,7 @@ Coverage and available checks vary by process and by the information supplied.
 
 ## Prompt templates
 
-**Prepared for v1.6.0:** these five templates are not included in v1.5.0.
+**Available since v1.6.0:** these five templates are not included in v1.5.0.
 
 Ready-to-copy English review prompts are available in [`prompt-templates/`](prompt-templates/):
 
@@ -195,14 +190,14 @@ If Node.js is not installed or is outdated, download the current LTS release fro
 Open a terminal (Windows PowerShell, Command Prompt, macOS Terminal, or a Linux shell) and run:
 
 ```bash
-npx skills add RamunasSab/cad-design-review@v1.5.0 --global --all
+npx skills add RamunasSab/cad-design-review@v1.6.0 --global --all
 ```
 
 For development additions described in this README, use the unpinned command in [Stable release and development version](#stable-release-and-development-version).
 
 This command:
 
-- Downloads CAD Design Review from the v1.5.0 tag in this public GitHub repository.
+- Downloads CAD Design Review from the v1.6.0 tag in this public GitHub repository.
 - Installs the skill for all agents supported by the Skills CLI.
 - Uses **global scope**, making the skill available across your projects for your operating-system user account.
 - Skips the interactive agent and skill selection prompts.
@@ -216,13 +211,13 @@ The repository currently provides one skill: `cad-design-review`.
 To list the skill or skills in the stable release without installing them, run:
 
 ```bash
-npx skills add RamunasSab/cad-design-review@v1.5.0 --list
+npx skills add RamunasSab/cad-design-review@v1.6.0 --list
 ```
 
 To use the interactive installation flow for the stable release instead, run:
 
 ```bash
-npx skills add RamunasSab/cad-design-review@v1.5.0
+npx skills add RamunasSab/cad-design-review@v1.6.0
 ```
 
 The CLI will guide you through selecting the skill, compatible agent(s), and installation scope.
@@ -282,7 +277,7 @@ The repository contains:
 - `SKILL.md` — main instructions and engineering review workflow.
 - `references/` — technical guidance, checklists, schemas, and reference datasets.
 - `scripts/` — Python utilities for supported DFM, tolerance, stack-up, and drawing-data checks.
-- `examples/` — reproducible clearance review, original input, and revised input (prepared for v1.6.0).
+- `examples/` — reproducible clearance review, original input, and revised input (added in v1.6.0).
 - `prompt-templates/` — ready-to-copy review prompts for five manufacturing-process categories.
 - `tests/` — lightweight smoke and validation tests. The `tests/` directory also includes STEP, DXF, and PNG files for the gearbox shaft test component, allowing quick manual verification.
 

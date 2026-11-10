@@ -9,19 +9,13 @@ This project is already public at [RamunasSab/cad-design-review](https://github.
 - Keep the homepage link directed to the maintained project website.
 - Preserve the published v1.5.0 snapshot. Changes on main remain unreleased until a new release is intentionally published.
 
-## Publish the prepared v1.6.0 release
+## v1.6.0 publication
 
-Preparation is on the `release/v1.6.0` branch. The stable release remains v1.5.0 until publication.
+The v1.6.0 publication workflow runs only for a push to main that changes its release notes and whose head commit message starts with `Release v1.6.0`. It validates Python/JSON/examples before creating the GitHub Release at that exact commit. It does not move an existing tag or automatically publish future versions.
 
-1. Review the preparation pull request and confirm its CI checks pass.
-2. Before tagging, update README's stable command and channel table to v1.6.0, remove its preparation notice and unreleased/main-only qualifiers for included features, and describe main as the development channel. Change the changelog v1.6.0 heading from prepared to its actual publication date and remove its preparation-only notice. Update the README changelog anchor accordingly.
-3. Merge the reviewed preparation changes into main and check the final CI result.
-4. Create a **new v1.6.0 tag** at that exact main commit; keep v1.5.0 unchanged.
-5. Create a GitHub Release titled **CAD Design Review v1.6.0 — Review templates and dimension-chain checks**. Copy the text from [prepared release notes](docs/releases/v1.6.0.md), removing only the sentence explaining that its command becomes available after tagging.
-6. Publish the release, then verify the tag-specific README, changelog, install command, and source archives. The prepared notes' comparison link resolves after the tag exists.
-7. Confirm the stable/main distinction still matches the published state.
+The finalization PR is merged using the title `Release v1.6.0`. After the workflow succeeds, verify the published release, tag commit, stable README, and source archives. A rerun checks for an existing tag/release before attempting creation.
 
-No automatic release or tag creation is configured by this preparation. A custom ZIP is not required.
+Future releases require their own explicit preparation and publication decision.
 
 ## Release checklist
 
