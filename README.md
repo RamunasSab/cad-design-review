@@ -139,6 +139,20 @@ The templates cover documentation, dimensions, datums, closed dimension chains, 
 
 The templates request reports in the language of your request unless you explicitly choose another output language. Their English source text does not require English output. Additive-manufacturing review is manual DfAM guidance; it is not automated by `scripts/check_dfm.py`.
 
+## Codex environment checks
+
+Partial checks completed on **2026-11-10** in a hosted Linux workspace with Codex CLI **0.167.0-alpha.4** available. This is not an end-to-end CLI installation certification.
+
+| Area | Observed result |
+|---|---|
+| Python utilities, smoke tests, and example calculations | Passed on Python 3.12.14 |
+| Directed instruction-file review and Lithuanian output | Passed one fresh-agent case; automatic skill selection not tested |
+| STEP / DXF import | Passed basic import with separately installed CadQuery/OCP and ezdxf |
+| Skills CLI installation and subsequent Codex discovery | Not verified: npm package fetch blocked by workspace HTTP 403 |
+| PDF, Windows, desktop, and IDE integration | Not tested |
+
+[Detailed evidence, package versions, limitations, and remaining checks](docs/codex-validation.md). Parser availability is environment-specific; the skill does not include a CAD parser.
+
 ## Installation
 
 CAD Design Review can be installed with the [Skills CLI](https://skills.sh/docs/cli), which downloads the skill from this GitHub repository and makes it available to compatible AI agents.
