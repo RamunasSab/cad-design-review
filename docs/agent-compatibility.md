@@ -6,6 +6,7 @@ These records distinguish utility execution, directed instruction use, and actua
 |---|---|---|
 | Hosted Codex workspace | Executed Python utilities, STEP/DXF parser checks, and one directed review | Partial validation; [detailed report](codex-validation.md) |
 | Claude AI | User supplied a review response on 2026-11-10 | Basic calculation correct; recommendation review partially failed |
+| Windows Skills CLI copy installation | User supplied a successful clone, discovery of one skill, and copy-install transcript on 2026-11-10 | Installation reported successful; agent activation not tested |
 | Claude Code | No actual session tested | Not tested |
 | Codex CLI clean installation | Package download blocked in hosted workspace; user-side testing deferred | Not verified |
 

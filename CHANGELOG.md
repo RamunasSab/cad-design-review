@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+No changes queued after the prepared v1.6.0 scope.
+
+## 1.6.0 – Review templates and dimension-chain checks (prepared)
+
+Release preparation only; no v1.6.0 tag or public release has been created yet.
+
 ### Added
 - Added five ready-to-copy English review prompts in `prompt-templates/`: progressive stamping, sheet-metal cutting and bending, machining, plastic injection molding, and additive manufacturing / 3D printing.
 - Included editable input fields, documentation and dimension-chain checks, worst-case tolerance stack-ups with minimum/maximum values, process-specific DFM checks, and explicit evidence and coverage limitations.
