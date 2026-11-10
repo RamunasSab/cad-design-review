@@ -19,6 +19,7 @@
 - Clarified that the additive-manufacturing template provides manual DfAM guidance without adding automated DfAM rules.
 
 ### Project presentation and contributor support
+- Added a pull request template covering the problem, validation, engineering evidence, and contribution rights.
 - Added a README quick start, tag-pinned stable installation, and explicit stable/main channel guidance.
 - Added a reproducible clearance-review example with original and revised JSON inputs.
 - Added test, release, and MIT badges, CONTRIBUTING.md, and issue forms for installation problems, engineering findings, and feature requests.
@@ -26,6 +27,7 @@
 - Added an agent-compatibility overview, documented a correction to the Claude AI recommendation, and clarified FAQ and manual additive-manufacturing coverage.
 
 ### Maintenance
+- Added weekly Dependabot proposals for GitHub Actions versions, limited to three open update pull requests; no automatic merging is configured.
 - Upgraded actions/checkout and actions/setup-python to v6, using Node.js 24; the updated workflow completed successfully.
 
 ## 1.5.0 – Expanded process coverage and review controls
