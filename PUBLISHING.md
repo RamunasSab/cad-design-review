@@ -9,6 +9,14 @@ This project is already public at [RamunasSab/cad-design-review](https://github.
 - Keep the homepage link directed to the maintained project website.
 - Preserve the published v1.5.0 snapshot. Changes on main remain unreleased until a new release is intentionally published.
 
+## v1.6.0 publication
+
+The v1.6.0 publication workflow runs only for a push to main that changes its release notes and whose head commit message starts with `Release v1.6.0`. It validates Python/JSON/examples before creating the GitHub Release at that exact commit. It does not move an existing tag or automatically publish future versions.
+
+The finalization PR is merged using the title `Release v1.6.0`. After the workflow succeeds, verify the published release, tag commit, stable README, and source archives. A rerun checks for an existing tag/release before attempting creation.
+
+Future releases require their own explicit preparation and publication decision.
+
 ## Release checklist
 
 1. Review the diff from the previous tag and complete relevant checks.

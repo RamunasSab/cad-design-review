@@ -3,7 +3,7 @@ name: cad-design-review
 description: Review manufacturing-ready mechanical part models, engineering drawings, and assemblies. Covers ISO fits and tolerances, general tolerances (ISO 2768), ISO 20457 plastic molding tolerances, GD&T (ISO 1101 / ASME Y14.5), tolerance stack-ups, and process-specific DFM for injection molding, sheet metal fabrication & cutting, machining, additive manufacturing, and progressive stamping. Use when a user asks to inspect, review, assess, or find issues in a drawing, part, model, or assembly; check tolerances, fits, bearing fits, datums, tolerance stack-ups, or manufacturability.
 license: MIT
 metadata:
-  version: "1.5.0"
+  version: "1.6.0"
 ---
 
 # CAD Design Review
