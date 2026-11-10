@@ -9,6 +9,7 @@
 [![Tests](https://github.com/RamunasSab/cad-design-review/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/RamunasSab/cad-design-review/actions/workflows/tests.yml)
 [![Latest release](https://img.shields.io/github/v/release/RamunasSab/cad-design-review)](https://github.com/RamunasSab/cad-design-review/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![skills.sh installs](https://skills.sh/b/ramunassab/cad-design-review)](https://skills.sh/ramunassab/cad-design-review/cad-design-review)
 
 **A portable AI agent skill for reviewing mechanical drawings, tolerances, GD&T, and manufacturability.**
 
@@ -31,7 +32,7 @@ Look for `cad-design-review`, then restart your agent if it was already open. In
 
 `--all` targets CLI-supported agents, not every AI application. File-reading and Python execution capabilities depend on the host. This skill does not install a CAD application or a STEP/PDF/DXF parser. Python 3 is only needed to run the bundled utilities.
 
-[Detailed installation](#installation) · [Stable release](https://github.com/RamunasSab/cad-design-review/releases/tag/v1.5.0) · [Report an issue](https://github.com/RamunasSab/cad-design-review/issues)
+[Find on skills.sh](https://skills.sh/ramunassab/cad-design-review/cad-design-review) · [Detailed installation](#installation) · [Stable release](https://github.com/RamunasSab/cad-design-review/releases/tag/v1.5.0) · [Report an issue](https://github.com/RamunasSab/cad-design-review/issues)
 
 ## Stable release and development version
 
