@@ -2,7 +2,12 @@
 
 ## Unreleased
 
-No unreleased changes.
+### Added
+- Added a manual plastic snap-fit assembly review mode, a dedicated reference checklist and a reusable English prompt template.
+- Require an engaged STEP assembly with separate mating bodies and a section through the joint for complete assessment; request missing inputs and report partial scope explicitly.
+- Cover assembly-path deflection, worst-case engagement and gap, material-specific strain/force evidence, two-part compliance, creep/cycles, manufacturing and release access.
+- Preserve existing process codes, Python calculations and numeric datasets. No automated snap-fit solver or CAD parser is added; source PDF/figures/tables are not redistributed.
+- Document the new mode in README and SKILL.md as an unreleased development addition.
 
 ## 1.6.0 – 2026-11-10 – Review templates and dimension-chain checks
 
