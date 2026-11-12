@@ -1,6 +1,6 @@
 ---
 name: cad-design-review
-description: Review manufacturing-ready mechanical part models, engineering drawings, and assemblies. Covers ISO fits and tolerances, general tolerances (ISO 2768), ISO 20457 plastic molding tolerances, GD&T (ISO 1101 / ASME Y14.5), tolerance stack-ups, and process-specific DFM for injection molding, sheet metal fabrication & cutting, machining, additive manufacturing, and progressive stamping. Use when a user asks to inspect, review, assess, or find issues in a drawing, part, model, or assembly; check tolerances, fits, bearing fits, datums, tolerance stack-ups, or manufacturability.
+description: Review manufacturing-ready mechanical part models, engineering drawings, and assemblies. Covers ISO fits and tolerances, general tolerances (ISO 2768), ISO 20457 plastic molding tolerances, GD&T (ISO 1101 / ASME Y14.5), tolerance stack-ups, plastic snap-fit joints, and process-specific DFM for injection molding, sheet metal fabrication & cutting, machining, additive manufacturing, and progressive stamping. Use when a user asks to inspect, review, assess, or find issues in a drawing, part, model, or assembly; check tolerances, fits, bearing fits, datums, tolerance stack-ups, or manufacturability.
 license: MIT
 metadata:
   version: "1.6.0"
@@ -12,7 +12,7 @@ You are an assistant to a senior mechanical design engineer. Identify potential 
 
 ## Review prompt templates
 
-Use the five templates below when the user asks for a reusable prompt, a process-specific starting point, or help specifying review inputs. Read only the requested template. Translate the template when requested; preserve its technical meaning. Respond in the language of the user's actual request unless the user explicitly chooses another language. English source documentation does not imply English output.
+Use the process and assembly templates below when the user asks for a reusable prompt, a process-specific starting point, or help specifying review inputs. Read only the requested template. Translate the template when requested; preserve its technical meaning. Respond in the language of the user's actual request unless the user explicitly chooses another language. English source documentation does not imply English output.
 
 - Progressive stamping: [template](prompt-templates/progressive_stamping.md).
 - Sheet-metal cutting and bending: [template](prompt-templates/sheet_metal_cutting_and_bending.md).
@@ -20,7 +20,13 @@ Use the five templates below when the user asks for a reusable prompt, a process
 - Plastic injection molding: [template](prompt-templates/plastic_injection_molding.md).
 - Additive manufacturing: [template](prompt-templates/additive_manufacturing_3d_printing.md); manual DfAM only.
 
+- Plastic snap-fit joint assembly: [template](prompt-templates/plastic_snap_fit.md); manual assembly-review mode, not a manufacturing process.
+
 Templates are optional input aids, not a prerequisite for review. Apply the core drawing, chain, and datum checks even when the user supplies only a brief review request. Never demand all three file formats.
+
+## Plastic snap-fit joint review
+
+For two plastic parts joined by hooks or other snap features, read [plastic snap-fit review](references/plastic-snap-fit.md). Require an engaged STEP assembly with both parts as separate identifiable bodies and a section through the critical joint showing both mating parts for a complete assessment. Request both explicitly when missing; perform only supported partial checks and mark blocked checks `NEEDS_CLARIFICATION`. Request free-state geometry if the assembly shows deformation. Establish each part's grade/condition, assembly path, cycles, loads and environment before strength/force acceptance. Do not infer peak assembly deflection from the engaged position, invent material/friction data, or claim numeric STEP measurements without a CAD parser. This is a manual assembly-review mode; no new process code or automated snap-fit simulation is implemented.
 
 ## Before starting: process, files, and evidence
 
