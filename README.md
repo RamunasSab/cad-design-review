@@ -75,6 +75,19 @@ This is a constructed, reproducible example, not an assessment of the bundled CA
 - **Structured engineering findings** — distinguish nonconformances, risks, clarification requests, and informational observations.
 - **Multilingual interaction** — internal instructions and documentation are in English, while user-facing responses follow the language of the user's request.
 
+## Plastic snap-fit joint review (development)
+
+Review two plastic parts joined by hooks, U-shaped arms, torsion latches or annular snaps as a dedicated **assembly-review mode**, alongside the applicable manufacturing-process checks.
+
+For a complete assessment, provide:
+- A STEP assembly in the engaged position, retaining both parts as separate identifiable bodies.
+- A section through each distinct critical snap-fit location showing both mating parts, the arm/root, lead-in and retaining geometry; preferably a dimensioned PDF with tolerances.
+- Free-state geometry if the assembly depicts deformation, plus both polymer grades/conditions, assembly direction, cycles, required insertion/retention loads and service environment.
+
+The review covers assembly motion, flexible geometry, worst-case engagement/deflection/gap, material strain, creep and repeated use, manufacturing risks and release access. Missing required files trigger a request and a limited-scope review, not a complete assessment. Reliable force/strength conclusions require suitable material/contact evidence and, where appropriate, FEA or physical tests. No automatic CAD parser or snap-fit solver is added.
+
+Read the [review guide](references/plastic-snap-fit.md) and copy the [snap-fit prompt](prompt-templates/plastic_snap_fit.md). This addition is in the development branch after merge; it is **not included in the published v1.6.0 tag**. Use the development installation described above to obtain it.
+
 ## Who is it for?
 
 CAD Design Review is intended for:
@@ -118,7 +131,7 @@ Coverage and available checks vary by process and by the information supplied.
 
 ## Prompt templates
 
-**Available since v1.6.0:** these five templates are not included in v1.5.0.
+**Process templates available since v1.6.0:** these five templates are not included in v1.5.0. The additional snap-fit assembly template is a development addition, not part of v1.6.0.
 
 Ready-to-copy English review prompts are available in [`prompt-templates/`](prompt-templates/):
 
@@ -129,6 +142,8 @@ Ready-to-copy English review prompts are available in [`prompt-templates/`](prom
 | Machining | [machining.md](prompt-templates/machining.md) |
 | Plastic injection molding | [plastic_injection_molding.md](prompt-templates/plastic_injection_molding.md) |
 | Additive manufacturing / 3D printing | [additive_manufacturing_3d_printing.md](prompt-templates/additive_manufacturing_3d_printing.md) |
+
+Additional assembly mode: [plastic_snap_fit.md](prompt-templates/plastic_snap_fit.md) — requires an engaged STEP assembly and joint section for a complete snap-fit assessment.
 
 ### Using a template
 
