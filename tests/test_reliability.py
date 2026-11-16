@@ -46,10 +46,10 @@ class ReliabilityTests(unittest.TestCase):
         for key,value in [("samples",0),("samples",1.5),("samples",True),("samples",1000001),("seed",1.2)]:
             d=copy.deepcopy(CASES[0]["input"]);d[key]=value
             with self.subTest(key=key,value=value),self.assertRaises(ValueError):stackup.analyse(d)
-        for field,value in [("tolerance",-.1),("nominal",float("inf")),("direction",True),("direction",0)]:
+        for field,value in [("tolerance",-.1),("nominal",True),("tolerance",False),("nominal",float("inf")),("direction",True),("direction",0)]:
             d=copy.deepcopy(CASES[0]["input"]);d["contributors"][0][field]=value
             with self.subTest(field=field),self.assertRaises(ValueError):stackup.analyse(d)
-        for cpk in [None,0,-1,float("nan"),float("inf")]:
+        for cpk in [None,True,0,-1,float("nan"),float("inf")]:
             d=copy.deepcopy(CASES[0]["input"]);d["contributors"][0].update(distribution="normal")
             if cpk is not None:d["contributors"][0]["cpk"]=cpk
             with self.subTest(cpk=cpk),self.assertRaises(ValueError):stackup.analyse(d)
@@ -75,6 +75,20 @@ class ReliabilityTests(unittest.TestCase):
         r,_=dfm.check(part,[rule]);self.assertEqual(r[0]["severity"],"RISK");self.assertEqual(r[0]["rule_severity"],"NONCONFORMANCE")
         rule.update(basis="binding_requirement",requirement_reference="Approved drawing note 7")
         self.assertEqual(dfm.check(part,[rule])[0][0]["severity"],"NONCONFORMANCE")
+    def test_centered_monte_carlo_numerics(self):
+        d={"requirement":{"min":0.3,"max":0.3},"contributors":[{"nominal":0.1,"tolerance":0,"direction":1},{"nominal":0.2,"tolerance":0,"direction":1}],"samples":10}
+        r=stackup.analyse(d)
+        self.assertTrue(r["worst_case"]["pass"])
+        self.assertEqual(r["monte_carlo"]["percent_out_of_spec"],0)
+        d={"requirement":{"min":9999,"max":10001},"contributors":[{"nominal":10000,"tolerance":0.001,"direction":1}],"samples":100000}
+        r=stackup.analyse(d)
+        self.assertAlmostEqual(r["monte_carlo"]["sigma"],r["statistical"]["sigma"],delta=0.00001)
+    def test_binding_rule_order(self):
+        part={"features":[{"id":"x","type":"rib","draft":0}]}
+        heuristic={"id":"h","applies_to":"rib","field":"draft","op":">=","limit":"1","severity":"NONCONFORMANCE","message":"draft"}
+        binding={**heuristic,"id":"b","basis":"binding_requirement","requirement_reference":"Approved drawing note 7"}
+        for rules in [[heuristic,binding],[binding,heuristic]]:
+            self.assertEqual(dfm.check(part,rules)[0][0]["severity"],"NONCONFORMANCE")
     def test_version_contract(self):
         v=json.loads((ROOT/"project-version.json").read_text(encoding="utf-8"))
         readme=(ROOT/"README.md").read_text(encoding="utf-8")
