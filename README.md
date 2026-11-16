@@ -386,3 +386,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for reporting guidance, contribution step
 
 The Tests badge reports the Python compilation, smoke tests, and reference-JSON validation in the workflow; it is not certification of engineering correctness or agent compatibility.
 
+
+## Controlled project terminology
+
+English/German/Lithuanian mechanical-engineering terms follow the [user-supplied glossary](references/mechanikos_inzinerijos_zodynas.csv). Select equivalents by topic and preserve grammatical inflection. Terms not present remain in English and are flagged for a glossary addition; no automatic translation is invented. The original CSV is retained unchanged. Terminology preferences are not proof of technical correctness or standards compliance.
