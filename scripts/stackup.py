@@ -52,10 +52,15 @@ def _sigma(c):
         raise ValueError(f"{c.get('name', '?')}: distribution must be 'uniform' or 'normal'")
     if "cpk" not in c:
         raise ValueError(f"{c.get('name', '?')}: a process Cpk value is required for a normal distribution")
+    if isinstance(c["cpk"], bool):
+        raise ValueError("Cpk must be a positive number, not a Boolean")
     cpk = float(c["cpk"])
     if not math.isfinite(cpk) or cpk <= 0:
         raise ValueError(f"{c.get('name', '?')}: Cpk must be finite and > 0")
-    return t / (3.0 * cpk)
+    sigma = t / cpk / 3.0
+    if not math.isfinite(sigma) or (t > 0 and sigma == 0):
+        raise ValueError("Cpk and tolerance produce an unrepresentable sigma")
+    return sigma
 
 
 def _norm_cdf(x):
@@ -66,6 +71,8 @@ def analyse(data):
     # Canonical JSON rejects NaN/Infinity anywhere, including optional fields.
     canonical = json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
     req = data["requirement"]
+    if any(isinstance(req[k], bool) or not isinstance(req[k], (int, float)) for k in ("min", "max")):
+        raise ValueError("Requirement bounds must be JSON numbers")
     lo, hi = float(req["min"]), float(req["max"])
     if not (math.isfinite(lo) and math.isfinite(hi)) or lo > hi:
         raise ValueError("Requirement bounds must be finite and min <= max")
@@ -73,6 +80,8 @@ def analyse(data):
     if not cs:
         raise ValueError("At least one stack-up contributor is required")
     for c in cs:
+        if any(isinstance(c[k], bool) or not isinstance(c[k], (int, float)) for k in ("nominal", "tolerance")):
+            raise ValueError("Nominal and tolerance must be JSON numbers")
         if not math.isfinite(float(c["nominal"])) or not math.isfinite(float(c["tolerance"])):
             raise ValueError(f"{c.get('name', '?')}: nominal value and tolerance must be finite")
         if isinstance(c.get("direction"), bool) or c.get("direction") not in (1, -1):
@@ -111,24 +120,26 @@ def analyse(data):
     rng = random.Random(seed)  # fixed seed -> reproducible results
     out = 0
     vals_min, vals_max = float("inf"), float("-inf")
-    total, total_sq = 0.0, 0.0
-    for _ in range(n):
-        v = 0.0
+    delta_mean, delta_m2 = 0.0, 0.0
+    delta_lo, delta_hi = float(dlo - dn), float(dhi - dn)
+    for sample_index in range(1, n + 1):
+        deviation = 0.0
         for c, s in zip(cs, sigmas):
-            x = float(c["nominal"])
             if c.get("distribution", "uniform") == "uniform":
-                x += rng.uniform(-float(c["tolerance"]), float(c["tolerance"]))
+                perturbation = rng.uniform(-float(c["tolerance"]), float(c["tolerance"]))
             else:
-                x += rng.gauss(0.0, s)
-            v += c["direction"] * x
-        total += v
-        total_sq += v * v
+                perturbation = rng.gauss(0.0, s)
+            deviation += c["direction"] * perturbation
+        v = nominal + deviation
+        step = deviation - delta_mean
+        delta_mean += step / sample_index
+        delta_m2 += step * (deviation - delta_mean)
         vals_min = min(vals_min, v)
         vals_max = max(vals_max, v)
-        if v < lo or v > hi:
+        if deviation < delta_lo or deviation > delta_hi:
             out += 1
-    mc_mean = total / n
-    mc_sigma = math.sqrt(max(total_sq / n - mc_mean ** 2, 0.0))
+    mc_mean = nominal + delta_mean
+    mc_sigma = math.sqrt(max(delta_m2 / n, 0.0))
 
     # 4) Sensitivity (contribution to variance) and contribution to the worst case
     sens = []
