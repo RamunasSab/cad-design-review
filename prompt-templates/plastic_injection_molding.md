@@ -18,3 +18,6 @@ Check:
 7. If mold data is supplied, assess gate locations, weld-line risks, venting, and cooling. Do not claim these are validated from the part model alone.
 
 Present prioritized findings and specific changes in the language of my request. Assess ISO 20457 requirements against the specified edition and verified information; do not present older DIN tables as verified ISO 20457:2026 tables. Do not invent missing process data. Label general DFM ratios as conditional guidance.
+
+
+Fit-source policy: use ISO 286-1:2010 only for fit calculations and preferable combinations. Require nominal size and numerical functional limits. Do not use DIN 7157 application/series mappings. Figures 12–13 first-choice combinations are candidates, not application approval; unsupported numerical data require NEEDS_CLARIFICATION.

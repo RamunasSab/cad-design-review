@@ -13,7 +13,14 @@
       "limit": "0.5*t",
       "severity": "NONCONFORMANCE",
       "message": "Inside bend radius is less than 0.5×t (too small even for soft materials).",
-      "source": "DFM-skill"
+      "source": "DFM-skill",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-BEND-02",
@@ -23,7 +30,14 @@
       "limit": "1.0*t",
       "severity": "RISK",
       "message": "Inside bend radius is less than 1×t: may be acceptable only for soft materials; verify the material and grain direction.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-BEND-03",
@@ -33,7 +47,14 @@
       "limit": "max(4*t, 3)",
       "severity": "NONCONFORMANCE",
       "message": "Bend flange is too short (should be > 4×t and practically at least 3 mm).",
-      "source": "DFM-skill"
+      "source": "DFM-skill",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-HOLE-01",
@@ -43,7 +64,14 @@
       "limit": "1.0*t",
       "severity": "NONCONFORMANCE",
       "message": "Hole diameter is smaller than the sheet thickness (the small punch may break).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-HOLE-02",
@@ -53,7 +81,14 @@
       "limit": "2.0*t",
       "severity": "RISK",
       "message": "Hole is too close to the edge (< 2×t): the edge may deform.",
-      "source": "DFM-skill"
+      "source": "DFM-skill",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-HOLE-03",
@@ -63,7 +98,14 @@
       "limit": "2.0*t + bend_radius",
       "severity": "NONCONFORMANCE",
       "message": "Hole is too close to the bend (should be > 2×t + bend radius); the hole may distort.",
-      "source": "DFM-skill"
+      "source": "DFM-skill",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-HOLE-04",
@@ -73,7 +115,14 @@
       "limit": "2.0*t",
       "severity": "RISK",
       "message": "Hole-to-hole spacing is less than 2×t.",
-      "source": "DFM-skill"
+      "source": "DFM-skill",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-EXT-01",
@@ -83,7 +132,14 @@
       "limit": "3.0*t",
       "severity": "NONCONFORMANCE",
       "message": "Extruded-hole distance to the edge is less than 3×t: deformation or tearing may occur.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-EXT-02",
@@ -93,7 +149,14 @@
       "limit": "6.0*t",
       "severity": "NONCONFORMANCE",
       "message": "Spacing between extruded holes is less than 6×t.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-EMB-01",
@@ -103,7 +166,14 @@
       "limit": "3.0*t",
       "severity": "NONCONFORMANCE",
       "message": "Emboss depth exceeds 3×t: the material may thin or tear.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-CURL-01",
@@ -113,7 +183,14 @@
       "limit": "2.0*t",
       "severity": "NONCONFORMANCE",
       "message": "Curl outside radius is less than 2×t.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-CURL-02",
@@ -123,7 +200,14 @@
       "limit": "outer_radius + t",
       "severity": "NONCONFORMANCE",
       "message": "Hole is too close to the curl (distance should be at least curl radius + t).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-CURL-03",
@@ -133,7 +217,14 @@
       "limit": "outer_radius + 6.0*t",
       "severity": "NONCONFORMANCE",
       "message": "Bend is too close to the curl (should be at least curl radius + 6×t).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-HEM-01",
@@ -144,7 +235,14 @@
       "tol": "0.1*t",
       "severity": "RISK",
       "message": "The inside diameter of a teardrop hem should equal the sheet thickness.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-HEM-02",
@@ -154,7 +252,14 @@
       "limit": "1.0*t",
       "severity": "RISK",
       "message": "Open-hem inside diameter exceeds t: the bend may lose its round shape.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-HEM-03",
@@ -164,7 +269,14 @@
       "limit": "5.0*t + bend_radius + hem_radius",
       "severity": "NONCONFORMANCE",
       "message": "Bend is too close to the hem (should be at least 5×t + bend radius + hem radius).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-NOTCH-01",
@@ -174,7 +286,14 @@
       "limit": "1.5*t",
       "severity": "NONCONFORMANCE",
       "message": "Notch width is less than 1.5×t.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-NOTCH-02",
@@ -184,7 +303,14 @@
       "limit": "5.0*t",
       "severity": "RISK",
       "message": "Notch length exceeds 5×t.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "SM-NOTCH-03",
@@ -194,7 +320,14 @@
       "limit": "0.5*t",
       "severity": "RISK",
       "message": "Notch corner radius is less than 0.5×t.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "sheet-metal",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     }
   ]
 }

@@ -75,6 +75,17 @@ This is a constructed, reproducible example, not an assessment of the bundled CA
 - **Structured engineering findings** — distinguish nonconformances, risks, clarification requests, and informational observations.
 - **Multilingual interaction** — internal instructions and documentation are in English, while user-facing responses follow the language of the user's request.
 
+## ISO 286-1:2010 fits (development)
+
+Fit calculations and candidate recommendations now use the supplied **ISO 286-1:2010** exclusively. DIN 7157 application descriptions and series have been removed. Figures 12–13 define preferable combinations and framed first choices; they do not assign application-specific performance.
+
+```sh
+python scripts/check_tolerances.py fit H7/g6 --size 20 --json
+python scripts/check_tolerances.py recommend --basis hole --type clearance --size 40 --min 0.024 --max 0.092 --json
+```
+
+Results include hole/shaft limits, signed minimum/maximum difference and numerical filtering. The verified numeric/candidate subset covers **0 < D ≤ 500 mm**; unsupported entries require clarification. No-match means no match in the implemented subset. [Scope, units and source rules](references/fits-and-tolerances.md). This addition is unreleased and is not in the v1.6.0 tag.
+
 ## Plastic snap-fit joint review (development)
 
 Review two plastic parts joined by hooks, U-shaped arms, torsion latches or annular snaps as a dedicated **assembly-review mode**, alongside the applicable manufacturing-process checks.
@@ -86,7 +97,31 @@ For a complete assessment, provide:
 
 The review covers assembly motion, flexible geometry, worst-case engagement/deflection/gap, material strain, creep and repeated use, manufacturing risks and release access. Missing required files trigger a request and a limited-scope review, not a complete assessment. Reliable force/strength conclusions require suitable material/contact evidence and, where appropriate, FEA or physical tests. No automatic CAD parser or snap-fit solver is added.
 
-Read the [review guide](references/plastic-snap-fit.md) and copy the [snap-fit prompt](prompt-templates/plastic_snap_fit.md). This addition is in the development branch after merge; it is **not included in the published v1.6.0 tag**. Use the development installation described above to obtain it.
+Read the [review guide](references/plastic-snap-fit.md) and copy the [snap-fit prompt](prompt-templates/plastic_snap_fit.md). This addition is available on main; it is **not included in the published v1.6.0 tag**. Use the development installation described above to obtain it.
+
+## What is automatic, and what needs engineering judgement?
+
+| Layer | Implemented behaviour | Limit |
+|---|---|---|
+| Stack-up calculator | Deterministic signed-chain limits, model-based statistics, JSON audit trail | Explicit input in mm; no geometry extraction, dependence cancellation or process certification |
+| DFM engine | Deterministic comparisons against JSON rule expressions | Bundled rules are heuristics; screening findings are risks, not verified standards violations |
+| Drawing-data validator | Checks supplied normalized JSON and cross-file metadata | Does not read STEP, PDF or DXF; an adapter must provide the input |
+| AI-guided review | Interprets context, datums, GD&T, manufacturing and snap-fit risks | Must identify assumptions, evidence and checks it could not perform |
+
+Development additions below are not included in the existing v1.6.0 tag. See [reliability scope and deferred work](docs/reliability.md), [adapter contract](docs/input-adapters.md) and [standard provenance](docs/standards-support.md).
+
+### Reproducible stack-up reports (development)
+
+```bash
+python scripts/stackup.py input.json --report json > report.json
+python scripts/stackup.py input.json --report html > report.html
+python scripts/stackup.py input.json --summary --fail-on nonconformance
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+The JSON report records input, SHA-256 of canonical input and calculator code, formula, units, seed, assumptions and unrounded decimal endpoints. Acceptance uses inclusive decimal bounds, before display rounding. Zero-variance modeled Cpk is null, not Infinity. Exit code 2 means the supplied chain fails its explicit requirement; ordinary invocation retains exit code 0 for compatibility. Invalid input exits nonzero. HTML reports can be printed to PDF using the browser; there is no native PDF exporter.
+
+Ten [golden cases](examples/golden-stackups.json), generated invariant cases and negative tests cover numeric results and input validation. Prompt-contract tests check required instructions; they do not prove an AI agent will follow them or constitute multi-model validation.
 
 ## Who is it for?
 
@@ -332,7 +367,7 @@ The repository does not include automatic CAD/drawing parsers. Numerical geometr
 
 ### Which version should I use?
 
-Use the pinned stable installation for v1.5.0. Use the unpinned repository for current main additions. Check the [channel table](#stable-release-and-development-version) before choosing; documentation and examples on main may not exist in the stable snapshot.
+Use the pinned stable installation for v1.6.0. Use the unpinned repository for current main additions. Check the [channel table](#stable-release-and-development-version) before choosing; documentation and examples on main may not exist in the stable snapshot.
 
 ## Important limitations
 
@@ -361,3 +396,9 @@ The repository includes an MIT license. Before reusing or redistributing bundled
 See [CONTRIBUTING.md](CONTRIBUTING.md) for reporting guidance, contribution steps, and validation commands. Use the [issue forms](https://github.com/RamunasSab/cad-design-review/issues/new/choose) for installation problems, incorrect engineering findings, or feature requests.
 
 The Tests badge reports the Python compilation, smoke tests, and reference-JSON validation in the workflow; it is not certification of engineering correctness or agent compatibility.
+
+
+## Controlled project terminology
+
+English/German/Lithuanian mechanical-engineering terms follow the [user-supplied glossary](references/mechanikos_inzinerijos_zodynas.csv). Select equivalents by topic and preserve grammatical inflection. Terms not present remain in English and are flagged for a glossary addition; no automatic translation is invented. The original CSV is retained unchanged. Terminology preferences are not proof of technical correctness or standards compliance.
+

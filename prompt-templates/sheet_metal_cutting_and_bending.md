@@ -17,3 +17,6 @@ Check:
 7. Burrs, cut quality, coating effects on final dimensions, and inspectability.
 
 Present findings in the language of my request, ordered by priority, with specific corrective actions. Distinguish geometric measurements from visual assessments. Evaluate process limits against the actual material and supplier equipment, and identify checks that remain incomplete.
+
+
+Fit-source policy: use ISO 286-1:2010 only for fit calculations and preferable combinations. Require nominal size and numerical functional limits. Do not use DIN 7157 application/series mappings. Figures 12–13 first-choice combinations are candidates, not application approval; unsupported numerical data require NEEDS_CLARIFICATION.

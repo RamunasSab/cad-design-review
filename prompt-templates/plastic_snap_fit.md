@@ -33,3 +33,6 @@ Check:
 Use an actual CAD parser/kernel before claiming numerical STEP measurements or measured collisions. Distinguish intentional snap interference from an unintended rigid collision. Do not infer peak assembly deformation from the final seated position alone. Do not apply supplier examples or plastics-on-steel friction values as universal plastic/plastic limits.
 
 Provide prioritized findings with location, evidence/confidence, status (NONCONFORMANCE / RISK / NEEDS_CLARIFICATION / INFO), and corrective action. Distinguish geometric engagement, assembly strain, insertion force, retention and service-life conclusions. State scope, assumptions, tools actually used and checks not completed. Do not invent measurements, material properties or a strength approval.
+
+
+Fit-source policy: use ISO 286-1:2010 only for fit calculations and preferable combinations. Require nominal size and numerical functional limits. Do not use DIN 7157 application/series mappings. Figures 12–13 first-choice combinations are candidates, not application approval; unsupported numerical data require NEEDS_CLARIFICATION.

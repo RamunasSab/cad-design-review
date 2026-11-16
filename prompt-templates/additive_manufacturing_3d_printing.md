@@ -19,3 +19,6 @@ Check:
 8. Threads, inserts, and functional surfaces that may require post-machining.
 
 Provide a prioritized findings table in the language of my request with specific corrective actions. Do not apply universal 45° overhang, minimum wall, or clearance limits across all processes. Treat this as a manual DfAM review and identify conclusions that require build-preparation data or test specimens for validation.
+
+
+Fit-source policy: use ISO 286-1:2010 only for fit calculations and preferable combinations. Require nominal size and numerical functional limits. Do not use DIN 7157 application/series mappings. Figures 12–13 first-choice combinations are candidates, not application approval; unsupported numerical data require NEEDS_CLARIFICATION.

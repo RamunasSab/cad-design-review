@@ -1,0 +1,606 @@
+{
+  "schema_version": 1,
+  "note": "Application guidance is indicative, not a requirement or ISO application table. Numeric classification is calculated at the selected diameter.",
+  "applications": [
+    {
+      "id": "H11-c11",
+      "code": "H11/c11",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Rough-service rotation",
+      "application": "Loose pulleys and bushes"
+    },
+    {
+      "id": "H11-d11",
+      "code": "H11/d11",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Rough-service rotation",
+      "application": "Loose pulleys and bushes"
+    },
+    {
+      "id": "C11-h11",
+      "code": "C11/h11",
+      "basis": "shaft",
+      "category": "clearance",
+      "name": "Rough-service rotation",
+      "application": "Loose pulleys and bushes"
+    },
+    {
+      "id": "H11-a11",
+      "code": "H11/a11",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Large assembly allowance",
+      "application": "Heat, contamination or alignment allowance"
+    },
+    {
+      "id": "A11-h11",
+      "code": "A11/h11",
+      "basis": "shaft",
+      "category": "clearance",
+      "name": "Large assembly allowance",
+      "application": "Heat, contamination or alignment allowance"
+    },
+    {
+      "id": "H11-h11",
+      "code": "H11/h11",
+      "basis": "both",
+      "category": "clearance",
+      "name": "Low-precision positioning",
+      "application": "Covers and spacers"
+    },
+    {
+      "id": "H9-h9",
+      "code": "H9/h9",
+      "basis": "both",
+      "category": "clearance",
+      "name": "Low-precision positioning",
+      "application": "Covers and spacers"
+    },
+    {
+      "id": "H9-d9",
+      "code": "H9/d9",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "General bearing rotation",
+      "application": "Shafts with operating-temperature variation"
+    },
+    {
+      "id": "D9-h9",
+      "code": "D9/h9",
+      "basis": "shaft",
+      "category": "clearance",
+      "name": "General bearing rotation",
+      "application": "Shafts with operating-temperature variation"
+    },
+    {
+      "id": "H9-e9",
+      "code": "H9/e9",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Lubricated bearing rotation",
+      "application": "Long bushes and multiple bearing supports"
+    },
+    {
+      "id": "E9-h9",
+      "code": "E9/h9",
+      "basis": "shaft",
+      "category": "clearance",
+      "name": "Lubricated bearing rotation",
+      "application": "Long bushes and multiple bearing supports"
+    },
+    {
+      "id": "D10-h9",
+      "code": "D10/h9",
+      "basis": "shaft",
+      "category": "clearance",
+      "name": "Loose pulley mounting",
+      "application": "Low-precision rotating components"
+    },
+    {
+      "id": "H8-e8",
+      "code": "H8/e8",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "General moving assemblies",
+      "application": "Pump shafts and sliding components"
+    },
+    {
+      "id": "H8-f7",
+      "code": "H8/f7",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Accurate bearing rotation",
+      "application": "Spindles and transmission shafts"
+    },
+    {
+      "id": "F8-h7",
+      "code": "F8/h7",
+      "basis": "shaft",
+      "category": "clearance",
+      "name": "Accurate bearing rotation",
+      "application": "Spindles and transmission shafts"
+    },
+    {
+      "id": "H8-h7",
+      "code": "H8/h7",
+      "basis": "both",
+      "category": "clearance",
+      "name": "Hand-assembled location",
+      "application": "Sliding and removable components"
+    },
+    {
+      "id": "H8-h8",
+      "code": "H8/h8",
+      "basis": "both",
+      "category": "clearance",
+      "name": "Hand-assembled location",
+      "application": "Sliding and removable components"
+    },
+    {
+      "id": "H7-f7",
+      "code": "H7/f7",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Moderate running clearance",
+      "application": "Moving shafts and journals"
+    },
+    {
+      "id": "F7-h6",
+      "code": "F7/h6",
+      "basis": "shaft",
+      "category": "clearance",
+      "name": "Moderate running clearance",
+      "application": "Moving shafts and journals"
+    },
+    {
+      "id": "H7-g6",
+      "code": "H7/g6",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Precision sliding",
+      "application": "Guide pins and sliding components"
+    },
+    {
+      "id": "G7-h6",
+      "code": "G7/h6",
+      "basis": "shaft",
+      "category": "clearance",
+      "name": "Precision sliding",
+      "application": "Guide pins and sliding components"
+    },
+    {
+      "id": "H7-h6",
+      "code": "H7/h6",
+      "basis": "both",
+      "category": "clearance",
+      "name": "Accurate removable mounting",
+      "application": "Keyed gears, pulleys and centring features"
+    },
+    {
+      "id": "H6-g5",
+      "code": "H6/g5",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "High-precision sliding",
+      "application": "Measuring equipment and guide pins"
+    },
+    {
+      "id": "G6-h5",
+      "code": "G6/h5",
+      "basis": "shaft",
+      "category": "clearance",
+      "name": "High-precision sliding",
+      "application": "Measuring equipment and guide pins"
+    },
+    {
+      "id": "H6-h5",
+      "code": "H6/h5",
+      "basis": "both",
+      "category": "clearance",
+      "name": "Precision hand assembly",
+      "application": "Gauges and instrument components"
+    },
+    {
+      "id": "H6-h6",
+      "code": "H6/h6",
+      "basis": "both",
+      "category": "clearance",
+      "name": "Precision hand assembly",
+      "application": "Gauges and instrument components"
+    },
+    {
+      "id": "H7-h7",
+      "code": "H7/h7",
+      "basis": "both",
+      "category": "clearance",
+      "name": "Economical sliding",
+      "application": "Removable covers, pins and fixtures"
+    },
+    {
+      "id": "H7-h8",
+      "code": "H7/h8",
+      "basis": "both",
+      "category": "clearance",
+      "name": "Economical sliding",
+      "application": "Removable covers, pins and fixtures"
+    },
+    {
+      "id": "H8-h9",
+      "code": "H8/h9",
+      "basis": "both",
+      "category": "clearance",
+      "name": "Economical sliding",
+      "application": "Removable covers, pins and fixtures"
+    },
+    {
+      "id": "H8-g7",
+      "code": "H8/g7",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "General guide motion",
+      "application": "Sliding sleeves and guide pins"
+    },
+    {
+      "id": "H7-f6",
+      "code": "H7/f6",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Precision running clearance",
+      "application": "Precision pumps and instrument shafts"
+    },
+    {
+      "id": "H6-f6",
+      "code": "H6/f6",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Precision running clearance",
+      "application": "Precision pumps and instrument shafts"
+    },
+    {
+      "id": "H7-e7",
+      "code": "H7/e7",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "General-purpose running clearance",
+      "application": "Fans, conveyors and transmission components"
+    },
+    {
+      "id": "H7-e8",
+      "code": "H7/e8",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "General-purpose running clearance",
+      "application": "Fans, conveyors and transmission components"
+    },
+    {
+      "id": "H8-e9",
+      "code": "H8/e9",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "General-purpose running clearance",
+      "application": "Fans, conveyors and transmission components"
+    },
+    {
+      "id": "H9-f8",
+      "code": "H9/f8",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "General-purpose running clearance",
+      "application": "Fans, conveyors and transmission components"
+    },
+    {
+      "id": "H7-d8",
+      "code": "H7/d8",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Rough-service bearing clearance",
+      "application": "Contamination and alignment allowance"
+    },
+    {
+      "id": "H8-d9",
+      "code": "H8/d9",
+      "basis": "hole",
+      "category": "clearance",
+      "name": "Rough-service bearing clearance",
+      "application": "Contamination and alignment allowance"
+    },
+    {
+      "id": "H7-js6",
+      "code": "H7/js6",
+      "basis": "hole",
+      "category": "transition",
+      "name": "Accurate removable positioning",
+      "application": "Couplings and pulleys"
+    },
+    {
+      "id": "JS7-h6",
+      "code": "JS7/h6",
+      "basis": "shaft",
+      "category": "transition",
+      "name": "Accurate removable positioning",
+      "application": "Couplings and pulleys"
+    },
+    {
+      "id": "H7-k6",
+      "code": "H7/k6",
+      "basis": "hole",
+      "category": "transition",
+      "name": "Light push assembly",
+      "application": "Gears and bearing interfaces"
+    },
+    {
+      "id": "K7-h6",
+      "code": "K7/h6",
+      "basis": "shaft",
+      "category": "transition",
+      "name": "Light push assembly",
+      "application": "Gears and bearing interfaces"
+    },
+    {
+      "id": "H7-m6",
+      "code": "H7/m6",
+      "basis": "hole",
+      "category": "transition",
+      "name": "Firm removable positioning",
+      "application": "Gears and bushes"
+    },
+    {
+      "id": "M7-h6",
+      "code": "M7/h6",
+      "basis": "shaft",
+      "category": "transition",
+      "name": "Firm removable positioning",
+      "application": "Gears and bushes"
+    },
+    {
+      "id": "H7-n6",
+      "code": "H7/n6",
+      "basis": "hole",
+      "category": "transition",
+      "name": "Infrequently dismantled assembly",
+      "application": "Hubs and housing bushes"
+    },
+    {
+      "id": "N7-h6",
+      "code": "N7/h6",
+      "basis": "shaft",
+      "category": "transition",
+      "name": "Infrequently dismantled assembly",
+      "application": "Hubs and housing bushes"
+    },
+    {
+      "id": "H6-js5",
+      "code": "H6/js5",
+      "basis": "hole",
+      "category": "transition",
+      "name": "Precision transition assembly",
+      "application": "Instrument components"
+    },
+    {
+      "id": "H6-k5",
+      "code": "H6/k5",
+      "basis": "hole",
+      "category": "transition",
+      "name": "Precision transition assembly",
+      "application": "Instrument components"
+    },
+    {
+      "id": "H6-m5",
+      "code": "H6/m5",
+      "basis": "hole",
+      "category": "transition",
+      "name": "Precision transition assembly",
+      "application": "Instrument components"
+    },
+    {
+      "id": "K6-h5",
+      "code": "K6/h5",
+      "basis": "shaft",
+      "category": "transition",
+      "name": "Precision transition assembly",
+      "application": "Instrument components"
+    },
+    {
+      "id": "M6-h5",
+      "code": "M6/h5",
+      "basis": "shaft",
+      "category": "transition",
+      "name": "Precision transition assembly",
+      "application": "Instrument components"
+    },
+    {
+      "id": "H8-k7",
+      "code": "H8/k7",
+      "basis": "hole",
+      "category": "transition",
+      "name": "General transition assembly",
+      "application": "Cost-sensitive locating assemblies"
+    },
+    {
+      "id": "H7-n7",
+      "code": "H7/n7",
+      "basis": "hole",
+      "category": "transition",
+      "name": "General transition assembly",
+      "application": "Cost-sensitive locating assemblies"
+    },
+    {
+      "id": "H8-p7",
+      "code": "H8/p7",
+      "basis": "hole",
+      "category": "transition",
+      "name": "General transition assembly",
+      "application": "Cost-sensitive locating assemblies"
+    },
+    {
+      "id": "H8-js7",
+      "code": "H8/js7",
+      "basis": "hole",
+      "category": "transition",
+      "name": "General transition assembly",
+      "application": "Cost-sensitive locating assemblies"
+    },
+    {
+      "id": "H8-m7",
+      "code": "H8/m7",
+      "basis": "hole",
+      "category": "transition",
+      "name": "General transition assembly",
+      "application": "Cost-sensitive locating assemblies"
+    },
+    {
+      "id": "H8-n7",
+      "code": "H8/n7",
+      "basis": "hole",
+      "category": "transition",
+      "name": "General transition assembly",
+      "application": "Cost-sensitive locating assemblies"
+    },
+    {
+      "id": "H7-j6",
+      "code": "H7/j6",
+      "basis": "hole",
+      "category": "transition",
+      "name": "Light transition assembly",
+      "application": "Legacy locating interfaces"
+    },
+    {
+      "id": "H7-p6",
+      "code": "H7/p6",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Fixed locating assembly",
+      "application": "Housing bushes and locating pins"
+    },
+    {
+      "id": "P7-h6",
+      "code": "P7/h6",
+      "basis": "shaft",
+      "category": "interference",
+      "name": "Fixed locating assembly",
+      "application": "Housing bushes and locating pins"
+    },
+    {
+      "id": "H7-p7",
+      "code": "H7/p7",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Fixed locating assembly",
+      "application": "Housing bushes and locating pins"
+    },
+    {
+      "id": "H7-r6",
+      "code": "H7/r6",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Press-assembled mounting",
+      "application": "Gear rims and shaft collars"
+    },
+    {
+      "id": "R7-h6",
+      "code": "R7/h6",
+      "basis": "shaft",
+      "category": "interference",
+      "name": "Press-assembled mounting",
+      "application": "Gear rims and shaft collars"
+    },
+    {
+      "id": "H7-s6",
+      "code": "H7/s6",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Permanent press assembly",
+      "application": "Fixed shaft\u2013hub joints"
+    },
+    {
+      "id": "S7-h6",
+      "code": "S7/h6",
+      "basis": "shaft",
+      "category": "interference",
+      "name": "Permanent press assembly",
+      "application": "Fixed shaft\u2013hub joints"
+    },
+    {
+      "id": "H8-s7",
+      "code": "H8/s7",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Permanent press assembly",
+      "application": "Fixed shaft\u2013hub joints"
+    },
+    {
+      "id": "H7-u6",
+      "code": "H7/u6",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Heavy fixed assembly",
+      "application": "High-load permanent joints"
+    },
+    {
+      "id": "U7-h6",
+      "code": "U7/h6",
+      "basis": "shaft",
+      "category": "interference",
+      "name": "Heavy fixed assembly",
+      "application": "High-load permanent joints"
+    },
+    {
+      "id": "H8-u7",
+      "code": "H8/u7",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Heavy fixed assembly",
+      "application": "High-load permanent joints"
+    },
+    {
+      "id": "H7-x6",
+      "code": "H7/x6",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Heavy fixed assembly",
+      "application": "High-load permanent joints"
+    },
+    {
+      "id": "H6-n5",
+      "code": "H6/n5",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Precision fixed assembly",
+      "application": "Instrument bushes and fixed components"
+    },
+    {
+      "id": "H6-p5",
+      "code": "H6/p5",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Precision fixed assembly",
+      "application": "Instrument bushes and fixed components"
+    },
+    {
+      "id": "N6-h5",
+      "code": "N6/h5",
+      "basis": "shaft",
+      "category": "interference",
+      "name": "Precision fixed assembly",
+      "application": "Instrument bushes and fixed components"
+    },
+    {
+      "id": "P6-h5",
+      "code": "P6/h5",
+      "basis": "shaft",
+      "category": "interference",
+      "name": "Precision fixed assembly",
+      "application": "Instrument bushes and fixed components"
+    },
+    {
+      "id": "H7-t6",
+      "code": "H7/t6",
+      "basis": "hole",
+      "category": "interference",
+      "name": "Heavy press assembly",
+      "application": "Permanent shaft\u2013hub joints; D > 24 mm"
+    }
+  ]
+}

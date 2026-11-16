@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Optional external review adapter envelope",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "sources",
+    "payloads"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "format",
+          "tool",
+          "verification"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "format": {
+            "enum": [
+              "STEP",
+              "DXF",
+              "PDF",
+              "IMAGE"
+            ]
+          },
+          "revision": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "units": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "tool": {
+            "type": "string",
+            "minLength": 1
+          },
+          "tool_version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "method": {
+            "enum": [
+              "cad_kernel",
+              "vector",
+              "semantic",
+              "ocr",
+              "visual"
+            ]
+          },
+          "verification": {
+            "enum": [
+              "verified",
+              "unverified",
+              "partial"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "material": {
+      "type": "object"
+    },
+    "process": {
+      "type": "string"
+    },
+    "function": {
+      "type": "string"
+    },
+    "standards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "designation"
+        ],
+        "properties": {
+          "designation": {
+            "type": "string"
+          },
+          "edition": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "payloads": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "drawing_data": {
+          "type": "object",
+          "description": "Existing consumer-specific input; envelope does not replace payload validation."
+        },
+        "dfm": {
+          "type": "object",
+          "description": "Existing consumer-specific input; envelope does not replace payload validation."
+        },
+        "stackup": {
+          "type": "object",
+          "description": "Existing consumer-specific input; envelope does not replace payload validation."
+        }
+      }
+    }
+  }
+}

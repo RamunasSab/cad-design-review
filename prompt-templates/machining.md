@@ -18,3 +18,6 @@ Check:
 8. Coating and heat-treatment effects on dimensions and distortion. Identify unnecessarily costly precision requirements.
 
 Provide a prioritized findings table in the language of my request, including evidence and proposed corrections. Do not apply universal limits for wall thickness, thread engagement, or tool reach without the relevant conditions. State review coverage and missing information.
+
+
+Fit-source policy: use ISO 286-1:2010 only for fit calculations and preferable combinations. Require nominal size and numerical functional limits. Do not use DIN 7157 application/series mappings. Figures 12–13 first-choice combinations are candidates, not application approval; unsupported numerical data require NEEDS_CLARIFICATION.

@@ -13,7 +13,14 @@
       "limit": "5.0",
       "severity": "RISK",
       "message": "Drilled-hole depth exceeds 5× diameter: deep-hole drilling may be required, increasing cost.",
-      "source": "DFM-skill"
+      "source": "DFM-skill",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-DRILL-02",
@@ -23,7 +30,14 @@
       "limit": "3.0",
       "severity": "RISK",
       "message": "Drilled-hole depth exceeds 3× diameter: the drill may wander or break, and chip evacuation becomes difficult (DFMPro wording “diameter-to-depth ratio < 3” is interpreted here as depth/diameter).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-DRILL-03",
@@ -33,7 +47,14 @@
       "limit": "1",
       "severity": "RISK",
       "message": "The drill enters a surface that is not perpendicular to the hole axis (risk of drill wandering).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-DRILL-04",
@@ -44,7 +65,14 @@
       "when": "blind == 0",
       "severity": "RISK",
       "message": "The drill exits through a surface that is not perpendicular to the hole axis (uneven breakout/burrs may result).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-DRILL-05",
@@ -55,7 +83,14 @@
       "when": "blind == 1",
       "severity": "RISK",
       "message": "The blind-hole bottom is specified as flat: a standard drill leaves a conical bottom, which can cause problems for subsequent boring.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-DRILL-06",
@@ -65,7 +100,14 @@
       "limit": "0",
       "severity": "RISK",
       "message": "The hole intersects a cavity: the drill may wander when it re-enters the material.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-DRILL-07",
@@ -76,7 +118,14 @@
       "when": "intersects_cavity == 1",
       "severity": "NONCONFORMANCE",
       "message": "Where the hole intersects a cavity, its axis lies inside the cavity (at minimum, the axis should remain outside the cavity).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-DRILL-08",
@@ -87,7 +136,14 @@
       "optional": true,
       "severity": "NONCONFORMANCE",
       "message": "Partial hole: less than 75% of the hole area is supported by material (risk of drill wandering).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-DRILL-09",
@@ -97,7 +153,14 @@
       "limit": "1",
       "severity": "RISK",
       "message": "Non-standard hole size: a special tool may be required, increasing manufacturing and inventory costs.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-MILL-01",
@@ -108,7 +171,14 @@
       "when": "corner_radius > 0",
       "severity": "RISK",
       "message": "Deep pocket: depth exceeds 4× tool diameter (tool diameter ≈ 2× corner radius); long tools may deflect, break, or vibrate.",
-      "source": "DFM-skill (depth) + DFMPro (qualitative guidance)"
+      "source": "DFM-skill (depth) + DFMPro (qualitative guidance)",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-MILL-02",
@@ -118,7 +188,14 @@
       "limit": "0.01",
       "severity": "NONCONFORMANCE",
       "message": "Sharp internal corner: cannot be produced by conventional milling; use EDM or revise the geometry.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-MILL-03",
@@ -128,7 +205,14 @@
       "limit": "min_tool_diameter",
       "severity": "RISK",
       "message": "The narrow region between features is smaller than the minimum permitted cutter diameter (min_tool_diameter).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-MILL-04",
@@ -141,7 +225,14 @@
       "limit": "1",
       "severity": "RISK",
       "message": "Non-standard side or bottom radius (use one standard side radius and one standard bottom radius).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-MILL-05",
@@ -155,7 +246,14 @@
       "tol": "0.01",
       "severity": "RISK",
       "message": "Side and bottom surfaces are not perpendicular: multi-axis machining may be required, increasing cost.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-MILL-06",
@@ -169,7 +267,14 @@
       "limit": "1",
       "severity": "NONCONFORMANCE",
       "message": "The feature is not accessible to the tool in the intended machining orientation.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-TURN-01",
@@ -179,7 +284,14 @@
       "limit": "0.03*diameter",
       "severity": "RISK",
       "message": "Tool relief in the blind-turned bore is less than 3% of the bore diameter.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-TURN-02",
@@ -190,7 +302,14 @@
       "tol": "0.01",
       "severity": "RISK",
       "message": "The end of the keyway is not rounded to match the cutter (radius = half the width because cutter diameter = keyway width; inferred from the DFMPro description).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-TURN-03",
@@ -200,7 +319,14 @@
       "limit": "8.0",
       "severity": "RISK",
       "message": "Length / minimum diameter exceeds 8: a tailstock or steady rest may be required to prevent part deflection.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-TURN-04",
@@ -210,7 +336,14 @@
       "limit": "0.01",
       "severity": "RISK",
       "message": "Sharp internal corner in turning: a larger radius is needed to accommodate the tool nose radius.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-TURN-05",
@@ -220,7 +353,14 @@
       "limit": "58",
       "severity": "RISK",
       "message": "Contour angle exceeds 58° from the axis: it cannot be machined in a single turning operation (steep or wall-parallel grooves).",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     },
     {
       "id": "MC-TURN-06",
@@ -233,7 +373,14 @@
       "limit": "0.01",
       "severity": "RISK",
       "message": "Axial slot is not symmetric about the rotation axis: likely a modelling error that may cause assembly problems.",
-      "source": "DFMPro"
+      "source": "DFMPro",
+      "basis": "heuristic",
+      "confidence": "D",
+      "applicability": {
+        "process": "machining",
+        "conditions": "Preliminary screening only; verify material, tooling, feature measurement convention and supplier capability."
+      },
+      "source_edition": null
     }
   ]
 }

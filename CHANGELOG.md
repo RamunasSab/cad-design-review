@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+### Application-based calculator display
+- Add an English-only, indicative application catalogue with 75 fit designations for the external website. Remove the two-series presentation and legacy source/language blocks.
+- Display hole/shaft upper/lower deviations, limit sizes, tolerance widths and signed-midpoint clearance/interference metrics.
+- Extend the verified numeric subset for the application catalogue, including nominal-size exclusions; test the supplied Ø25 H7/g6 display and language independence.
+
+### ISO 286-1:2010 fit selection
+- Replace DIN 7157 fit series/application lookup with ISO 286-1:2010 numerical calculation and a verified subset of preferable combinations from Figures 12–13.
+- Add signed functional-bound filtering, source metadata, delta/exception handling and Annex B regression cases. Numeric scope: 0 < D ≤ 500 mm; fail closed outside supported classes/ranges.
+- Disable legacy application-based bearing recommendations rather than imply ISO 286-1 contains bearing selection rules.
+- Keep the licensed source PDF out of the public repository; record its hash and clause/table references.
+
+
+### Reliability and reporting
+- Corrected the README stable-version FAQ; added a version manifest and documentation consistency checks.
+- Added ten golden stack-up cases, generated arithmetic invariants, negative input tests and prompt-contract checks; CI covers Python 3.10–3.13 on Linux, Windows and macOS.
+- Use decimal worst-case endpoints for inclusive-boundary acceptance, reject nonfinite Cpk and invalid sample/seed values, and serialize zero-variance modeled Cpk as null.
+- Add reproducible JSON audit metadata, Markdown/HTML/JSON reports, summaries and opt-in failure exit status to the stack-up CLI.
+- Record heuristic provenance on bundled DFM rules and classify heuristic violations as risks while retaining original rule severity.
+- Document the normalized adapter envelope, automation boundaries and standard-edition limitations; no new CAD parser or standards selector is claimed.
+
+
 ### Added
 - Added a manual plastic snap-fit assembly review mode, a dedicated reference checklist and a reusable English prompt template.
 - Require an engaged STEP assembly with separate mating bodies and a section through the joint for complete assessment; request missing inputs and report partial scope explicitly.
@@ -90,3 +111,5 @@
 ## Notes
 
 This release does not implement automatic STEP/DXF/PDF parsing. `check_drawing_data.py` validates JSON supplied by a separate extraction adapter. DFM limits are guidelines unless supported by an approved company or supplier specification.
+
+

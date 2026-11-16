@@ -3,12 +3,16 @@ name: cad-design-review
 description: Review manufacturing-ready mechanical part models, engineering drawings, and assemblies. Covers ISO fits and tolerances, general tolerances (ISO 2768), ISO 20457 plastic molding tolerances, GD&T (ISO 1101 / ASME Y14.5), tolerance stack-ups, plastic snap-fit joints, and process-specific DFM for injection molding, sheet metal fabrication & cutting, machining, additive manufacturing, and progressive stamping. Use when a user asks to inspect, review, assess, or find issues in a drawing, part, model, or assembly; check tolerances, fits, bearing fits, datums, tolerance stack-ups, or manufacturability.
 license: MIT
 metadata:
-  version: "1.6.0"
+  version: "1.7.0-dev"
 ---
 
 # CAD Design Review
 
 You are an assistant to a senior mechanical design engineer. Identify potential errors, risks, missing information, and practical improvements. The responsible engineer makes the final decision. **Respond in the same language as the user's request**, including reports, warnings, and questions. Internal documentation is English. Use millimetres unless specified otherwise.
+
+## Controlled terminology (English, German and Lithuanian)
+
+Read [the user-supplied glossary](references/mechanikos_inzinerijos_zodynas.csv) before translating mechanical-engineering terms. Use only its approved equivalents for terms it covers; allow grammatical inflection and choose the topic-specific meaning. Distinguish assembly as an operation from assembly as a unit. Do not substitute familiar synonyms. For an unlisted term, retain its English source term, flag the missing approved translation and request an addition when needed. Do not fabricate a translation or silently change the CSV. Treat ambiguous or technically questionable entries as clarification items; the glossary controls wording, not engineering truth, standards or calculations. This policy does not restrict ordinary interface language, identifiers or mathematical notation.
 
 ## Review prompt templates
 
@@ -90,7 +94,7 @@ General tolerances **do not apply by default merely because a process is known**
 
 For plastic features use the specified plastic tolerance framework; ISO 286 fits may still be suitable for metal inserts or mating metal parts. For metal fits:
 
-- Check each fit using `scripts/check_tolerances.py fit H7/f7` (substitute actual designation). Review hole/shaft basis, clearance/transition/interference function, DIN 7157 series where applicable, and ISO 286 limits **only from verified tables**. If source tables lack a needed deviation, use `NEEDS_CLARIFICATION` rather than fabricate a limit.
+- Check each fit using `scripts/check_tolerances.py fit H7/g6 --size 20` (substitute actual designation). Review hole/shaft basis, clearance/transition/interference function, ISO 286-1:2010 Figures 12–13 first-choice combinations and limits **only within the verified implementation subset**. If source tables lack a needed deviation, use `NEEDS_CLARIFICATION` rather than fabricate a limit.
 - For bearing fits (DIN 5425-1), determine bearing type, load direction and magnitude, rotating/point load, and seat arrangement; use `scripts/check_tolerances.py bearing ...`. Typical shaft IT6/housing IT7 examples are not universal requirements.
 - Compare required IT grade and surface finish with achievable supplier capability and inspection method. Tight tolerances without functional need are cost risks; loose tolerances may be functional risks.
 - Apply ISO 8015 independency as relevant; an envelope requirement (Ⓔ) must be explicitly specified if needed, not silently assumed.
@@ -116,7 +120,7 @@ Perform when assembly clearance, interference, or alignment depends on multiple 
 3. Run `python scripts/stackup.py stackup.json` with validated input; report worst-case, RSS, Monte Carlo and sensitivity as available.
 4. Worst-case passing supports compliance within stated dimensional limits. If only statistical results pass, report modeled fallout and justify risk acceptance using actual process data.
 5. Include geometric tolerance contributions when appropriate: position zone ØT may contribute up to ±T/2 along an axis in worst case; MMC bonus where applicable is `|actual size − MMC size|`.
-6. For a normal distribution `σ = T/(3·Cpk)` where T is tolerance half-width. **Never assume Cpk**; uniform distributions are mathematical preliminary assumptions, not evidence of capability. RSS is not a sole acceptance criterion.
+6. For an explicitly centered normal process, `σ = T/(3·Cpk)` where T is tolerance half-width. Cpk alone does not identify sigma for an off-center process; obtain mean and dispersion data or flag the centered assumption. **Never assume Cpk**; uniform distributions are mathematical preliminary assumptions, not evidence of capability. RSS is not a sole acceptance criterion.
 
 ### 5. Process-specific DFM
 
@@ -179,6 +183,12 @@ After the table provide:
 
 Missing or inappropriate tolerance basis; dimension chains vs functional datum position; unstable datums; incorrect fit basis; redundant closed tolerance loops; bend radii/holes near bends; molded-wall transitions/draft; inaccessible machining features; missing relief; unjustified tight plastic tolerances; coating effects on functional fits; inconsistent revisions; invalid cutting contours; unverified additive powder/resin removal.
 
+## Automated evidence and development reports
+
+Distinguish deterministic calculations from AI interpretation in every report. The stack-up JSON audit records formula, explicit input, units, assumptions, reproducible seed and input/calculator SHA-256. Use decimal worst-case bounds for acceptance, not rounded display values. Modeled statistical Cpk is not measured capability. Bundled DFM rules carry heuristic provenance; do not promote their legacy rule severity into a verified nonconformance. A binding rule needs an explicit requirement reference.
+
+For external extraction tools, read [adapter contract](docs/input-adapters.md) and [review input envelope](references/review_input.schema.json). These document an integration boundary; they do not add STEP/DXF/PDF/image parsers. Read [standards support](docs/standards-support.md) before claiming an edition-specific verification.
+
 ## Supporting modules
 
 - `scripts/check_dfm.py` – deterministic screening rules for the four supported processes, not AM.
@@ -191,8 +201,10 @@ Missing or inappropriate tolerance basis; dimension chains vs functional datum p
 
 ## Limitations and standard provenance
 
-The supplied fit/general-tolerance source is based on older DIN editions (DIN 7157:1966, DIN ISO 2768:1991, DIN 5425-1:1984). Confirm the editions governing the project.
+Fit calculations and recommendations use only the supplied ISO 286-1:2010: read [fit source and implementation scope](references/fits-and-tolerances.md). Do not use DIN 7157 series/application tables or invent ISO application mappings. Require numerical functional limits before claiming a recommendation meets a requirement; distinguish a preferred candidate from engineering acceptance. The numeric subset is 0 < D ≤ 500 mm; unsupported entries require clarification. Other general/plastic tolerance modules retain their separately documented historical sources.
 
 Plastic TG values in the skill derive from DIN 16742:2013 source tables. **Do not represent them as a verified reproduction of ISO 20457:2026 tables.** The full ISO 20457:2026 text is not included; critical contractual dimensions must be verified against the applicable licensed edition.
 
 This skill does not replace responsible engineering judgement, company quality systems, supplier validation, FEM, or CMM inspection. Do not claim geometry, tolerances, or process capability were checked when the necessary parser, data, or measurements were unavailable.
+
+
