@@ -1,0 +1,312 @@
+[
+  {
+    "id": "original-clearance",
+    "input": {
+      "name": "original-clearance",
+      "requirement": {
+        "min": 0.02,
+        "max": 0.2
+      },
+      "contributors": [
+        {
+          "name": "Hole",
+          "nominal": 20.065,
+          "tolerance": 0.065,
+          "direction": 1
+        },
+        {
+          "name": "Shaft",
+          "nominal": 19.985,
+          "tolerance": 0.015,
+          "direction": -1
+        }
+      ],
+      "samples": 50
+    },
+    "expected": {
+      "min": 0,
+      "max": 0.16,
+      "passes": false,
+      "status": "NONCONFORMANCE"
+    }
+  },
+  {
+    "id": "revised-hole",
+    "input": {
+      "name": "revised-hole",
+      "requirement": {
+        "min": 0.02,
+        "max": 0.2
+      },
+      "contributors": [
+        {
+          "name": "Hole",
+          "nominal": 20.085,
+          "tolerance": 0.045,
+          "direction": 1
+        },
+        {
+          "name": "Shaft",
+          "nominal": 19.985,
+          "tolerance": 0.015,
+          "direction": -1
+        }
+      ],
+      "samples": 50
+    },
+    "expected": {
+      "min": 0.04,
+      "max": 0.16,
+      "passes": true,
+      "status": "INFO"
+    }
+  },
+  {
+    "id": "shift-hole",
+    "input": {
+      "name": "shift-hole",
+      "requirement": {
+        "min": 0.02,
+        "max": 0.2
+      },
+      "contributors": [
+        {
+          "name": "Hole",
+          "nominal": 20.085,
+          "tolerance": 0.065,
+          "direction": 1
+        },
+        {
+          "name": "Shaft",
+          "nominal": 19.985,
+          "tolerance": 0.015,
+          "direction": -1
+        }
+      ],
+      "samples": 50
+    },
+    "expected": {
+      "min": 0.02,
+      "max": 0.18,
+      "passes": true,
+      "status": "INFO"
+    }
+  },
+  {
+    "id": "insufficient-shaft-change",
+    "input": {
+      "name": "insufficient-shaft-change",
+      "requirement": {
+        "min": 0.02,
+        "max": 0.2
+      },
+      "contributors": [
+        {
+          "name": "Hole",
+          "nominal": 20.065,
+          "tolerance": 0.065,
+          "direction": 1
+        },
+        {
+          "name": "Shaft",
+          "nominal": 19.975,
+          "tolerance": 0.015,
+          "direction": -1
+        }
+      ],
+      "samples": 50
+    },
+    "expected": {
+      "min": 0.01,
+      "max": 0.17,
+      "passes": false,
+      "status": "NONCONFORMANCE"
+    }
+  },
+  {
+    "id": "shaft-only-correction",
+    "input": {
+      "name": "shaft-only-correction",
+      "requirement": {
+        "min": 0.02,
+        "max": 0.2
+      },
+      "contributors": [
+        {
+          "name": "Hole",
+          "nominal": 20.065,
+          "tolerance": 0.065,
+          "direction": 1
+        },
+        {
+          "name": "Shaft",
+          "nominal": 19.965,
+          "tolerance": 0.015,
+          "direction": -1
+        }
+      ],
+      "samples": 50
+    },
+    "expected": {
+      "min": 0.02,
+      "max": 0.18,
+      "passes": true,
+      "status": "INFO"
+    }
+  },
+  {
+    "id": "interference",
+    "input": {
+      "name": "interference",
+      "requirement": {
+        "min": -0.1,
+        "max": -0.02
+      },
+      "contributors": [
+        {
+          "name": "Hole",
+          "nominal": 10,
+          "tolerance": 0.01,
+          "direction": 1
+        },
+        {
+          "name": "Shaft",
+          "nominal": 10.05,
+          "tolerance": 0.01,
+          "direction": -1
+        }
+      ],
+      "samples": 50
+    },
+    "expected": {
+      "min": -0.07,
+      "max": -0.03,
+      "passes": true,
+      "status": "INFO"
+    }
+  },
+  {
+    "id": "transition",
+    "input": {
+      "name": "transition",
+      "requirement": {
+        "min": 0,
+        "max": 0.1
+      },
+      "contributors": [
+        {
+          "name": "Hole",
+          "nominal": 10,
+          "tolerance": 0.02,
+          "direction": 1
+        },
+        {
+          "name": "Shaft",
+          "nominal": 10,
+          "tolerance": 0.01,
+          "direction": -1
+        }
+      ],
+      "samples": 50
+    },
+    "expected": {
+      "min": -0.03,
+      "max": 0.03,
+      "passes": false,
+      "status": "NONCONFORMANCE"
+    }
+  },
+  {
+    "id": "exact-boundary",
+    "input": {
+      "name": "exact-boundary",
+      "requirement": {
+        "min": 0.1,
+        "max": 0.3
+      },
+      "contributors": [
+        {
+          "name": "Hole",
+          "nominal": 0.3,
+          "tolerance": 0.1,
+          "direction": 1
+        },
+        {
+          "name": "Shaft",
+          "nominal": 0.1,
+          "tolerance": 0,
+          "direction": -1
+        }
+      ],
+      "samples": 50
+    },
+    "expected": {
+      "min": 0.1,
+      "max": 0.3,
+      "passes": true,
+      "status": "INFO"
+    }
+  },
+  {
+    "id": "zero-tolerance",
+    "input": {
+      "name": "zero-tolerance",
+      "requirement": {
+        "min": 0,
+        "max": 0
+      },
+      "contributors": [
+        {
+          "name": "Hole",
+          "nominal": 20,
+          "tolerance": 0,
+          "direction": 1
+        },
+        {
+          "name": "Shaft",
+          "nominal": 20,
+          "tolerance": 0,
+          "direction": -1
+        }
+      ],
+      "samples": 50
+    },
+    "expected": {
+      "min": 0,
+      "max": 0,
+      "passes": true,
+      "status": "INFO"
+    }
+  },
+  {
+    "id": "upper-limit-failure",
+    "input": {
+      "name": "upper-limit-failure",
+      "requirement": {
+        "min": 0,
+        "max": 0.2
+      },
+      "contributors": [
+        {
+          "name": "Hole",
+          "nominal": 20.2,
+          "tolerance": 0.05,
+          "direction": 1
+        },
+        {
+          "name": "Shaft",
+          "nominal": 20,
+          "tolerance": 0.01,
+          "direction": -1
+        }
+      ],
+      "samples": 50
+    },
+    "expected": {
+      "min": 0.14,
+      "max": 0.26,
+      "passes": false,
+      "status": "NONCONFORMANCE"
+    }
+  }
+]
