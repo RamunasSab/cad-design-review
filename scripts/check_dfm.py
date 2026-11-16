@@ -151,6 +151,11 @@ def check(part, rules):
                 add(f, r, r["severity"], r["message"], value=v, limit=round(lim, 4), op=op,
                     limit_max=None if lim_max is None else round(lim_max, 4))
 
+    for item in results:
+        rule = next((r for r in rules if r["id"] == item["rule"]), {})
+        if item["severity"] == "NONCONFORMANCE" and not (rule.get("basis") == "binding_requirement" and rule.get("requirement_reference")):
+            item["severity"] = "RISK"
+
     # Keep only the most severe finding for the same feature field (avoid duplicates).
     rule_field = {r["id"]: r["field"] for r in rules}
     best = {}
@@ -158,10 +163,6 @@ def check(part, rules):
         key = (r["feature"], rule_field.get(r["rule"]), r["severity"] == "NEEDS_CLARIFICATION" and r["rule"])
         if key not in best or ORDER[r["severity"]] < ORDER[best[key]["severity"]]:
             best[key] = r
-    for item in best.values():
-        rule = next((r for r in rules if r["id"] == item["rule"]), {})
-        if item["severity"] == "NONCONFORMANCE" and not (rule.get("basis") == "binding_requirement" and rule.get("requirement_reference")):
-            item["severity"] = "RISK"
     results = sorted(best.values(), key=lambda x: (ORDER.get(x["severity"], 9), str(x["feature"])))
     return results, sorted(x for x in unknown if x)
 
