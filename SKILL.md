@@ -3,7 +3,7 @@ name: cad-design-review
 description: Review manufacturing-ready mechanical part models, engineering drawings, and assemblies. Covers ISO fits and tolerances, general tolerances (ISO 2768), ISO 20457 plastic molding tolerances, GD&T (ISO 1101 / ASME Y14.5), tolerance stack-ups, plastic snap-fit joints, and process-specific DFM for injection molding, sheet metal fabrication & cutting, machining, additive manufacturing, and progressive stamping. Use when a user asks to inspect, review, assess, or find issues in a drawing, part, model, or assembly; check tolerances, fits, bearing fits, datums, tolerance stack-ups, or manufacturability.
 license: MIT
 metadata:
-  version: "1.6.0"
+  version: "1.7.0-dev"
 ---
 
 # CAD Design Review
@@ -116,7 +116,7 @@ Perform when assembly clearance, interference, or alignment depends on multiple 
 3. Run `python scripts/stackup.py stackup.json` with validated input; report worst-case, RSS, Monte Carlo and sensitivity as available.
 4. Worst-case passing supports compliance within stated dimensional limits. If only statistical results pass, report modeled fallout and justify risk acceptance using actual process data.
 5. Include geometric tolerance contributions when appropriate: position zone ØT may contribute up to ±T/2 along an axis in worst case; MMC bonus where applicable is `|actual size − MMC size|`.
-6. For a normal distribution `σ = T/(3·Cpk)` where T is tolerance half-width. **Never assume Cpk**; uniform distributions are mathematical preliminary assumptions, not evidence of capability. RSS is not a sole acceptance criterion.
+6. For an explicitly centered normal process, `σ = T/(3·Cpk)` where T is tolerance half-width. Cpk alone does not identify sigma for an off-center process; obtain mean and dispersion data or flag the centered assumption. **Never assume Cpk**; uniform distributions are mathematical preliminary assumptions, not evidence of capability. RSS is not a sole acceptance criterion.
 
 ### 5. Process-specific DFM
 
@@ -179,6 +179,12 @@ After the table provide:
 
 Missing or inappropriate tolerance basis; dimension chains vs functional datum position; unstable datums; incorrect fit basis; redundant closed tolerance loops; bend radii/holes near bends; molded-wall transitions/draft; inaccessible machining features; missing relief; unjustified tight plastic tolerances; coating effects on functional fits; inconsistent revisions; invalid cutting contours; unverified additive powder/resin removal.
 
+## Automated evidence and development reports
+
+Distinguish deterministic calculations from AI interpretation in every report. The stack-up JSON audit records formula, explicit input, units, assumptions, reproducible seed and input/calculator SHA-256. Use decimal worst-case bounds for acceptance, not rounded display values. Modeled statistical Cpk is not measured capability. Bundled DFM rules carry heuristic provenance; do not promote their legacy rule severity into a verified nonconformance. A binding rule needs an explicit requirement reference.
+
+For external extraction tools, read [adapter contract](docs/input-adapters.md) and [review input envelope](references/review_input.schema.json). These document an integration boundary; they do not add STEP/DXF/PDF/image parsers. Read [standards support](docs/standards-support.md) before claiming an edition-specific verification.
+
 ## Supporting modules
 
 - `scripts/check_dfm.py` – deterministic screening rules for the four supported processes, not AM.
@@ -196,3 +202,4 @@ The supplied fit/general-tolerance source is based on older DIN editions (DIN 71
 Plastic TG values in the skill derive from DIN 16742:2013 source tables. **Do not represent them as a verified reproduction of ISO 20457:2026 tables.** The full ISO 20457:2026 text is not included; critical contractual dimensions must be verified against the applicable licensed edition.
 
 This skill does not replace responsible engineering judgement, company quality systems, supplier validation, FEM, or CMM inspection. Do not claim geometry, tolerances, or process capability were checked when the necessary parser, data, or measurements were unavailable.
+
