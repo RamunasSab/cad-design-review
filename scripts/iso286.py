@@ -40,11 +40,30 @@ def deviations(code, size, hole, data=None):
         raise ValueError('Class outside the verified implementation subset')
     i = index(d['size_upper_mm'], size)
     it = Decimal(d['it_um'][str(grade)][i])
+    if letter in ['a','c','t','u','x']:
+        value = d['split_deviations_um'][letter][index(d['split_upper_mm'],size)]
+        if value is None or (letter == 'a' and size <= 1):
+            raise ValueError('Class not defined in this nominal-size interval')
+        base = Decimal(value)
+        if letter in ['a','c']:
+            return (-base,-base+it) if hole else (base-it,base)
+        if not hole:
+            return base,base+it
+        if grade == 5 and size > 3:
+            raise ValueError('IT5 hole delta outside verified subset')
+        delta = it-Decimal(d['it_um'][str(grade-1)][i]) if grade <= 7 and size > 3 else Decimal(0)
+        es = -base+delta
+        return es-it,es
+    if letter == 'j':
+        if hole or grade not in [5,6]:
+            raise ValueError('Only shaft j5/j6 implemented')
+        base = Decimal(d['j56_lower_um'][i])
+        return base,base+it
     if letter == 'js':
         return -it/2, it/2
     if letter == 'h':
         return (Decimal(0), it) if hole else (-it, Decimal(0))
-    if letter in ['e','f','g']:
+    if letter in ['d','e','f','g']:
         es = Decimal(d['fundamental_um'][letter][i])
         return (-es, -es+it) if hole else (es-it, es)
     base = Decimal(d['rs_um'][letter][index(d['rs_upper_mm'],size)] if letter in ['r','s'] else d['fundamental_um'][letter][i])

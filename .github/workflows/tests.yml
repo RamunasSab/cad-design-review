@@ -30,6 +30,8 @@ jobs:
         run: python -m unittest discover -s tests -p "test_iso286.py"
       - name: Verify shared browser ISO engine
         run: node tests/test_iso286_web.js
+      - name: Verify fit result table and language behavior
+        run: node tests/test_fit_selector_ui.js
       - name: Validate reference JSON files
         run: python -c "import json, pathlib; [json.loads(p.read_text(encoding='utf-8')) for p in pathlib.Path('references').glob('*.json')]"
 

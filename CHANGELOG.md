@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Application-based calculator display
+- Add an English-only, indicative application catalogue with 75 fit designations for the external website. Remove the two-series presentation and legacy source/language blocks.
+- Display hole/shaft upper/lower deviations, limit sizes, tolerance widths and signed-midpoint clearance/interference metrics.
+- Extend the verified numeric subset for the application catalogue, including nominal-size exclusions; test the supplied Ø25 H7/g6 display and language independence.
+
 ### ISO 286-1:2010 fit selection
 - Replace DIN 7157 fit series/application lookup with ISO 286-1:2010 numerical calculation and a verified subset of preferable combinations from Figures 12–13.
 - Add signed functional-bound filtering, source metadata, delta/exception handling and Annex B regression cases. Numeric scope: 0 < D ≤ 500 mm; fail closed outside supported classes/ranges.

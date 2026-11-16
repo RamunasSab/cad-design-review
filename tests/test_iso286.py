@@ -10,6 +10,15 @@ sys.path.insert(0,str(ROOT/'scripts'))
 import iso286
 
 class ISO286Tests(unittest.TestCase):
+    def test_extended_application_classes(self):
+        self.assertEqual(iso286.deviations('j6',25,False),(-4,9))
+        self.assertEqual(iso286.deviations('t6',25,False),(41,54))
+        self.assertEqual(iso286.deviations('u6',20,False),(41,54))
+        self.assertEqual(iso286.deviations('x6',30,False),(64,77))
+        self.assertEqual(iso286.deviations('c11',50,False),(-290,-130))
+        with self.assertRaises(ValueError):iso286.deviations('t6',24,False)
+        with self.assertRaises(ValueError):iso286.deviations('a11',1,False)
+
     def test_annex_b_examples(self):
         for code, expected in [('H8/f7',[.025,.089]),('H7/n6',[-.033,.008]),('H7/s6',[-.059,-.018])]:
             self.assertEqual(iso286.calculate(code,36)['signed_difference_mm'],expected)
