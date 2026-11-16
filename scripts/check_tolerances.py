@@ -20,7 +20,8 @@ Usage examples:
 
 Add --json to return JSON. A result of None / "not specified" means the table
 contains no value (mark NEEDS_CLARIFICATION; do not guess). This utility does not
-provide ISO 286 limit-deviation values.
+provide every ISO 286 class: the verified implementation subset is documented.
+Fit calculations use ISO 286-1:2010 only; use fit H7/g6 --size 20 or recommend --basis hole --type clearance --size 20.
 """
 import argparse
 import json
@@ -56,36 +57,22 @@ def fmt_minutes(m):
 
 # ---------- Fits ----------
 def cmd_fit(d, a):
+    from iso286 import calculate, load as load_iso
+    iso = load_iso()
     code = a.designation.replace(" ", "")
-    hit = None
-    for f in d["fits"]:
-        if code in (f.get("hole_basis"), f.get("shaft_basis"), f.get("shaft_basis_suggested")):
-            hit = f
-            break
-    s1, s2 = d["fit_series"]["series_1_priority"], d["fit_series"]["series_2"]
-    series = 1 if code in s1 else (2 if code in s2 else None)
-    system = "hole basis" if code.startswith("H") else ("shaft basis" if "/h" in code else "other")
-    res = {"designation": code, "system": system, "series": series, "in_table": hit is not None}
-    if hit:
-        res.update({k: hit.get(k) for k in ("type", "name", "application", "hole_basis", "shaft_basis",
-                                           "interference_level", "pdf_note")})
-    if series is None and not hit:
-        res["verdict"] = ("Not listed among the DIN 7157 recommended fits (neither series 1 nor series 2). "
-                          "RISK: justify the choice by function or select a recommended fit.")
-    elif series == 2:
-        res["verdict"] = "Series 2 (permitted, but series 1 has priority). Check whether a series 1 fit is unsuitable."
-    elif series == 1:
-        res["verdict"] = "Series 1 (highest priority)."
-    else:
-        res["verdict"] = "Present in the description table but not assigned to series 1 or 2 (check the PDF note)."
-    if code == "F7/h6":
-        res["note"] = "F7/h6 is not listed in DIN 7157; F8/h6 is recommended for the H7/f7 pair."
-    if series and not hit:
-        res["note"] = "Listed in series 1/2 but absent from the description table (the PDF does not provide an application description)."
-    return res
+    if a.size is None:
+        membership = [{"basis": basis, **c} for basis, entries in iso["candidates"].items() for c in entries if c["code"] == code]
+        return {"standard": iso["standard"], "designation": code, "listed_in_verified_subset": bool(membership),
+                "first_choice": any(c["first_choice"] for c in membership),
+                "status": "NEEDS_CLARIFICATION", "note": "Supply --size mm for numerical classification and limits. No DIN application or series lookup is used."}
+    return calculate(code, a.size, iso)
 
 
-# ---------- General tolerances ----------
+def cmd_recommend(d, a):
+    from iso286 import recommend
+    return recommend(a.basis, a.type, a.size, a.minimum, a.maximum)
+
+
 def cmd_general(d, a):
     key = {"linear": "general_linear", "radius": "general_radius_chamfer", "angle": "general_angular"}[a.type]
     t = d[key]
@@ -106,6 +93,7 @@ def cmd_general(d, a):
     else:
         res.update({"tolerance": f"±{v} mm", "tolerance_mm": v})
     return res
+
 
 
 def cmd_geom(d, a):
@@ -132,24 +120,10 @@ def cmd_geom(d, a):
 
 
 def cmd_bearing(d, a):
-    b = d["bearings"]
-    out = {"standard": "DIN 5425-1", "note": b["_description"]}
-    if a.thrust:
-        t = b["thrust"]["combined_radial_axial" if a.thrust == "combined" else "axial_only"]
-        out["bearing_types"] = t["bearing_types"]
-        for wash in ("shaft_washer", "housing_washer"):
-            v = t[wash]
-            out[wash] = v.get(a.load) if (isinstance(v, dict) and a.load) else v
-        return out
-    ring = {"inner": "inner_ring_shaft", "outer": "outer_ring_housing"}[a.ring]
-    rows = [r for r in b["radial"][ring]
-            if (not a.load or r["load"] == a.load) and (not a.level or r["level"] in (a.level, "temporarily_high"))]
-    out["ring"] = a.ring
-    out["rows"] = [{**r, "recommended": (r[a.bearing_type] if a.bearing_type else None)} for r in rows]
-    return out
+    return {"standard": "ISO 286-1:2010", "status": "NEEDS_CLARIFICATION",
+            "note": "ISO 286-1 does not provide bearing application recommendations. Supply functional clearance/interference limits; use recommend or fit with --size."}
 
 
-# Implementation note (English translation required for public distribution).
 def _plastic_val(P, tg, kind, i):
     v = P[kind][tg][i]
     return None if v is None else float(v)
@@ -211,7 +185,13 @@ def to_text(r):
 def main(argv):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
-    s = sub.add_parser("fit"); s.add_argument("designation")
+    s = sub.add_parser("fit"); s.add_argument("designation"); s.add_argument("--size")
+    s = sub.add_parser("recommend")
+    s.add_argument("--basis", choices=["hole", "shaft"], required=True)
+    s.add_argument("--type", choices=["clearance", "transition", "interference"], required=True)
+    s.add_argument("--size", required=True)
+    s.add_argument("--min", dest="minimum")
+    s.add_argument("--max", dest="maximum")
     s = sub.add_parser("general")
     s.add_argument("--type", choices=["linear", "radius", "angle"], required=True)
     s.add_argument("--size", type=float, required=True)
@@ -237,10 +217,16 @@ def main(argv):
         sp.add_argument("--json", action="store_true")
     a = p.parse_args(argv[1:])
     d = load()
-    r = {"fit": cmd_fit, "general": cmd_general, "geom": cmd_geom, "bearing": cmd_bearing, "plastic": cmd_plastic}[a.cmd](d, a)
+    try:
+        r = {"fit": cmd_fit, "recommend": cmd_recommend, "general": cmd_general, "geom": cmd_geom, "bearing": cmd_bearing, "plastic": cmd_plastic}[a.cmd](d, a)
+    except ValueError as exc:
+        r = {"status": "NEEDS_CLARIFICATION", "error": str(exc)}
+        print(json.dumps(r) if a.json else to_text(r))
+        return 2
     print(json.dumps(r, indent=2, ensure_ascii=False) if a.json else to_text(r))
     return 0
 
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
+

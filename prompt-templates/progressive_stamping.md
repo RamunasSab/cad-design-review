@@ -17,3 +17,6 @@ Check:
 7. If strip-layout and die-design files are supplied, check carriers, pilots, pitch, station sequence, and tool access.
 
 Present findings in the language of my request, ordered by priority: location, issue, evidence, status, and specific corrective action. Separate verified nonconformances from risks and missing information. Do not treat general DFM guidance as mandatory standards. State which checks could not be completed.
+
+
+Fit-source policy: use ISO 286-1:2010 only for fit calculations and preferable combinations. Require nominal size and numerical functional limits. Do not use DIN 7157 application/series mappings. Figures 12–13 first-choice combinations are candidates, not application approval; unsupported numerical data require NEEDS_CLARIFICATION.

@@ -75,6 +75,17 @@ This is a constructed, reproducible example, not an assessment of the bundled CA
 - **Structured engineering findings** — distinguish nonconformances, risks, clarification requests, and informational observations.
 - **Multilingual interaction** — internal instructions and documentation are in English, while user-facing responses follow the language of the user's request.
 
+## ISO 286-1:2010 fits (development)
+
+Fit calculations and candidate recommendations now use the supplied **ISO 286-1:2010** exclusively. DIN 7157 application descriptions and series have been removed. Figures 12–13 define preferable combinations and framed first choices; they do not assign application-specific performance.
+
+```sh
+python scripts/check_tolerances.py fit H7/g6 --size 20 --json
+python scripts/check_tolerances.py recommend --basis hole --type clearance --size 40 --min 0.024 --max 0.092 --json
+```
+
+Results include hole/shaft limits, signed minimum/maximum difference and numerical filtering. The verified numeric/candidate subset covers **0 < D ≤ 500 mm**; unsupported entries require clarification. No-match means no match in the implemented subset. [Scope, units and source rules](references/fits-and-tolerances.md). This addition is unreleased and is not in the v1.6.0 tag.
+
 ## Plastic snap-fit joint review (development)
 
 Review two plastic parts joined by hooks, U-shaped arms, torsion latches or annular snaps as a dedicated **assembly-review mode**, alongside the applicable manufacturing-process checks.
@@ -390,3 +401,4 @@ The Tests badge reports the Python compilation, smoke tests, and reference-JSON 
 ## Controlled project terminology
 
 English/German/Lithuanian mechanical-engineering terms follow the [user-supplied glossary](references/mechanikos_inzinerijos_zodynas.csv). Select equivalents by topic and preserve grammatical inflection. Terms not present remain in English and are flagged for a glossary addition; no automatic translation is invented. The original CSV is retained unchanged. Terminology preferences are not proof of technical correctness or standards compliance.
+

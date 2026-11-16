@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### ISO 286-1:2010 fit selection
+- Replace DIN 7157 fit series/application lookup with ISO 286-1:2010 numerical calculation and a verified subset of preferable combinations from Figures 12–13.
+- Add signed functional-bound filtering, source metadata, delta/exception handling and Annex B regression cases. Numeric scope: 0 < D ≤ 500 mm; fail closed outside supported classes/ranges.
+- Disable legacy application-based bearing recommendations rather than imply ISO 286-1 contains bearing selection rules.
+- Keep the licensed source PDF out of the public repository; record its hash and clause/table references.
+
+
 ### Reliability and reporting
 - Corrected the README stable-version FAQ; added a version manifest and documentation consistency checks.
 - Added ten golden stack-up cases, generated arithmetic invariants, negative input tests and prompt-contract checks; CI covers Python 3.10–3.13 on Linux, Windows and macOS.
@@ -99,4 +106,5 @@
 ## Notes
 
 This release does not implement automatic STEP/DXF/PDF parsing. `check_drawing_data.py` validates JSON supplied by a separate extraction adapter. DFM limits are guidelines unless supported by an approved company or supplier specification.
+
 

@@ -94,7 +94,7 @@ General tolerances **do not apply by default merely because a process is known**
 
 For plastic features use the specified plastic tolerance framework; ISO 286 fits may still be suitable for metal inserts or mating metal parts. For metal fits:
 
-- Check each fit using `scripts/check_tolerances.py fit H7/f7` (substitute actual designation). Review hole/shaft basis, clearance/transition/interference function, DIN 7157 series where applicable, and ISO 286 limits **only from verified tables**. If source tables lack a needed deviation, use `NEEDS_CLARIFICATION` rather than fabricate a limit.
+- Check each fit using `scripts/check_tolerances.py fit H7/g6 --size 20` (substitute actual designation). Review hole/shaft basis, clearance/transition/interference function, ISO 286-1:2010 Figures 12–13 first-choice combinations and limits **only within the verified implementation subset**. If source tables lack a needed deviation, use `NEEDS_CLARIFICATION` rather than fabricate a limit.
 - For bearing fits (DIN 5425-1), determine bearing type, load direction and magnitude, rotating/point load, and seat arrangement; use `scripts/check_tolerances.py bearing ...`. Typical shaft IT6/housing IT7 examples are not universal requirements.
 - Compare required IT grade and surface finish with achievable supplier capability and inspection method. Tight tolerances without functional need are cost risks; loose tolerances may be functional risks.
 - Apply ISO 8015 independency as relevant; an envelope requirement (Ⓔ) must be explicitly specified if needed, not silently assumed.
@@ -201,9 +201,10 @@ For external extraction tools, read [adapter contract](docs/input-adapters.md) a
 
 ## Limitations and standard provenance
 
-The supplied fit/general-tolerance source is based on older DIN editions (DIN 7157:1966, DIN ISO 2768:1991, DIN 5425-1:1984). Confirm the editions governing the project.
+Fit calculations and recommendations use only the supplied ISO 286-1:2010: read [fit source and implementation scope](references/fits-and-tolerances.md). Do not use DIN 7157 series/application tables or invent ISO application mappings. Require numerical functional limits before claiming a recommendation meets a requirement; distinguish a preferred candidate from engineering acceptance. The numeric subset is 0 < D ≤ 500 mm; unsupported entries require clarification. Other general/plastic tolerance modules retain their separately documented historical sources.
 
 Plastic TG values in the skill derive from DIN 16742:2013 source tables. **Do not represent them as a verified reproduction of ISO 20457:2026 tables.** The full ISO 20457:2026 text is not included; critical contractual dimensions must be verified against the applicable licensed edition.
 
 This skill does not replace responsible engineering judgement, company quality systems, supplier validation, FEM, or CMM inspection. Do not claim geometry, tolerances, or process capability were checked when the necessary parser, data, or measurements were unavailable.
+
 
