@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Reliability and reporting
+- Corrected the README stable-version FAQ; added a version manifest and documentation consistency checks.
+- Added ten golden stack-up cases, generated arithmetic invariants, negative input tests and prompt-contract checks; CI covers Python 3.10–3.13 on Linux, Windows and macOS.
+- Use decimal worst-case endpoints for inclusive-boundary acceptance, reject nonfinite Cpk and invalid sample/seed values, and serialize zero-variance modeled Cpk as null.
+- Add reproducible JSON audit metadata, Markdown/HTML/JSON reports, summaries and opt-in failure exit status to the stack-up CLI.
+- Record heuristic provenance on bundled DFM rules and classify heuristic violations as risks while retaining original rule severity.
+- Document the normalized adapter envelope, automation boundaries and standard-edition limitations; no new CAD parser or standards selector is claimed.
+
+
 ### Added
 - Added a manual plastic snap-fit assembly review mode, a dedicated reference checklist and a reusable English prompt template.
 - Require an engaged STEP assembly with separate mating bodies and a section through the joint for complete assessment; request missing inputs and report partial scope explicitly.
@@ -90,3 +99,4 @@
 ## Notes
 
 This release does not implement automatic STEP/DXF/PDF parsing. `check_drawing_data.py` validates JSON supplied by a separate extraction adapter. DFM limits are guidelines unless supported by an approved company or supplier specification.
+
