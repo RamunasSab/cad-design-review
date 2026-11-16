@@ -8,7 +8,7 @@ env:
   PYTHONUTF8: "1"
 
 jobs:
-  test:
+  matrix:
     strategy:
       fail-fast: false
       matrix:
@@ -28,3 +28,14 @@ jobs:
         run: python -m unittest discover -s tests -p "test_reliability.py"
       - name: Validate reference JSON files
         run: python -c "import json, pathlib; [json.loads(p.read_text(encoding='utf-8')) for p in pathlib.Path('references').glob('*.json')]"
+
+  test:
+    name: test
+    needs: matrix
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every platform and Python version
+        env:
+          MATRIX_RESULT: ${{ needs.matrix.result }}
+        run: test "$MATRIX_RESULT" = "success"
