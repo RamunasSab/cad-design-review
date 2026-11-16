@@ -1,0 +1,266 @@
+﻿Tema,English,Deutsch,Lietuviškai
+Matmenys ir tolerancijos,Dimension,Maß,Matmuo
+Matmenys ir tolerancijos,Nominal dimension,Nennmaß,Nominalusis matmuo
+Matmenys ir tolerancijos,Actual dimension,Istmaß,Tikrasis matmuo
+Matmenys ir tolerancijos,Limit dimension,Grenzmaß,Ribinis matmuo
+Matmenys ir tolerancijos,Maximum limit,oberes Grenzmaß,Didžiausiasis ribinis matmuo
+Matmenys ir tolerancijos,Minimum limit,unteres Grenzmaß,Mažiausiasis ribinis matmuo
+Matmenys ir tolerancijos,Deviation,Abweichung,Nuokrypis
+Matmenys ir tolerancijos,Upper deviation,oberes Abmaß,Viršutinis nuokrypis
+Matmenys ir tolerancijos,Lower deviation,unteres Abmaß,Apatinis nuokrypis
+Matmenys ir tolerancijos,Tolerance,Toleranz,Tolerancija
+Matmenys ir tolerancijos,Tolerance zone,Toleranzfeld,Tolerancijos laukas
+Matmenys ir tolerancijos,Tolerance class / IT grade,Toleranzklasse / IT-Grad,Tolerancijos laipsnis
+Matmenys ir tolerancijos,Basic size,Nennmaß,Pagrindinis matmuo
+Matmenys ir tolerancijos,Size,Größe / Abmessung,Dydis / matmenys
+Matmenys ir tolerancijos,Measurement,Messung,Matavimas
+Matmenys ir tolerancijos,Measuring instrument,Messmittel,Matavimo priemonė
+Matmenys ir tolerancijos,Calibration,Kalibrierung,Kalibravimas
+Matmenys ir tolerancijos,Accuracy,Genauigkeit,Tikslumas
+Matmenys ir tolerancijos,Precision,Präzision,Tikslumas / pakartojamumas
+Matmenys ir tolerancijos,Repeatability,Wiederholbarkeit,Pakartojamumas
+Matmenys ir tolerancijos,Uncertainty of measurement,Messunsicherheit,Matavimo neapibrėžtis
+Matmenys ir tolerancijos,Geometrical tolerance,Form- und Lagetoleranz,Geometrinė tolerancija
+Matmenys ir tolerancijos,Form tolerance,Formtoleranz,Formos tolerancija
+Matmenys ir tolerancijos,Positional tolerance,Lagetoleranz,Padėties tolerancija
+Matmenys ir tolerancijos,Straightness,Geradheit,Tiesumas
+Matmenys ir tolerancijos,Flatness,Ebenheit,Plokštumas
+Matmenys ir tolerancijos,Circularity / roundness,Rundheit,Apvalumas
+Matmenys ir tolerancijos,Cylindricity,Zylindrizität,Cilindriškumas
+Matmenys ir tolerancijos,Parallelism,Parallelität,Lygiagretumas
+Matmenys ir tolerancijos,Perpendicularity,Rechtwinkligkeit,Statumas
+Matmenys ir tolerancijos,Angularity,Winkligkeit,Kampinis nuokrypis
+Matmenys ir tolerancijos,Concentricity,Konzentrizität,Koncentriškumas
+Matmenys ir tolerancijos,Coaxiality,Koaxialität,Koaksiališkumas
+Matmenys ir tolerancijos,Symmetry,Symmetrie,Simetriškumas
+Matmenys ir tolerancijos,Run-out,Rundlauf,Mušimas
+Matmenys ir tolerancijos,Total run-out,Gesamtschlag,Bendras mušimas
+Matmenys ir tolerancijos,Datum,Bezugselement,Atskaitos elementas
+Matmenys ir tolerancijos,Datum feature,Bezugsfläche,Atskaitos paviršius
+Matmenys ir tolerancijos,General tolerance,Allgemeintoleranz,Bendroji tolerancija
+Matmenys ir tolerancijos,Limits of size,Grenzmaße,Ribiniai matmenys
+Suleidimai ir jungtys,Fit,Passung,Suleidimas
+Suleidimai ir jungtys,Clearance fit,Spielpassung,Suleidimas su tarpu
+Suleidimai ir jungtys,Interference fit,Presspassung / Übermaßpassung,Suleidimas su įvarža
+Suleidimai ir jungtys,Transition fit,Übergangspassung,Tarpinis suleidimas
+Suleidimai ir jungtys,Clearance,Spiel,Tarpas
+Suleidimai ir jungtys,Minimum clearance,Mindestspiel,Mažiausiasis tarpas
+Suleidimai ir jungtys,Maximum clearance,Höchstspiel,Didžiausiasis tarpas
+Suleidimai ir jungtys,Interference,Übermaß / Pressung,Įvarža
+Suleidimai ir jungtys,Minimum interference,Mindestübermaß,Mažiausioji įvarža
+Suleidimai ir jungtys,Maximum interference,Höchstübermaß,Didžiausioji įvarža
+Suleidimai ir jungtys,Fit tolerance,Passungstoleranz,Suleidimo tolerancija
+Suleidimai ir jungtys,Hole-basis system,Einheitsbohrung / Bohrungssystem,Skylės sistema
+Suleidimai ir jungtys,Shaft-basis system,Einheitswelle / Wellensystem,Veleno sistema
+Suleidimai ir jungtys,Mating parts,Passungspartner,Sujungiamosios detalės
+Suleidimai ir jungtys,Hole,Bohrung,Skylė
+Suleidimai ir jungtys,Shaft,Welle,Velenas
+Suleidimai ir jungtys,Bore,Bohrung / Innendurchmesser,Anga / vidinis skersmuo
+Suleidimai ir jungtys,Assembly,Montage / Zusammenbau,Surinkimas
+Suleidimai ir jungtys,Disassembly,Demontage,Išrinkimas
+Suleidimai ir jungtys,Joint,Verbindung,Jungtis
+Suleidimai ir jungtys,Detachable joint,lösbare Verbindung,Išardoma jungtis
+Suleidimai ir jungtys,Permanent joint,unlösbare Verbindung,Neišardoma jungtis
+Suleidimai ir jungtys,Press fit,Presssitz,Presiuojamas suleidimas
+Suleidimai ir jungtys,Shrink fit,Schrumpfsitz,Įspaudžiamasis suleidimas
+Suleidimai ir jungtys,Splined joint,Passverzahnung,Šlicinė jungtis
+Suleidimai ir jungtys,Threaded joint,Gewindeverbindung,Srieginė jungtis
+Suleidimai ir jungtys,Welded joint,Schweißverbindung,Suvirinta jungtis
+Suleidimai ir jungtys,Adhesive joint,Klebeverbindung,Klijuota jungtis
+Suleidimai ir jungtys,Riveted joint,Nietverbindung,Kniedijama jungtis
+Paviršiai ir apdirbimas,Surface roughness,Oberflächenrauheit,Paviršiaus šiurkštumas
+Paviršiai ir apdirbimas,Roughness,Rauheit,Šiurkštumas
+Paviršiai ir apdirbimas,Roughness parameter Ra,Rauheitswert Ra,Šiurkštumo parametras Ra
+Paviršiai ir apdirbimas,Roughness parameter Rz,Rauheitswert Rz,Šiurkštumo parametras Rz
+Paviršiai ir apdirbimas,Surface finish,Oberflächengüte,Paviršiaus padengimas
+Paviršiai ir apdirbimas,Surface texture,Oberflächentextur,Paviršiaus tekstūra
+Paviršiai ir apdirbimas,Machined surface,bearbeitete Fläche,Apdirbtas paviršius
+Paviršiai ir apdirbimas,Unmachined surface,unbearbeitete Fläche,Neapdirbtas paviršius
+Paviršiai ir apdirbimas,Surface treatment,Oberflächenbehandlung,Paviršiaus apdorojimas
+Paviršiai ir apdirbimas,Coating,Beschichtung,Danga
+Paviršiai ir apdirbimas,Plating,Galvanisierung,Galvaninė danga
+Paviršiai ir apdirbimas,Anodizing,Eloxieren,Anodizavimas
+Paviršiai ir apdirbimas,Painting,Lackieren,Dažymas
+Paviršiai ir apdirbimas,Polishing,Polieren,Poliravimas
+Paviršiai ir apdirbimas,Grinding,Schleifen,Šlifavimas
+Paviršiai ir apdirbimas,Honing,Honen,Honavimas
+Paviršiai ir apdirbimas,Lapping,Läppen,Galandimas
+Paviršiai ir apdirbimas,Turning,Drehen,Tekinimas
+Paviršiai ir apdirbimas,Milling,Fräsen,Frezavimas
+Paviršiai ir apdirbimas,Drilling,Bohren,Gręžimas
+Paviršiai ir apdirbimas,Boring,Bohren / Aufbohren,Ištekinimas
+Paviršiai ir apdirbimas,Reaming,Reiben,Raižymas
+Paviršiai ir apdirbimas,Threading,Gewindeschneiden,Sriegiavimas
+Paviršiai ir apdirbimas,Tapping,Gewindebohren,Sriegiavimas skylėje
+Paviršiai ir apdirbimas,Broaching,Räumen,Pratraukimas
+Paviršiai ir apdirbimas,Casting,Gießen,Liejimas
+Paviršiai ir apdirbimas,Forging,Schmieden,Kalimas
+Paviršiai ir apdirbimas,Stamping,Stanzen,Štampavimas
+Paviršiai ir apdirbimas,Welding,Schweißen,Suvirinimas
+Paviršiai ir apdirbimas,Cutting,Schneiden,Pjovimas
+Paviršiai ir apdirbimas,Heat treatment,Wärmebehandlung,Terminis apdorojimas
+Paviršiai ir apdirbimas,Hardening,Härten,Grūdinimas
+Paviršiai ir apdirbimas,Tempering,Anlassen,Atkaitinimas
+Paviršiai ir apdirbimas,Annealing,Glühen,Atkaitinimas
+Paviršiai ir apdirbimas,Carburizing,Aufkohlen,Cementavimas
+Paviršiai ir apdirbimas,Nitriding,Nitrieren,Azotavimas
+Paviršiai ir apdirbimas,Deburring,Entgraten,Užvartų šalinimas
+Paviršiai ir apdirbimas,Chamfer,Fase,Nuožula
+Paviršiai ir apdirbimas,Fillet,Rundung,Apvalinimas
+Paviršiai ir apdirbimas,Undercut,Freistich,Atbulinis kampas
+Paviršiai ir apdirbimas,Draft angle,Entwurfswinkel,Nuolydis
+Mašinų dalys,Machine element,Maschinenelement,Mašinos elementas / detalė
+Mašinų dalys,Part / component,Bauteil / Werkstück,Detalė / ruošinys
+Mašinų dalys,Assembly,Baugruppe,Surinkimas
+Mašinų dalys,Subassembly,Teilbaugruppe,Junginys
+Mašinų dalys,Housing,Gehäuse,Korpusas
+Mašinų dalys,Frame,Rahmen / Gestell,Rėmas
+Mašinų dalys,Shaft,Welle,Velenas
+Mašinų dalys,Axle,Achse,Ašis
+Mašinų dalys,Spindle,Spindel,Špindelis
+Mašinų dalys,Bearing,Lager,Guolis
+Mašinų dalys,Ball bearing,Kugellager,Rutulinis guolis
+Mašinų dalys,Roller bearing,Rollenlager,Ritininis guolis
+Mašinų dalys,Plain bearing,Gleitlager,Guolio įvorė
+Mašinų dalys,Bushing,Buchse,Įvorė
+Mašinų dalys,Sleeve,Hülse,Įvorė
+Mašinų dalys,Gear,Zahnrad,Krumpliaratis
+Mašinų dalys,Pinion,Ritzel,Mažasis krumpliaratis
+Mašinų dalys,Gear pair,Zahnradpaar,Krumplių pora
+Mašinų dalys,Gear ratio,Übersetzung / Zahnradübersetzung,Perdavimo santykis
+Mašinų dalys,Module,Modul,Modulis
+Mašinų dalys,Pitch circle,Teilkreis,Dalijamasis apskritimas
+Mašinų dalys,Tooth,Zahn,Krumplis
+Mašinų dalys,Chain,Kette,Grandinė
+Mašinų dalys,Belt,Riemen,Diržas
+Mašinų dalys,Pulley,Riemenscheibe,Skriemulys
+Mašinų dalys,Coupling,Kupplung,Mova
+Mašinų dalys,Clutch,Kupplung,Sankaba
+Mašinų dalys,Brake,Bremse,Stabdys
+Mašinų dalys,Spring,Feder,Spyruoklė
+Mašinų dalys,Screw,Schraube,Sraigtas
+Mašinų dalys,Bolt,Schraube / Bolzen,Varžtas
+Mašinų dalys,Nut,Mutter,Veržlė
+Mašinų dalys,Washer,Scheibe,Poveržlė
+Mašinų dalys,Pin,Stift,Kaištis
+Mašinų dalys,Key,Passfeder,Pleištas
+Mašinų dalys,Rivet,Niete,Kniedė
+Mašinų dalys,Seal,Dichtung,Tarpinė / sandariklis
+Mašinų dalys,O-ring,O-Ring,O formos tarpinė
+Mašinų dalys,Lubrication,Schmierung,Tepimas
+Mašinų dalys,Lubricant,Schmiermittel,Tepalas
+Mašinų dalys,Fastener,Verbindungselement,Sujungimo elementas
+Jėgos ir mechanika,Force,Kraft,Jėga
+Jėgos ir mechanika,Load,Belastung / Last,Apkrova
+Jėgos ir mechanika,Static load,statische Belastung,Statiška apkrova
+Jėgos ir mechanika,Dynamic load,dynamische Belastung,Dinaminė apkrova
+Jėgos ir mechanika,Stress,Spannung,Įtempis
+Jėgos ir mechanika,Normal stress,Normalspannung,Normalinis įtempis
+Jėgos ir mechanika,Shear stress,Schubspannung,Šlyties įtempis
+Jėgos ir mechanika,Strain,Dehnung / Verformung,Santykinė deformacija
+Jėgos ir mechanika,Deformation,Verformung,Deformacija
+Jėgos ir mechanika,Elastic deformation,elastische Verformung,Tamprioji deformacija
+Jėgos ir mechanika,Plastic deformation,plastische Verformung,Plastinė deformacija
+Jėgos ir mechanika,Stiffness,Steifigkeit,Standumas
+Jėgos ir mechanika,Rigidity,Steifigkeit,Standumas
+Jėgos ir mechanika,Deflection,Durchbiegung,Įlinkis
+Jėgos ir mechanika,Torque,Drehmoment,Sukimo momentas
+Jėgos ir mechanika,Moment,Moment,Momentas
+Jėgos ir mechanika,Bending moment,Biegemoment,Lenkimo momentas
+Jėgos ir mechanika,Torsional moment,Torsionsmoment,Sukimo momentas
+Jėgos ir mechanika,Shear force,Querkraft,Skersinė jėga
+Jėgos ir mechanika,Axial force,Axialkraft,Ašinė jėga
+Jėgos ir mechanika,Pressure,Druck,Slėgis
+Jėgos ir mechanika,Friction,Reibung,Trintis
+Jėgos ir mechanika,Wear,Verschleiß,Dilimas
+Jėgos ir mechanika,Fatigue,Ermüdung,Nuovargis
+Jėgos ir mechanika,Fatigue strength,Ermüdungsfestigkeit,Nuovargio stipris
+Jėgos ir mechanika,Yield strength,Streckgrenze,Takumo riba
+Jėgos ir mechanika,Tensile strength,Zugfestigkeit,Tempiamasis stipris
+Jėgos ir mechanika,Compressive strength,Druckfestigkeit,Gniuždymo stipris
+Jėgos ir mechanika,Shear strength,Scherfestigkeit,Šlyties stipris
+Jėgos ir mechanika,Hardness,Härte,Kietumas
+Jėgos ir mechanika,Toughness,Zähigkeit,Tvirtumas
+Jėgos ir mechanika,Ductility,Duktilität,Takumas
+Jėgos ir mechanika,Brittleness,Sprödigkeit,Trapumas
+Jėgos ir mechanika,Elastic modulus,Elastizitätsmodul,Tamprumo modulis
+Jėgos ir mechanika,Poisson’s ratio,Poissonzahl,Puasono koeficientas
+Jėgos ir mechanika,Safety factor,Sicherheitsfaktor,Saugos koeficientas
+Jėgos ir mechanika,Resonance,Resonanz,Rezonansas
+Jėgos ir mechanika,Vibration,Schwingung,Vibracija
+Jėgos ir mechanika,Damping,Dämpfung,Slopinimas
+Jėgos ir mechanika,Kinematics,Kinematik,Kinematika
+Jėgos ir mechanika,Dynamics,Dynamik,Dinamika
+Jėgos ir mechanika,Statics,Statik,Statika
+Jėgos ir mechanika,Center of gravity,Schwerpunkt,Sunkio centras
+Jėgos ir mechanika,Moment of inertia,Trägheitsmoment,Inercijos momentas
+Šiluma ir skysčiai,Thermodynamics,Thermodynamik,Termodinamika
+Šiluma ir skysčiai,Heat transfer,Wärmeübertragung,Šilumos perdavimas
+Šiluma ir skysčiai,Conduction,Wärmeleitung,Šilumos laidumas
+Šiluma ir skysčiai,Convection,Konvektion,Konvekcija
+Šiluma ir skysčiai,Radiation,Strahlung,Spinduliuotė
+Šiluma ir skysčiai,Temperature,Temperatur,Temperatūra
+Šiluma ir skysčiai,Heat,Wärme,Šiluma
+Šiluma ir skysčiai,Heat flux,Wärmestrom,Šilumos srautas
+Šiluma ir skysčiai,Thermal expansion,Wärmeausdehnung,Šiluminis plėtimasis
+Šiluma ir skysčiai,Efficiency,Wirkungsgrad,Naudingumo koeficientas
+Šiluma ir skysčiai,Power,Leistung,Galia
+Šiluma ir skysčiai,Energy,Energie,Energija
+Šiluma ir skysčiai,Work,Arbeit,Darbas
+Šiluma ir skysčiai,Fluid mechanics,Strömungsmechanik,Skysčių mechanika
+Šiluma ir skysčiai,Flow rate,Volumenstrom / Durchfluss,Srauto greitis / debitas
+Šiluma ir skysčiai,Pressure drop,Druckverlust,Slėgio nuostolis
+Šiluma ir skysčiai,Viscosity,Viskosität,Klampumas
+Šiluma ir skysčiai,Turbulence,Turbulenz,Turbulencija
+Šiluma ir skysčiai,Laminar flow,Laminare Strömung,Laminarinis srautas
+Šiluma ir skysčiai,Pump,Pumpe,Siurblys
+Šiluma ir skysčiai,Compressor,Verdichter / Kompressor,Kompresorius
+Šiluma ir skysčiai,Valve,Ventil,Vožtuvas
+Šiluma ir skysčiai,Pipe,Rohr,Vamzdis
+Šiluma ir skysčiai,Nozzle,Düse,Purkštukas
+Šiluma ir skysčiai,Heat exchanger,Wärmeübertrager,Šilumokaitis
+Šiluma ir skysčiai,Boiler,Kessel,Katilas
+Šiluma ir skysčiai,Turbine,Turbine,Turbina
+Šiluma ir skysčiai,Engine,Motor,Variklis
+Šiluma ir skysčiai,Internal combustion engine,Verbrennungsmotor,Vidinio degimo variklis
+Šiluma ir skysčiai,Electric motor,Elektromotor,Elektros variklis
+Brėžiniai ir gamyba,Engineering drawing,Technische Zeichnung,Inžinerinis brėžinys
+Brėžiniai ir gamyba,Technical drawing,Technische Zeichnung,Techninis brėžinys
+Brėžiniai ir gamyba,Assembly drawing,Montagezeichnung,Surinkimo brėžinys
+Brėžiniai ir gamyba,Detail drawing,Einzelteilzeichnung,Detalės brėžinys
+Brėžiniai ir gamyba,Exploded view,Explosionszeichnung,Išskleista surinkimo schema
+Brėžiniai ir gamyba,Section view,Schnittansicht,Pjūvis
+Brėžiniai ir gamyba,Cross-section,Querschnitt,Skersinis pjūvis
+Brėžiniai ir gamyba,View,Ansicht,Vaizdas
+Brėžiniai ir gamyba,Dimension line,Maßlinie,Matmens linija
+Brėžiniai ir gamyba,Dimensioning,Bemaßung,Matmenavimas
+Brėžiniai ir gamyba,Annotation,Beschriftung / Anmerkung,Užrašas / pastaba
+Brėžiniai ir gamyba,Title block,Schriftfeld,Brėžinio antraštė
+Brėžiniai ir gamyba,Revision,Revision,Revizija / pakeitimas
+Brėžiniai ir gamyba,Material specification,Werkstoffangabe,Medžiagos nurodymas
+Brėžiniai ir gamyba,Material,Werkstoff,Medžiaga
+Brėžiniai ir gamyba,Steel,Stahl,Plienas
+Brėžiniai ir gamyba,Stainless steel,Edelstahl / rostfreier Stahl,Nerūdijantis plienas
+Brėžiniai ir gamyba,Cast iron,Gusseisen,Ketai
+Brėžiniai ir gamyba,Aluminium,Aluminium,Aliuminis
+Brėžiniai ir gamyba,Copper,Kupfer,Varis
+Brėžiniai ir gamyba,Brass,Messing,Žalvaris
+Brėžiniai ir gamyba,Bronze,Bronze,Bronza
+Brėžiniai ir gamyba,Plastic,Kunststoff,Plastikas
+Brėžiniai ir gamyba,Composite,Verbundwerkstoff,Kompozitas
+Brėžiniai ir gamyba,Rubber,Gummi,Guma
+Brėžiniai ir gamyba,Ceramic,Keramik,Keramika
+Brėžiniai ir gamyba,Quality control,Qualitätskontrolle,Kokybės kontrolė
+Brėžiniai ir gamyba,Inspection,Prüfung,Patikra / kontrolė
+Brėžiniai ir gamyba,Non-destructive testing,zerstörungsfreie Prüfung,Nenaikinamoji kontrolė
+Brėžiniai ir gamyba,Quality assurance,Qualitätssicherung,Kokybės užtikrinimas
+Brėžiniai ir gamyba,CAD model,CAD-Modell,CAD modelis
+Brėžiniai ir gamyba,CAM,CAM,Kompiuterinė gamyba
+Brėžiniai ir gamyba,CNC machining,CNC-Bearbeitung,CNC apdirbimas
+Brėžiniai ir gamyba,Prototype,Prototyp,Prototipas
+Brėžiniai ir gamyba,Production drawing,Fertigungszeichnung,Gamybos brėžinys
+Brėžiniai ir gamyba,Workpiece,Werkstück,Ruošinys
+Brėžiniai ir gamyba,Tool,Werkzeug,Įrankis
+Brėžiniai ir gamyba,Fixture,Vorrichtung,Įtvirtinimo įtaisas
+Brėžiniai ir gamyba,Jig,Lehre / Vorrichtung,Šablonas / įtaisas
+Brėžiniai ir gamyba,Gauge,Messmittel / Lehre,Matuoklis / kalibras
